@@ -1,0 +1,97 @@
+ <!-- Begin Page Content -->
+ <div class="container-fluid">
+
+        <nav aria-label="breadcrumb">
+            <ol class="breadcrumb">
+                <li class="breadcrumb-item"><a href="./">Inicio</a></li>
+                <li class="breadcrumb-item active" aria-current="page">Categorias</li>
+   
+   
+            </ol>
+   
+        </nav>
+        <!-- Button trigger modal -->
+   
+        <button type="button" class="btn btn-primary float-right mb-4" data-toggle="modal" data-target="#exampleModal">
+            Agregar categoria
+        </button>
+   
+        <table class="table table-bordered" id="dataTable" width="100%" cellspacing="0">
+            <thead>
+                <tr>
+                    <th>#</th>
+                    <th>Nombre</th>
+                    <th>Acciones</th>
+   
+                </tr>
+            </thead>
+            <tfoot>
+                <tr>
+                    <th>#</th>
+                    <th>Nombre</th>
+                    <th>Acciones</th>
+   
+                </tr>
+            </tfoot>
+            <tbody>
+                <tr>
+                    <td>1</td>
+                    <td>Categoria de prueba 1</td>
+                    <td>
+                        <div class="btn-group">
+                            <button class="btn btn-warning"><i class="fas fa-edit"></i></button>
+                            <button class="btn btn-danger"><i class="fas fa-trash"></i></button>
+   
+                        </div>
+   
+                    </td>
+   
+                </tr>
+   
+   
+            </tbody>
+        </table>
+   
+   
+   
+   
+   
+   
+   
+   
+    </div>
+    <!-- /.container-fluid -->
+   
+   
+   
+    <!-- Modal -->
+    <div class="modal fade" id="exampleModal" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
+        <div class="modal-dialog" role="document">
+            <div class="modal-content">
+                <div class="modal-header bg-gray-900 text-white">
+                    <h5 class="modal-title" id="exampleModalLabel">Agregar Categoría</h5>
+                    <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                        <span aria-hidden="true">&times;</span>
+                    </button>
+                </div>
+                <form action="#" method="post">
+                    <div class="modal-body">
+   
+                        <div class="col-auto">
+                            <label class="sr-only" for="inlineFormInputGroup">Nombre de la categoría</label>
+                            <div class="input-group mb-2">
+                                <div class="input-group-prepend">
+                                    <div class="input-group-text"><i class="fas fa-project-diagram"></i></div>
+                                </div>
+                                <input type="text" name="" class="form-control" id="inlineFormInputGroup" placeholder="Nombre de la categoría" required>
+                            </div>
+   
+                        </div>
+                        <div class="modal-footer">
+                            <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
+                            <input type="submit" class="btn btn-primary" value="Guardar" name="btnGuardarCategoria">
+                        </div>
+                    </div>
+                </form>
+            </div>
+        </div>
