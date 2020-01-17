@@ -134,6 +134,9 @@ class  ProductosControlador
 
                 if ($agregar) {
 
+                    //Ruta url 
+
+                    $url = Rutas::ctrRtas();
                     // Insersión
                     echo '<script>
     

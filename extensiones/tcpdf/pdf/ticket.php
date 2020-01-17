@@ -65,6 +65,8 @@ $total = number_format($respuestaVenta["total"],2);*/
 		$ventaTicket = VentasControlador::ctrMostrarVentaTicket($valorVenta);
 		//print_r($ventaTicket);
 		
+		$cliente = $ventaTicket[0]['nombre_cliente'];
+
 		$vendedor = $ventaTicket[0]['nombre'];
 		$fecha_venta = $ventaTicket[0]['fecha'];
 		
@@ -135,18 +137,20 @@ $total = number_format($respuestaVenta["total"],2);*/
 		<td style="width:$impresion px;">
 	
 			<div>
-				<strong style="text-align:center">
+				<strong style="text-align:center;font-size:14px">
 				
 				$nombre_suc 
 				
 				</strong> 
 				<br>
 		
-			
+				<div style="text-align:center; font-size:8px;">
+				
+				</div>
 				
 				
 				
-				<div style="width:$impresion px;" style="text-align:center; font-size:6px;">
+				<div style="width:$impresion px;" style="text-align:center; font-size:8px;">
 				
 			
 				
@@ -166,9 +170,14 @@ $total = number_format($respuestaVenta["total"],2);*/
 				Atiende: $vendedor
 				<br>
 				<hr>		
-				<br>	
-				General
-				<br>
+			<div style="text-align:center">
+
+			$cliente
+			
+			</div>
+
+				
+			
 				<hr>
 				<br>
 				

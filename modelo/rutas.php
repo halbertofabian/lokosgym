@@ -2,6 +2,6 @@
         class Rutas {
 
             public static function ctrRtas(){
-                return 'http://refaccionaria.softmormx.com/';
+                return 'http://localhost/softmor-pj/refaccionaria.com/';
             }
         } 

@@ -13,10 +13,10 @@
      <!-- Button trigger modal -->
 
      <button type="button" class="d-none d-sm-inline-block btn btn-primary  shadow-sm  float-right mb-4" data-toggle="modal" data-target="#AgregarProducto">
-     <i class="fab fa-product-hunt"></i>  Nuevo producto
+         <i class="fab fa-product-hunt"></i> Nuevo producto
      </button>
 
-    
+
 
      <table class="table table-bordered" id="dataTable" width="100%" cellspacing="0">
          <thead>
@@ -49,7 +49,7 @@
                 $producto = ProductosControlador::ctrMostrarProducto(null);
 
                 foreach ($producto as $key => $value) :
-                    ?>
+                ?>
                  <tr>
                      <td>
 
@@ -88,7 +88,13 @@
  <!-- /.container-fluid -->
 
 
-
+ <script>
+     $(function() {
+         $('#AgregarProducto').on('shown.bs.modal', function(e) {
+             $('#GDcodigo').focus();
+         })
+     });
+ </script>
  <!-- Agregar Modal -->
  <div class="modal fade" id="AgregarProducto" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
      <div class="modal-dialog modal-lg" role="document">
@@ -125,7 +131,7 @@
                                  <div class="input-group-prepend">
                                      <div class="input-group-text"><i class="fas fa-barcode"></i><strong class="text-danger"> * </strong></div>
                                  </div>
-                                 <input type="text" name="GDcodigo" class="form-control" id="GDcodigo" placeholder="Código" required>
+                                 <input type="text" name="GDcodigo" class="form-control" id="GDcodigo" placeholder="Código" required autofocus>
                              </div>
 
                          </div>
@@ -153,7 +159,7 @@
                                         $categoria = CategoriasControlador::ctrMostrarcategoria($id);
 
                                         foreach ($categoria as $key => $value) :
-                                            ?>
+                                        ?>
 
                                          <option value="<?php echo $value['id'] ?>"><?php echo $value['categoria'] ?></option>
 
@@ -369,7 +375,7 @@
                                         $categoria = CategoriasControlador::ctrMostrarcategoria($id);
 
                                         foreach ($categoria as $key => $value) :
-                                            ?>
+                                        ?>
 
                                          <option value="<?php echo $value['id'] ?>"><?php echo $value['categoria'] ?></option>
 

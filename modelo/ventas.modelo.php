@@ -81,11 +81,14 @@ class VentasModelo
         $sql = "SELECT dv.id_venta,dv.cantidad, dv.precio, dv.neto,
          dv.total, tp.codigo, tp.caracteristicas_producto, 
          tp.precio_publico, tv.id_venta,tv.id_cliente,tv.id_vendedor,
-         tv.forma_pago,tv.neto,tv.total,tv.descuento,tv.fecha,tu.nombre,tu.apellido 
+         tv.forma_pago,tv.neto,tv.total,tv.descuento,tv.fecha,tu.nombre,tu.apellido,tc.nombre_cliente 
          FROM tbl_detalle_ventas dv JOIN tbl_productos tp
           ON dv.id_producto = tp.id JOIN tbl_ventas tv 
           ON dv.id_venta = tv.id_venta JOIN tbl_usuarios tu
-           ON tv.id_vendedor = tu.id WHERE tv.id_venta = :codigo";
+           ON tv.id_vendedor = tu.id JOIN tbl_clientes tc
+           ON tv.id_cliente = tc.id_cliente
+           
+            WHERE tv.id_venta = :codigo";
         $stmt = Conexion::conectar()->prepare($sql);
 
         $stmt->bindParam(':codigo', $codigo);

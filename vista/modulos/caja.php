@@ -106,7 +106,7 @@
                                             </div>
                                             <select name="GDcliente" class="form-control" id="GDcliente" required>
                                                 <option value="">Seleccionar cliente</option>
-                                                <option value="0" selected>General</option>
+                                                <option value="1" selected>General</option>
                                                 <?php $clientes = ClientesControlador::ctrMostrarCliente(null);
 
 
