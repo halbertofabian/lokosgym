@@ -145,7 +145,7 @@ $total = number_format($respuestaVenta["total"],2);*/
 				<br>
 		
 				<div style="text-align:center; font-size:8px;">
-					FAAJ781117MW4
+					<strong>RFC: </strong>FAAJ781117MW4
 				</div>
 				
 				

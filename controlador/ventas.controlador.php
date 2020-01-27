@@ -114,7 +114,7 @@ class VentasControlador
                             // Insersión
                             echo '
                             <script>
-                                window.location = "ventas";
+                                window.location = "caja";
                                 window.open("extensiones/tcpdf/pdf/ticket.php?codigo=' . $_POST['GDcodigo_venta'] . '", "_blank");
                             </script>';
                         }

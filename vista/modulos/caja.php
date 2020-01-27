@@ -23,7 +23,7 @@
 
                             <div class="col-12 form-group  mb-2">
                                 <label for="txtCode" class="sr-only">SCAN CODE</label>
-                                <input type="text" class="form-control" id="box-search" placeholder="CODIGO DE BARRAS">
+                                <input type="text" class="form-control" id="box-search" placeholder="CODIGO DE BARRAS" autofocus>
                             </div>
 
                             <!--<div class="col-6 form-group mb-2">
