@@ -311,8 +311,8 @@ $(document).on('submit', '#formularioBusqueda', function (e) {
 
 
 $("#datos").on("click", "button.btnAgregarProducto", function () {
-    // var audio = document.getElementById("audio");
-    // audio.play();
+    var audio = document.getElementById("audio");
+    audio.play();
 
     var idProducto = $(this).attr("idProducto");
     //console.log(idProducto);
