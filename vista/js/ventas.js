@@ -104,9 +104,9 @@ $(document).on('change', '#GDcategoriaSearch', function () {
 })
 $(document).on('submit', '#formularioBusqueda', function (e) {
 
-    var audio = document.getElementById("audio");
+    // var audio = document.getElementById("audio");
 
-    audio.play();
+    // audio.play();
 
 
     e.preventDefault();
@@ -311,8 +311,8 @@ $(document).on('submit', '#formularioBusqueda', function (e) {
 
 
 $("#datos").on("click", "button.btnAgregarProducto", function () {
-    var audio = document.getElementById("audio");
-    audio.play();
+    // var audio = document.getElementById("audio");
+    // audio.play();
 
     var idProducto = $(this).attr("idProducto");
     //console.log(idProducto);
