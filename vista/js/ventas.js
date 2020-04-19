@@ -43,7 +43,7 @@ $("#GDcliente").on("change", function () {
 })
 
 
-function buscar_datos(consulta,categoria="") {
+function buscar_datos(consulta, categoria = "") {
 
     var datos = new FormData();
     datos.append("consulta", consulta);
@@ -95,7 +95,7 @@ $(document).on('change', '#GDcategoriaSearch', function () {
     var valor = $(this).val();
 
     if (valor != "") {
-        buscar_datos("",valor)
+        buscar_datos("", valor)
     } else {
         buscar_datos("");
     }
@@ -311,8 +311,7 @@ $(document).on('submit', '#formularioBusqueda', function (e) {
 
 
 $("#datos").on("click", "button.btnAgregarProducto", function () {
-    var audio = document.getElementById("audio");
-    audio.play();
+
 
     var idProducto = $(this).attr("idProducto");
     //console.log(idProducto);
@@ -406,6 +405,9 @@ $("#datos").on("click", "button.btnAgregarProducto", function () {
             $(".nuevoPrecioProducto").number(true, 2);
             $("#nuevoTotalVenta").number(true, 2);
             $("#nuevoTotalVentaSin").number(true, 2);
+
+            var audio = document.getElementById("audio");
+            audio.play();
 
         }
     })
