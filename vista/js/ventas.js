@@ -469,7 +469,7 @@ $(".formularioVenta").on("click", "button.quitarProducto", function () {
         $("#nuevoTotalVenta").attr("total", 0);
         $("#nuevoTotalVentaSin").val(0);
         //$("#GDcliente > option[value='General']").attr("selected", true)
-        $("#GDcliente").val(0)
+        
         $("#GDcredito").val("")
         $("#nuevoCambioEfectivo").val(0)
         $("#nuevoValorEfectivo").val(0)
