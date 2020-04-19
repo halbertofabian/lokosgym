@@ -35,7 +35,7 @@
                                     $categoria = CategoriasControlador::ctrMostrarcategoria($id);
 
                                     foreach ($categoria as $key => $value) :
-                                        ?>
+                                    ?>
 
                                         <option value="<?php echo $value['id'] ?>"><?php echo $value['categoria'] ?></option>
 
@@ -57,10 +57,10 @@
                     </div>
                 </div>
                 <div class="card-body" style="height: 500px; overflow-y: scroll;">
-                    <div class="row" id="datos">
-
-
-
+                    <div class="row justify-content-center" id="datos">
+                        <div class="col-auto">
+                            <img src="vista/img/load-1.gif" alt="">
+                        </div>
                     </div>
                 </div>
             </div>
@@ -112,7 +112,7 @@
 
                                                 foreach ($clientes as $key => $value) :
 
-                                                    ?>
+                                                ?>
                                                     <option value="<?php echo $value['id_cliente'] ?>"><?php echo $value['nombre_cliente'] ?></option>
                                                 <?php endforeach; ?>
                                             </select>
@@ -174,7 +174,7 @@
                                                                 <div class="input-group">
 
                                                                     <input type="number" class="form-control" min="0" id="nuevoImpuestoVenta" name="nuevoImpuestoVenta" placeholder="0" value="0">
-                                                                    
+
                                                                     <input type="hidden" name="nuevoPrecioImpuesto" id="nuevoPrecioImpuesto" required>
 
                                                                     <input type="hidden" name="nuevoPrecioNeto" id="nuevoPrecioNeto" required>
@@ -205,7 +205,7 @@
                                                         </tr>
                                                         <tr class="tr-acomulado">
                                                             <td>
-                                                               
+
                                                             </td>
                                                         </tr>
 

@@ -12,7 +12,7 @@
      </nav>
      <!-- Button trigger modal -->
 
-     
+
      <button type="button" id="daterange-btn" class="d-none d-sm-inline-block btn btn-default   mr-sm-2 shadow-sm  float-right mb-4">
          <span>
              <i class="fa fa-calendar"></i> Rango de fecha
@@ -58,18 +58,24 @@
 
                 $dateStart = null;
                 $dateEnd = null;
-                if(isset($_GET["fechaInicial"]) && isset($_GET["fechaFinal"])){
+                if (isset($_GET["fechaInicial"]) && isset($_GET["fechaFinal"])) {
                     $dateStart = $_GET['fechaInicial'];
                     $dateEnd = $_GET['fechaFinal'];
-                }
-                $ventas = VentasControlador::ctrMostrarVentasRangoFachas($dateStart,$dateEnd);
+                } else {
+                    date_default_timezone_set('America/Mexico_City');
 
-               // var_dump($ventas);
+                    $fecha = date('Y-m-d');
+                    $dateStart = $fecha;
+                    $dateEnd = $fecha;
+                }
+                $ventas = VentasControlador::ctrMostrarVentasRangoFachas($dateStart, $dateEnd);
+
+                // var_dump($ventas);
 
                 foreach ($ventas as $key => $value) :
 
 
-                    ?>
+                ?>
                  <tr>
                      <td>
 
