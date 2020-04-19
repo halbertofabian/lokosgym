@@ -110,25 +110,23 @@ class ProductosModelo
         $stmt = null;
     }
 
-    static public function mdlMostrarProductosBusqueda($consulta)
+    static public function mdlMostrarProductosBusqueda($consulta,$categoria)
     {
 
-        if ($consulta != null) {
-            $stmt = Conexion::conectar()->prepare("SELECT tblP.*, tblC.* FROM tbl_productos tblP JOIN tbl_categorias tblC ON tblP.categoria = tblC.id  WHERE codigo LIKE '%" . $consulta . "%' OR producto LIKE '%" . $consulta . "%' OR marca LIKE '%" . $consulta . "%' OR descripcion LIKE '%" . $consulta . "%' OR caracteristicas_producto LIKE '%" . $consulta . "%'  OR tblC.categoria LIKE '%" . $consulta . "%' GROUP BY producto ASC  ");
+        if ($categoria == "" && $consulta != "") {
+            $stmt = Conexion::conectar()->prepare("SELECT tblP.*, tblC.* FROM tbl_productos tblP JOIN tbl_categorias tblC ON tblP.categoria = tblC.id  WHERE codigo LIKE '" . $consulta . "%' OR producto LIKE '" . $consulta . "%' OR marca LIKE '" . $consulta . "%' OR descripcion LIKE '" . $consulta . "%' OR caracteristicas_producto LIKE '" . $consulta . "%'  OR tblC.categoria LIKE '" . $consulta . "%' GROUP BY producto ASC LIMIT 100 ");
+        } elseif ($categoria != "" && $consulta == "") {
+            $stmt = Conexion::conectar()->prepare("SELECT tblP.*, tblC.* FROM tbl_productos tblP JOIN tbl_categorias tblC ON tblP.categoria = tblC.id WHERE  tblP.categoria = ?  ");
+            $stmt->bindValue(1, $categoria);
         } else {
-            $stmt = Conexion::conectar()->prepare("SELECT tblP.*, tblC.* FROM tbl_productos tblP JOIN tbl_categorias tblC ON tblP.categoria = tblC.id  ORDER BY producto ASC ");
+            $stmt = Conexion::conectar()->prepare("SELECT tblP.*, tblC.* FROM tbl_productos tblP JOIN tbl_categorias tblC ON tblP.categoria = tblC.id  ORDER BY producto ASC LIMIT 100 ");
         }
-
-
 
         $stmt->execute();
 
         return  $stmt->fetchAll();
 
-        //print_r($stmt->errorInfo());
-
-
-        $stmt->close();
+        //print_r($stmt->errorInfo());      
 
         $stmt = null;
     }
@@ -154,7 +152,7 @@ class ProductosModelo
         $stmt = Conexion::conectar()->prepare($sql);
 
         $stmt->execute();
-        return $stmt->fetch();  
+        return $stmt->fetch();
         $stmt = null;
     }
 }

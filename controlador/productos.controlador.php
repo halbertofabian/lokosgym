@@ -37,7 +37,7 @@ class  ProductosControlador
         
                           </script>';
 
-                          return;
+                    return;
                 }
 
                 /*=============================================
@@ -214,7 +214,7 @@ class  ProductosControlador
 
         return ProductosModelo::mdlMostrarSumProductos();
     }
-    
+
 
     // Actualizar
 
@@ -385,8 +385,8 @@ class  ProductosControlador
         }
     }
 
-    public static function ctrMostrarProductosBuscados($consulta)
-	{
-		return ProductosModelo::mdlMostrarProductosBusqueda($consulta);
-	}
+    public static function ctrMostrarProductosBuscados($consulta, $categoria)
+    {
+        return ProductosModelo::mdlMostrarProductosBusqueda($consulta, $categoria);
+    }
 }

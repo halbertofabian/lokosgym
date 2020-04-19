@@ -1,12 +1,12 @@
 // VARIABLE LOCAL STORAGE 
-if(localStorage.getItem("capturarRango") != null){
+if (localStorage.getItem("capturarRango") != null) {
     $("#daterange-btn span").html(localStorage.getItem("capturarRango"))
 
-}else{
+} else {
     $("#daterange-btn span").html('<i class="fa fa-calendar"></i> Rango de fecha');
 }
 
-$(buscar_datos(null));
+$(buscar_datos(""));
 
 var porcentaje = 0;
 
@@ -43,13 +43,21 @@ $("#GDcliente").on("change", function () {
 })
 
 
-function buscar_datos(consulta) {
+function buscar_datos(consulta,categoria="") {
+
+    var datos = new FormData();
+    datos.append("consulta", consulta);
+    datos.append("categoria", categoria);
+
 
     $.ajax({
         url: 'ajax/ventas.ajax.php',
-        type: 'post',
-        dataType: 'html',
-        data: { consulta: consulta },
+        method: "POST",
+        data: datos,
+        cache: false,
+        contentType: false,
+        processData: false,
+        dataType: "html",
 
     })
         .done(function (respuesta) {
@@ -66,7 +74,7 @@ $(document).on('change', '#box-search', function () {
     if (valor != "") {
         buscar_datos(valor)
     } else {
-        buscar_datos(null);
+        buscar_datos("");
     }
 
 
@@ -77,7 +85,7 @@ $(document).on('keyup', '#box-searchAll', function () {
     if (valor != "") {
         buscar_datos(valor)
     } else {
-        buscar_datos(null);
+        buscar_datos("");
     }
 
 
@@ -85,18 +93,24 @@ $(document).on('keyup', '#box-searchAll', function () {
 })
 $(document).on('change', '#GDcategoriaSearch', function () {
     var valor = $(this).val();
-    if (valor != "") {
-        buscar_datos(valor)
-    } else {
-        buscar_datos(null);
-    }
 
+    if (valor != "") {
+        buscar_datos("",valor)
+    } else {
+        buscar_datos("");
+    }
 
 
 })
 $(document).on('submit', '#formularioBusqueda', function (e) {
 
+    var audio = document.getElementById("audio");
+
+    audio.play();
+
+
     e.preventDefault();
+
     var codigo_barra = $('#box-search').val();
 
 
@@ -119,10 +133,11 @@ $(document).on('submit', '#formularioBusqueda', function (e) {
             var stock = respuesta['existencia'];
             var precio = respuesta['precio_publico'];
 
-            console.log(respuesta);
+
 
             if (idProducto == undefined) {
                 swal("¡Error!", "No existe el producto en el inventario", "error");
+                $('#box-search').val("");
                 return;
 
             }
@@ -132,7 +147,7 @@ $(document).on('submit', '#formularioBusqueda', function (e) {
                 swal("¡Error!", "No hay stock disponible", "error");
 
                 $("button[idProducto='" + idProducto + "']").addClass("btn-info btnAgregarProducto");
-
+                $('#box-search').val("");
                 return;
 
             }
@@ -162,6 +177,7 @@ $(document).on('submit', '#formularioBusqueda', function (e) {
 
             if (cantidad == stock) {
                 swal("¡Error!", "No hay stock disponible", "error");
+                $('#box-search').val("");
                 return;
             }
 
@@ -281,7 +297,7 @@ $(document).on('submit', '#formularioBusqueda', function (e) {
 
             $(".nuevoPrecioProducto").number(true, 2);
             $("#nuevoTotalVenta").number(true, 2);
-            $("##nuevoTotalVentaSin").number(true, 2);
+            $("#nuevoTotalVentaSin").number(true, 2);
             $('#box-search').val("");
         }
 
@@ -295,6 +311,9 @@ $(document).on('submit', '#formularioBusqueda', function (e) {
 
 
 $("#datos").on("click", "button.btnAgregarProducto", function () {
+    var audio = document.getElementById("audio");
+    audio.play();
+
     var idProducto = $(this).attr("idProducto");
     //console.log(idProducto);
 
@@ -386,7 +405,7 @@ $("#datos").on("click", "button.btnAgregarProducto", function () {
 
             $(".nuevoPrecioProducto").number(true, 2);
             $("#nuevoTotalVenta").number(true, 2);
-            $("##nuevoTotalVentaSin").number(true, 2);
+            $("#nuevoTotalVentaSin").number(true, 2);
 
         }
     })
@@ -830,6 +849,7 @@ function listarProductos() {
     ///console.log(JSON.stringify(listaProductos));
 
     $("#listaProductos").val(JSON.stringify(listaProductos));
+    $('#box-search').val("");
 
 }
 
@@ -876,66 +896,66 @@ $('#daterange-btn').daterangepicker(
 
         localStorage.setItem("capturarRango", capturarRango);
 
-       window.location = "index.php?ruta=ventas&fechaInicial=" + fechaInicial + "&fechaFinal=" + fechaFinal;
+        window.location = "index.php?ruta=ventas&fechaInicial=" + fechaInicial + "&fechaFinal=" + fechaFinal;
 
 
 
     }
 
 )
-$(".daterangepicker.opensright .range_inputs .cancelBtn").on("click", function(){
+$(".daterangepicker.opensright .range_inputs .cancelBtn").on("click", function () {
 
-	localStorage.removeItem("capturarRango");
-	localStorage.clear();
-	window.location = "ventas";
+    localStorage.removeItem("capturarRango");
+    localStorage.clear();
+    window.location = "ventas";
 })
 /*=============================================
 CAPTURAR HOY
 =============================================*/
-$(".daterangepicker.opensright .ranges li").on("click", function(){
+$(".daterangepicker.opensright .ranges li").on("click", function () {
 
-	var textoHoy = $(this).attr("data-range-key");
+    var textoHoy = $(this).attr("data-range-key");
 
-	if(textoHoy == "Hoy"){
+    if (textoHoy == "Hoy") {
 
-		var d = new Date();
-		
-		var dia = d.getDate();
-		var mes = d.getMonth()+1;
-		var año = d.getFullYear();
+        var d = new Date();
 
-		// if(mes < 10){
+        var dia = d.getDate();
+        var mes = d.getMonth() + 1;
+        var año = d.getFullYear();
 
-		// 	var fechaInicial = año+"-0"+mes+"-"+dia;
-		// 	var fechaFinal = año+"-0"+mes+"-"+dia;
+        // if(mes < 10){
 
-		// }else if(dia < 10){
+        // 	var fechaInicial = año+"-0"+mes+"-"+dia;
+        // 	var fechaFinal = año+"-0"+mes+"-"+dia;
 
-		// 	var fechaInicial = año+"-"+mes+"-0"+dia;
-		// 	var fechaFinal = año+"-"+mes+"-0"+dia;
+        // }else if(dia < 10){
 
-		// }else if(mes < 10 && dia < 10){
+        // 	var fechaInicial = año+"-"+mes+"-0"+dia;
+        // 	var fechaFinal = año+"-"+mes+"-0"+dia;
 
-		// 	var fechaInicial = año+"-0"+mes+"-0"+dia;
-		// 	var fechaFinal = año+"-0"+mes+"-0"+dia;
+        // }else if(mes < 10 && dia < 10){
 
-		// }else{
+        // 	var fechaInicial = año+"-0"+mes+"-0"+dia;
+        // 	var fechaFinal = año+"-0"+mes+"-0"+dia;
 
-		// 	var fechaInicial = año+"-"+mes+"-"+dia;
-	 //    	var fechaFinal = año+"-"+mes+"-"+dia;
+        // }else{
 
-		// }
+        // 	var fechaInicial = año+"-"+mes+"-"+dia;
+        //    	var fechaFinal = año+"-"+mes+"-"+dia;
 
-		dia = ("0"+dia).slice(-2);
-		mes = ("0"+mes).slice(-2);
+        // }
 
-		var fechaInicial = año+"-"+mes+"-"+dia;
-		var fechaFinal = año+"-"+mes+"-"+dia;	
+        dia = ("0" + dia).slice(-2);
+        mes = ("0" + mes).slice(-2);
 
-    	localStorage.setItem("capturarRango", "Hoy");
+        var fechaInicial = año + "-" + mes + "-" + dia;
+        var fechaFinal = año + "-" + mes + "-" + dia;
 
-    	window.location = "index.php?ruta=ventas&fechaInicial="+fechaInicial+"&fechaFinal="+fechaFinal;
+        localStorage.setItem("capturarRango", "Hoy");
 
-	}
+        window.location = "index.php?ruta=ventas&fechaInicial=" + fechaInicial + "&fechaFinal=" + fechaFinal;
+
+    }
 
 })

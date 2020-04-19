@@ -1,12 +1,14 @@
 <!-- Begin Page Content -->
 
+<audio id="audio" controls style="display: none" >
+    <source type="audio/wav" src="vista/audio/scanner-beep-checkout.mp3">
+</audio>
 <div class="container-fluid">
 
     <nav aria-label="breadcrumb">
         <ol class="breadcrumb">
             <li class="breadcrumb-item"><a href="./">Inicio</a></li>
             <li class="breadcrumb-item active" aria-current="page">Caja</li>
-
 
         </ol>
 
@@ -26,24 +28,7 @@
                                 <input type="text" class="form-control" id="box-search" placeholder="CODIGO DE BARRAS" autofocus>
                             </div>
 
-                            <!--<div class="col-6 form-group mb-2">
-                                <select name="GDcategoriaSearch" class="form-control js-example-basic-single" id="GDcategoriaSearch">
-                                    <option value="">Todas las categorias</option>
-                                    <?php
-                                    //Categorias 
-                                    $id = null;
-                                    $categoria = CategoriasControlador::ctrMostrarcategoria($id);
 
-                                    foreach ($categoria as $key => $value) :
-                                    ?>
-
-                                        <option value="<?php echo $value['id'] ?>"><?php echo $value['categoria'] ?></option>
-
-                                    <?php endforeach; ?>
-
-
-                                </select>
-                            </div>-->
 
 
                         </div>
@@ -54,6 +39,24 @@
                     <div class="col-12 form-group  mb-2">
                         <label for="box-searchAll" class="sr-only">SEARCH ALL</label>
                         <input type="text" class="form-control" id="box-searchAll" style="border: none;" placeholder="BUSQUEDA FILTRADA">
+                    </div>
+                    <div class="col-6 form-group mb-2">
+                        <select name="GDcategoriaSearch" class="form-control js-example-basic-single" id="GDcategoriaSearch">
+                            <option value="">Todas las categorias</option>
+                            <?php
+                            //Categorias 
+                            $id = null;
+                            $categoria = CategoriasControlador::ctrMostrarcategoria($id);
+
+                            foreach ($categoria as $key => $value) :
+                            ?>
+
+                                <option value="<?php echo $value['id'] ?>"><?php echo $value['categoria'] ?></option>
+
+                            <?php endforeach; ?>
+
+
+                        </select>
                     </div>
                 </div>
                 <div class="card-body" style="height: 500px; overflow-y: scroll;">
