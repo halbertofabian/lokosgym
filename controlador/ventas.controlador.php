@@ -20,6 +20,10 @@ class VentasControlador
     {
         return VentasModelo::mdlMostrarVentasRangoFachas($dateStart,$dateEnd);
     }
+    public static function ctrMostrarVentasRangoFachasHome($dateStart,$dateEnd)
+    {
+        return VentasModelo::mdlMostrarVentasRangoFachasHome($dateStart,$dateEnd);
+    }
     
     
     public static function ctrMostrarVentaTicket($codigo)

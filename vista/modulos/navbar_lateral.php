@@ -20,9 +20,9 @@
     </li>
     <!-- Nav Item - Caja -->
     <li class="nav-item">
-        <a class="nav-link" href="<?php echo $url ?>caja">
+        <a class="nav-link" href="<?php echo $url ?>pos">
             <i class="fas fa-cash-register"></i>
-            <span>Caja</span></a>
+            <span>POS</span></a>
     </li>
     <!-- Nav Item - Usuarios-->
     <li class="nav-item">

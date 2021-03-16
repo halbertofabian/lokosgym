@@ -142,6 +142,43 @@ class VentasModelo
         $stmt = null;
     }
 
+    public static function mdlMostrarVentasRangoFachasHome($dateStart, $dateEnd)
+    {
+        if ($dateStart == null) {
+            $sql = "SELECT p.producto,p.precio_compra,dv.cantidad,dv.precio,dv.id_venta,v.total,v.descuento,v.fecha FROM tbl_detalle_ventas dv JOIN tbl_productos p ON dv.id_producto = p.id JOIN tbl_ventas v ON dv.id_venta = v.id_venta ORDER BY dv.id_venta DESC ";
+            $stmt = Conexion::conectar()->prepare($sql);
+
+            $stmt->execute();
+           
+        } else if ($dateStart == $dateEnd) {
+            // $sql = "SELECT tv.*,tu.nombre FROM tbl_ventas tv JOIN tbl_usuarios tu ON tv.id_vendedor = tu.id WHERE tv.fecha like '%$dateEnd%' GROUP BY tv.id_venta DESC ";
+
+            $sql = "SELECT p.producto,p.precio_compra,dv.cantidad,dv.precio,dv.id_venta,v.total,v.descuento,v.fecha FROM tbl_detalle_ventas dv JOIN tbl_productos p ON dv.id_producto = p.id JOIN tbl_ventas v ON dv.id_venta = v.id_venta WHERE v.fecha like '%$dateEnd%' ORDER BY dv.id_venta DESC";
+
+            $stmt = Conexion::conectar()->prepare($sql);
+
+            $stmt->execute();
+            
+        } else {
+
+            // $sql = "SELECT tv.*,tu.nombre FROM tbl_ventas tv JOIN tbl_usuarios tu ON tv.id_vendedor = tu.id WHERE tv.fecha BETWEEN '$dateStart' AND '$dateEnd' GROUP BY tv.id_venta DESC ";
+            $sql = "SELECT p.producto,p.precio_compra,dv.cantidad,dv.precio,dv.id_venta,v.total,v.descuento,v.fecha FROM tbl_detalle_ventas dv JOIN tbl_productos p ON dv.id_producto = p.id JOIN tbl_ventas v ON dv.id_venta = v.id_venta WHERE v.fecha BETWEEN '$dateStart' AND '$dateEnd' GROUP BY dv.id_venta DESC ";
+
+            $stmt = Conexion::conectar()->prepare($sql);
+
+            $stmt->execute();
+            
+        }
+
+
+
+        return $stmt->fetchAll();
+
+        //return print_r($stmt->errorInfo());
+
+        $stmt = null;
+    }
+
     // Reprtes
     public static function mdlMostrarSumVentas()
     {
@@ -152,4 +189,32 @@ class VentasModelo
         return $stmt->fetch();
         $stmt = null;
     }
+
+    public static function mdlMostrarSumarCompras(){
+        try {
+            $sql = "SELECT p.*,dv.*,v.* FROM tbl_detalle_ventas dv JOIN tbl_productos p ON dv.id_producto = p.id JOIN tbl_ventas v ON dv.id_venta = v.id_venta";
+            $pps = Conexion::conectar()->prepare($sql);
+            $pps -> execute();
+            return $pps->fetchAll();
+        } catch (\PDOException $th) {
+            //throw $th;
+            return false;
+        }finally{
+            $pps = null;
+        }
+    }
+    public static function mdlMostrarSumarCompras2(){
+        try {
+            $sql = "SELECT * FROM tbl_productos";
+            $pps = Conexion::conectar()->prepare($sql);
+            $pps -> execute();
+            return $pps->fetchAll();
+        } catch (\PDOException $th) {
+            //throw $th;
+            return false;
+        }finally{
+            $pps = null;
+        }
+    }
+    //`
 }

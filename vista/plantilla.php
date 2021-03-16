@@ -1,4 +1,7 @@
-<?php session_start();
+<?php
+
+session_set_cookie_params(60 * 60 * 24 * 14);
+session_start();
 
 ?>
 <!DOCTYPE html>
@@ -62,36 +65,37 @@
 
           <?php
 
-            include_once 'vista/modulos/navbar.php';
+          include_once 'vista/modulos/navbar.php';
 
-            ?>
+          ?>
 
           <?php if (isset($_GET['ruta'])) {
 
-              $rutas = explode("/", $_GET['ruta']);
+            $rutas = explode("/", $_GET['ruta']);
 
-              if (
-                $rutas[0] == 'categorias' ||
-                $rutas[0] == 'editar-productos' ||
-                $rutas[0] == 'productos' ||
+            if (
+              $rutas[0] == 'categorias' ||
+              $rutas[0] == 'editar-productos' ||
+              $rutas[0] == 'productos' ||
 
-                $rutas[0] == 'usuarios' ||
-                $rutas[0] == 'editar-usuarios' ||
+              $rutas[0] == 'usuarios' ||
+              $rutas[0] == 'editar-usuarios' ||
 
-                $rutas[0] == 'caja' ||
-                $rutas[0] == 'ventas' ||
-                $rutas[0] == 'clientes' ||
-                $rutas[0] == 'salir'
+              $rutas[0] == 'cajas' ||
+              $rutas[0] == 'ventas' ||
+              $rutas[0] == 'clientes' ||
+              $rutas[0] == 'pos' ||
+              $rutas[0] == 'salir'
 
-              ) {
-                include_once 'vista/modulos/' . $rutas[0] . '.php';
-              } else {
-                include_once 'vista/modulos/404.php';
-              }
+            ) {
+              include_once 'vista/modulos/' . $rutas[0] . '.php';
             } else {
-              include_once 'vista/modulos/inicio.php';
+              include_once 'vista/modulos/404.php';
             }
-            ?>
+          } else {
+            include_once 'vista/modulos/inicio.php';
+          }
+          ?>
 
 
 
@@ -110,7 +114,7 @@
     </div>
   <?php else :
     include_once 'vista/modulos/login.php';
-    ?>
+  ?>
   <?php endif; ?>
   <!-- End of Page Wrapper -->
 

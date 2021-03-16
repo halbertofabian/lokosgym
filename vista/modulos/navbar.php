@@ -73,7 +73,7 @@
      <li class="nav-item dropdown no-arrow">
        <a class="nav-link dropdown-toggle" href="#" id="userDropdown" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
          <span class="mr-2 d-none d-lg-inline text-gray-600 small"><?php echo $_SESSION['nombre'] . ' ' . $_SESSION['apellido']; ?></span>
-         <img class="img-profile rounded-circle" src="https://scontent.fmex10-1.fna.fbcdn.net/v/t1.0-9/66502409_334518250764473_6286267005196566528_n.jpg?_nc_cat=111&_nc_oc=AQmRNYPfwUl_7gttY9-ZZFO0719r3O3Yq3nM3OPEnNfw1JMyDgOAviKjZb5CXIdS_Kg&_nc_ht=scontent.fmex10-1.fna&oh=cf5e3d6700d64eb0b02d93b123fc4aa8&oe=5DDD4B2A">
+         <img class="img-profile rounded-circle" src="https://homevest.com/wp-content/uploads/2019/05/matureman1-512.png">
        </a>
        <!-- Dropdown - User Information -->
        <div class="dropdown-menu dropdown-menu-right shadow animated--grow-in" aria-labelledby="userDropdown">
