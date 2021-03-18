@@ -14,6 +14,7 @@
      <?php if (isset($rutas[1]) && $rutas[1] != "") :
 
             $producto = ProductosControlador::ctrMostrarProducto($rutas[1]);
+            
             if (!$producto) :
 
                 echo '
@@ -65,8 +66,8 @@
                                  <div class="input-group-prepend">
                                      <div class="input-group-text"><i class="fas fa-barcode"></i><strong class="text-danger"> * </strong></div>
                                  </div>
-                                 <input type="hidden" name="GDid" class="form-control" id="GDid" required value="<? echo $producto[0] ?>" readonly>
-                                 <input type="text" name="GDcodigo" class="form-control" id="GDcodigo" placeholder="Código" required value="<? echo $producto['codigo'] ?>">
+                                 <input type="hidden" name="GDid" class="form-control" id="GDid" required value="<?php echo $producto[0] ?>" readonly>
+                                 <input type="text" name="GDcodigo" class="form-control" id="GDcodigo" placeholder="Código" required value="<?php echo $producto['codigo'] ?>">
                              </div>
 
                          </div>
@@ -76,7 +77,7 @@
                                  <div class="input-group-prepend">
                                      <div class="input-group-text"><i class="fab fa-product-hunt"></i><strong class="text-danger"> * </strong></div>
                                  </div>
-                                 <input type="text" name="GDnombre" class="form-control" id="GDnombre" placeholder="Nombre" required value="<? echo $producto['producto'] ?>">
+                                 <input type="text" name="GDnombre" class="form-control" id="GDnombre" placeholder="Nombre" required value="<?php echo $producto['producto'] ?>">
                              </div>
 
                          </div>
@@ -87,7 +88,7 @@
                                      <div class="input-group-text"><i class="fas fa-project-diagram"></i><strong class="text-danger"> * </strong></div>
                                  </div>
                                  <select name="GDcategoria" class="form-control" id="GDcategoria" required>
-                                     <option value="<? echo $producto[4] ?>"><? echo $producto['categoria'] ?></option>
+                                     <option value="<?php echo $producto[4] ?>"><?php echo $producto['categoria'] ?></option>
                                      <?php
                                                 //Categorias 
                                                 $id = null;
@@ -111,7 +112,7 @@
                                  <div class="input-group-prepend">
                                      <div class="input-group-text"><i class="fas fa-copyright"></i></div>
                                  </div>
-                                 <input type="text" name="GDmarca" class="form-control" id="GDmarca" placeholder="Marca" value="<? echo $producto['marca'] ?>">
+                                 <input type="text" name="GDmarca" class="form-control" id="GDmarca" placeholder="Marca" value="<?php echo $producto['marca'] ?>">
                              </div>
 
                          </div>
@@ -121,13 +122,13 @@
                                  <div class="input-group-prepend">
                                      <div class="input-group-text"><i class="fas fa-align-right"></i></div>
                                  </div>
-                                 <textarea name="GDdescripcion" class="form-control" id="" cols="30" rows="3" placeholder="Descripción"><? echo $producto['descripcion'] ?></textarea>
+                                 <textarea name="GDdescripcion" class="form-control" id="" cols="30" rows="3" placeholder="Descripción"><?php echo $producto['descripcion'] ?></textarea>
                              </div>
 
                          </div>
                          <div class="col-12 col-md-6 mt-2">
                              <label class="" for="GDdescripcion">Características</label>
-                             <input type="text" class="form-control" data-role="tagsinput" name="GDcaracteristicas" value="<? echo $producto['caracteristicas_producto'] ?>" id="GDcaracteristicas">
+                             <input type="text" class="form-control" data-role="tagsinput" name="GDcaracteristicas" value="<?php echo $producto['caracteristicas_producto'] ?>" id="GDcaracteristicas">
 
 
 
@@ -138,7 +139,7 @@
                                  <div class="input-group-prepend">
                                      <div class="input-group-text"><i class="fas fa-sort-amount-up"></i><strong class="text-danger"> * </strong></div>
                                  </div>
-                                 <input type="number" name="GDstok" class="form-control" id="GDstok" placeholder="Cantidad de piezas" required value="<? echo $producto['existencia'] ?>">
+                                 <input type="number" name="GDstok" class="form-control" id="GDstok" placeholder="Cantidad de piezas" required value="<?php echo $producto['existencia'] ?>">
                              </div>
 
                          </div>
@@ -170,7 +171,7 @@
                                  <div class="input-group-prepend">
                                      <div class="input-group-text"><i class="fas fa-dollar-sign"></i></div>
                                  </div>
-                                 <input type="text" name="GDprecio_compra" class="form-control" id="GDprecio_compra" placeholder="Precio compra" value="<? echo $producto['precio_compra'] ?>">
+                                 <input type="text" name="GDprecio_compra" class="form-control" id="GDprecio_compra" placeholder="Precio compra" value="<?php echo $producto['precio_compra'] ?>">
                              </div>
 
                          </div>
@@ -180,7 +181,7 @@
                                  <div class="input-group-prepend">
                                      <div class="input-group-text"><i class="fas fa-hand-holding-usd"></i><strong class="text-danger"> * </strong></div>
                                  </div>
-                                 <input type="text" name="GDprecio_publico" class="form-control" id="GDprecio_publico" placeholder="Precio publico" required value="<? echo $producto['precio_publico'] ?>">
+                                 <input type="text" name="GDprecio_publico" class="form-control" id="GDprecio_publico" placeholder="Precio publico" required value="<?php echo $producto['precio_publico'] ?>">
                              </div>
 
                          </div>
@@ -190,7 +191,7 @@
                                  <div class="input-group-prepend">
                                      <div class="input-group-text"><i class="fas fa-money-check-alt"></i></div>
                                  </div>
-                                 <input type="text" name="GDprecio_mayoreo" class="form-control" id="GDprecio_mayoreo" placeholder="Precio mayoreo" value="<? echo $producto['precio_mayoreo'] ?>">
+                                 <input type="text" name="GDprecio_mayoreo" class="form-control" id="GDprecio_mayoreo" placeholder="Precio mayoreo" value="<?php echo $producto['precio_mayoreo'] ?>">
                              </div>
 
                          </div>
@@ -200,7 +201,7 @@
                                  <div class="input-group-prepend">
                                      <div class="input-group-text"><i class="fas fa-award"></i></div>
                                  </div>
-                                 <input type="text" name="GDprecio_especial" class="form-control" id="GDprecio_especial" placeholder="Precio especial" value="<? echo $producto['precio_especial'] ?>">
+                                 <input type="text" name="GDprecio_especial" class="form-control" id="GDprecio_especial" placeholder="Precio especial" value="<?php echo $producto['precio_especial'] ?>">
                              </div>
 
                          </div>

@@ -42,6 +42,22 @@
         </div>
     </li>
     <li class="nav-item">
+        <a class="nav-link collapsed" href="#" data-toggle="collapse" data-target="#membresias" aria-expanded="true" aria-controls="membresias">
+            <i class="fas fa-users"></i>
+            <span>Membresia</span>
+        </a>
+        <div id="membresias" class="collapse" aria-labelledby="headingTwo" data-parent="#accordionSidebar">
+            <div class="bg-white py-2 collapse-inner rounded">
+                <a class="collapse-item" href="<?php echo $url ?>alta-membresia"> <i class="fas fa-user"></i> Alta</a>
+                <a class="collapse-item" href="<?php echo $url ?>clientes"><i class="fas fa-address-card"></i> Clientes</a>
+                <a class="collapse-item" href="<?php echo $url ?>">
+                    <i class="fas fa-user-tag"></i>
+                    <span>Roles</span>
+                </a>
+            </div>
+        </div>
+    </li>
+    <li class="nav-item">
         <a class="nav-link collapsed" href="#" data-toggle="collapse" data-target="#Inventario" aria-expanded="true" aria-controls="Inventario">
             <i class="fas fa-dolly-flatbed"></i>
             <span>Inventario</span>

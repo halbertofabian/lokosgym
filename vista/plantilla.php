@@ -85,7 +85,8 @@ session_start();
               $rutas[0] == 'ventas' ||
               $rutas[0] == 'clientes' ||
               $rutas[0] == 'pos' ||
-              $rutas[0] == 'salir'
+              $rutas[0] == 'salir' || 
+              $rutas[0] == 'alta-membresia'
 
             ) {
               include_once 'vista/modulos/' . $rutas[0] . '.php';
@@ -167,6 +168,7 @@ session_start();
   <script src="<?php echo $url ?>vista/js/categorias.js"></script>
   <script src="<?php echo $url ?>vista/js/productos.js"></script>
   <script src="<?php echo $url ?>vista/js/ventas.js"></script>
+  <script src="<?php echo $url ?>vista/js/membresias.js"></script>   
 
 </body>
 
