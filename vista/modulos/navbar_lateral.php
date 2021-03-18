@@ -6,7 +6,7 @@
         <div class="sidebar-brand-icon rotate-n-15">
             <i class="fas fa-toolbox"></i>
         </div>
-        <div class="sidebar-brand-text mx-3">Refaccionaria <sup>el güero</sup></div>
+        <div class="sidebar-brand-text mx-3">LOKOS <sup>GYM</sup></div>
     </a>
 
     <!-- Divider -->
@@ -38,6 +38,20 @@
                     <i class="fas fa-user-tag"></i>
                     <span>Roles</span>
                 </a>
+            </div>
+        </div>
+    </li>
+    <li class="nav-item">
+        <a class="nav-link collapsed" href="#" data-toggle="collapse" data-target="#membresias" aria-expanded="true" aria-controls="membresias">
+            <i class="fas fa-users"></i>
+            <span>Membresia</span>
+        </a>
+        <div id="membresias" class="collapse" aria-labelledby="headingTwo" data-parent="#accordionSidebar">
+            <div class="bg-white py-2 collapse-inner rounded">
+                <a class="collapse-item" href="<?php echo $url ?>alta-membresia"> <i class="fas fa-user"></i> Alta</a>
+                <a class="collapse-item" href="<?php echo $url ?>renovar-membresia"><i class="fas fa-address-card"></i> Renovar</a>
+                <a class="collapse-item" href="<?php echo $url ?>membresias"><i class="fas fa-address-card"></i> Listar </a>
+                
             </div>
         </div>
     </li>

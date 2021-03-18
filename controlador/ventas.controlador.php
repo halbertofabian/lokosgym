@@ -86,6 +86,8 @@ class VentasControlador
             );
             // Realizar venta
             $crearVenta = VentasModelo::mdlCrearVenta($tbl_ventas);
+
+          
             if ($crearVenta) {
 
 
@@ -118,7 +120,7 @@ class VentasControlador
                             // Insersión
                             echo '
                             <script>
-                                window.location = "caja";
+                                window.location = "pos";
                                 window.open("extensiones/tcpdf/pdf/ticket.php?codigo=' . $_POST['GDcodigo_venta'] . '", "_blank");
                             </script>';
                         }

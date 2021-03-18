@@ -13,7 +13,7 @@
      <!-- Button trigger modal -->
      <?php if (isset($rutas[1]) && $rutas[1] != "") :
 
-            $producto = ProductosControlador::ctrMstraorProducto($rutas[1]);
+            $producto = ProductosControlador::ctrMostrarProducto($rutas[1]);
 
             if (!$producto) :
 

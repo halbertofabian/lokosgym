@@ -19,16 +19,15 @@ class imprimirFactura
 		//$sucursal = ControladorSucursal::ctrMostrarSucursal();
 		$direccion = "
 	
-	CALLE NICOLAS BRAVO, NUM. 207 
-	COL. CUAUHTEMOC, CP. 62900 
-	JOJUTLA, MORELOS
+		Mariano Otero #5733
+		Guadalajara, Jalisco. MX.
 	";
-		$nombre_suc = "REFACCIONARIA EL GÜERO";
+		$nombre_suc = "LOKOS GYM";
 		//$telefono_suc = "7341006945";
 		$web = "";
 		$tipo_impresion = "58mm";
 		$politicas_ventas = "
-	<strong>EN PARTES ELECTRICAS NO DAMOS GARANTÍA</strong>
+	<strong></strong>
 	";
 
 		$impresion = $tipo_impresion == '58mm' ? 130  : 160;
@@ -145,7 +144,7 @@ $total = number_format($respuestaVenta["total"],2);*/
 				<br>
 		
 				<div style="text-align:center; font-size:8px;">
-					<strong>RFC: </strong>FAAJ781117MW4
+					<strong>RFC: </strong>
 				</div>
 				
 				
@@ -286,7 +285,7 @@ EOF;
 	
 		<td style="width:$impresion px; text-align:center">
 			$politicas_ventas
-			**REVISE SU MERCANCIA** 
+			**GRACIAS POR SU COMPRA** 
 		</td>
 
 	</tr>
@@ -294,9 +293,7 @@ EOF;
 	
 		<td style="width:$impresion px; text-align:center; font-size:7px;">
 		
-		PARA CUALQUIER ACLARACIÓN ES <br>
-	OBLIGATORIO PRSENTAR TICKET Y EL 
-	PRODUCTO EN SU EMPAQUE ORIGINAL <br>
+		
 		</td>
 
 	</tr>

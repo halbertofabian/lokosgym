@@ -49,6 +49,18 @@ $(".nuevaImagen").change(function () {
 	}
 })
 
+var date = new Date();
+var day = date.getDate();
+var month= date.getMonth()+1;
+var year=date.getFullYear();
+if(month<10){
+	month="0"+ month;
+}
+if(day<10){
+	day="0"+ day;
+}
+var toDay= year+"-"+month+"-"+day;
+$(".today").val(toDay);
 
 
 
@@ -78,3 +90,46 @@ function closeFullscreen() {
 		document.msExitFullscreen();
 	}
 }
+
+
+$(".inputN").number(true, 2);
+
+
+
+// $(document).ready(function () {
+// 	$(".dataTable").DataTable({
+  
+	  
+// 	  "ordering": false,
+  
+// 	  "language": {
+  
+// 		"sProcessing": "Procesando...",
+// 		"sLengthMenu": "Mostrar _MENU_ registros",
+// 		"sZeroRecords": "No se encontraron resultados",
+// 		"sEmptyTable": "Ningún dato disponible en esta tabla",
+// 		"sInfo": "Mostrando registros del _START_ al _END_ de un total de _TOTAL_",
+// 		"sInfoEmpty": "Mostrando registros del 0 al 0 de un total de 0",
+// 		"sInfoFiltered": "(filtrado de un total de _MAX_ registros)",
+// 		"sInfoPostFix": "",
+// 		"sSearch": "Buscar:",
+  
+// 		"sUrl": "",
+// 		"sInfoThousands": ",",
+// 		"sLoadingRecords": "Cargando...",
+// 		"oPaginate": {
+// 		  "sFirst": "Primero",
+// 		  "sLast": "Último",
+// 		  "sNext": "Siguiente",
+// 		  "sPrevious": "Anterior"
+// 		},
+// 		"oAria": {
+// 		  "sSortAscending": ": Activar para ordenar la columna de manera ascendente",
+// 		  "sSortDescending": ": Activar para ordenar la columna de manera descendente"
+// 		}
+  
+// 	  }
+  
+// 	});
+//   });
+  
