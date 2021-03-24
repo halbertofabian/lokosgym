@@ -120,7 +120,7 @@ class MembresiasModelo
     {
         try {
             //code...
-            $sql = "INSERT INTO tbl_pagos_pmbs  (pmbs_rmbs,pmbs_fecha_pago,pmbs_mp,pmbs_monto,pmbs_ref) VALUES (?,?,?,?,?)";
+            $sql = "INSERT INTO tbl_pagos_pmbs  (pmbs_rmbs,pmbs_fecha_pago,pmbs_mp,pmbs_monto,pmbs_ref,pmbs_corte,id_vendedor) VALUES (?,?,?,?,?,?,?)";
             $con = Conexion::conectar();
             $pps = $con->prepare($sql);
             $pps->bindValue(1, $pmbs['pmbs_rmbs']);
@@ -128,6 +128,8 @@ class MembresiasModelo
             $pps->bindValue(3, $pmbs['pmbs_mp']);
             $pps->bindValue(4, $pmbs['pmbs_monto']);
             $pps->bindValue(5, $pmbs['pmbs_ref']);
+            $pps->bindValue(6, $pmbs['pmbs_corte']);
+            $pps->bindValue(7, $pmbs['id_vendedor']);
 
             $pps->execute();
             return $pps->rowCount() > 0;

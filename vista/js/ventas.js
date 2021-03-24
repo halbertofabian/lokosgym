@@ -1,4 +1,19 @@
 // VARIABLE LOCAL STORAGE 
+$(document).ready(function () {
+    var vts_fecha_inicio = $("#vts_fecha_inicio").val();
+    var vts_fecha_fin = $("#vts_fecha_fin").val();
+    var vts_mp = $("#vts_mp").val();
+
+    var vts_vendedor = $("#vts_vendedor").val();
+    buscarVentasFiltro(
+        [
+            vts_fecha_inicio,
+            vts_fecha_fin,
+            vts_mp,
+            vts_vendedor
+        ]);
+})
+
 if (localStorage.getItem("capturarRango") != null) {
     $("#daterange-btn span").html(localStorage.getItem("capturarRango"))
 
@@ -348,8 +363,8 @@ $("#datos").on("click", "button.btnAgregarProducto", function () {
 
 
             /*=============================================
-          	EVITAR AGREGAR PRODUTO CUANDO EL STOCK ESTÁ EN CERO
-          	=============================================*/
+                EVITAR AGREGAR PRODUTO CUANDO EL STOCK ESTÁ EN CERO
+                =============================================*/
 
             if (stock == 0) {
 
@@ -475,7 +490,7 @@ $(".formularioVenta").on("click", "button.quitarProducto", function () {
         $("#nuevoTotalVenta").attr("total", 0);
         $("#nuevoTotalVentaSin").val(0);
         //$("#GDcliente > option[value='General']").attr("selected", true)
-        
+
         $("#GDcredito").val("")
         $("#nuevoCambioEfectivo").val(0)
         $("#nuevoValorEfectivo").val(0)
@@ -517,9 +532,9 @@ $(".formularioVenta").on("change", "input.nuevaCantidadProducto", function () {
 
     if (Number($(this).val()) > Number($(this).attr("stock"))) {
 
-		/*=============================================
-		SI LA CANTIDAD ES SUPERIOR AL STOCK REGRESAR VALORES INICIALES
-		=============================================*/
+        /*=============================================
+        SI LA CANTIDAD ES SUPERIOR AL STOCK REGRESAR VALORES INICIALES
+        =============================================*/
 
         $(this).val(1);
 
@@ -1060,3 +1075,81 @@ $(".daterangepicker.opensright .ranges li").on("click", function () {
     }
 
 })
+
+
+$("#btnBuscarVentasFiltro").on("click", function () {
+
+
+
+
+    var vts_fecha_inicio = $("#vts_fecha_inicio").val();
+    var vts_fecha_fin = $("#vts_fecha_fin").val();
+    var vts_mp = $("#vts_mp").val();
+
+    var vts_vendedor = $("#vts_vendedor").val();
+
+    buscarVentasFiltro(
+        [
+            vts_fecha_inicio,
+            vts_fecha_fin,
+            vts_mp,
+            vts_vendedor
+        ]);
+
+})
+
+
+function buscarVentasFiltro(arrayDatos) {
+    var datos = new FormData();
+    datos.append("vts_fecha_inicio", arrayDatos[0])
+    datos.append("vts_fecha_fin", arrayDatos[1])
+    datos.append("vts_mp", arrayDatos[2])
+    datos.append("vts_vendedor", arrayDatos[3])
+    datos.append("btnBuscarVentasFiltro", true)
+
+    $.ajax({
+        url: "ajax/ventas.ajax.php",
+        method: "POST",
+        data: datos,
+        cache: false,
+        contentType: false,
+        processData: false,
+        dataType: "json",
+        beforeSend: function () {
+            startLoadButton();
+        },
+        success: function (res) {
+
+            stopLoadButton("Buscar");
+
+            var contenido = "";
+            var ventastotal = 0;
+
+            res.forEach(vts => {
+
+                ventastotal+= Number(vts.total);
+
+                contenido += 
+                `  
+                
+                <tr>
+                
+                    <td>${vts.id_venta}</td>
+                    <td>${vts.nombre}</td>
+                    <td>${vts.venta_mp}</td>
+                    <td>${vts.total}</td>
+                    <td>${vts.fecha}</td>
+                
+                </tr>
+                
+                `;
+                
+            });
+
+            $("#ventasBody").html(contenido);
+            $("#vts_total").html(ventastotal);
+
+        }
+    })
+
+}

@@ -36,9 +36,19 @@ class MembresiasControlador
 
                 $_POST['pmbs_fecha_pago'] = $fecha_registro;
 
+                $_POST['pmbs_corte'] = $_SESSION["usr_caja"];
+                $_POST['id_vendedor'] = $_SESSION["id"];
+
                 $crearPago = MembresiasModelo::mdlRegistrarMembresiaPago($_POST);
 
                 if ($crearPago) {
+                    
+                    echo '
+                            <script>
+                                
+                                window.open("./extensiones/tcpdf/pdf/pagos.php?pmbs_id=", "_blank");
+                            </script>';
+
                     echo '<script>
     
                     swal({
@@ -50,7 +60,7 @@ class MembresiasControlador
                })
                .then((willDelete) => {
                  if (willDelete) {
-                     location.href = "./"
+                     location.href = "./pagos"
                  }
                });
 
@@ -99,9 +109,20 @@ class MembresiasControlador
 
                 $_POST['pmbs_fecha_pago'] = $fecha_registro;
 
+                $_POST['pmbs_corte'] = $_SESSION["usr_caja"];
+                $_POST['id_vendedor'] = $_SESSION["id"];
+
+                
+                
                 $crearPago = MembresiasModelo::mdlRegistrarMembresiaPago($_POST);
 
                 if ($crearPago) {
+                    
+                    echo '
+                            <script>
+                                
+                                window.open("./extensiones/tcpdf/pdf/pagos.php?pmbs_id=", "_blank");
+                            </script>';
                     echo '<script>
 
                 swal({
@@ -113,7 +134,7 @@ class MembresiasControlador
            })
            .then((willDelete) => {
              if (willDelete) {
-                 location.href = "./"
+                 location.href = "./pagos"
              }
            });
 

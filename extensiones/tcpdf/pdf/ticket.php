@@ -1,4 +1,9 @@
-<?php session_start();
+<?php 
+ob_start();
+error_reporting(E_ALL & ~E_NOTICE);
+  ini_set('display_errors', 0);
+  ini_set('log_errors', 1);
+session_start();
 
 
 require_once '../../../controlador/ventas.controlador.php';
@@ -63,20 +68,20 @@ $total = number_format($respuestaVenta["total"],2);*/
 
 		$ventaTicket = VentasControlador::ctrMostrarVentaTicket($valorVenta);
 		//print_r($ventaTicket);
-		
+
 		$cliente = $ventaTicket[0]['nombre_cliente'];
 
 		$vendedor = $ventaTicket[0]['nombre'];
 		$fecha_venta = $ventaTicket[0]['fecha'];
-		
+
 		$total = $ventaTicket[0]['total'];
 		$neto = $ventaTicket[0]['neto'];
 
-		$descuentoTotal = $ventaTicket[0][12]-$total;
+		$descuentoTotal = $ventaTicket[0][12] - $total;
 
 		// Calcular el cambio
 		$forma_pago = $ventaTicket[0]['forma_pago'];
-		$forma_pago = explode("-",$forma_pago);
+		$forma_pago = explode("-", $forma_pago);
 
 		$leyend1 = "";
 		$leyend2 = "";
@@ -85,26 +90,23 @@ $total = number_format($respuestaVenta["total"],2);*/
 
 		$leyend3 = "";
 
-		if($descuentoTotal>0){
+		if ($descuentoTotal > 0) {
 			$leyend3 = "Descuento:";
-			$descuentoTotal ="- $".$descuentoTotal;
-		}else{
+			$descuentoTotal = "- $" . $descuentoTotal;
+		} else {
 			$descuentoTotal = "";
 		}
-		if($forma_pago[0]=='Efectivo'){
-			if(!empty($forma_pago[1])){
+		if ($forma_pago[0] == 'Efectivo') {
+			if (!empty($forma_pago[1])) {
 				$leyend1 = "Pago con:";
 				$leyend2 = "Cambio:";
 				$pagocon = $forma_pago[1];
 				$cambio = $forma_pago[1] - $total;
-
-
 			}
-		}else{
+		} else {
 			$leyend1 = "Pago con:";
-				
+
 			$pagocon = $ventaTicket[0]['forma_pago'];
-			
 		}
 
 
@@ -199,9 +201,9 @@ EOF;
 
 
 
-		foreach ($ventaTicket as $key => $value){
+		foreach ($ventaTicket as $key => $value) {
 
-			$descuento = $value['precio'] / 100 *   $value['descuento']; 
+			$descuento = $value['precio'] / 100 *   $value['descuento'];
 			$descuento = $value['precio'] - $descuento;
 			$totalDescuento = $descuento * $value['cantidad'];
 			$bloque2 = <<<EOF
@@ -310,6 +312,7 @@ EOF;
 		//SALIDA DEL ARCHIVO 
 
 		//$pdf->Output('factura.pdf', 'D');
+		ob_end_clean();
 		$pdf->Output('factura.pdf');
 	}
 }

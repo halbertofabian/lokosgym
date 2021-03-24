@@ -18,7 +18,7 @@
      </div>
    </form>
    <div class="btn-group">
-   <a class="d-none d-sm-inline-block btn  btn-primary shadow-sm " href="<?php $url ?>caja">
+   <a class="d-none d-sm-inline-block btn  btn-primary shadow-sm " href="<?php $url ?>pos">
      <i class="fas fa-cash-register"></i>
 
    </a>

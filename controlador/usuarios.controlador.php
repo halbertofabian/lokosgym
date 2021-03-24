@@ -111,6 +111,8 @@ class UsuariosControlador
                 $_SESSION['telefono'] = $sesion['telefono'];
                 $_SESSION['id'] = $sesion['id'];
 
+                $_SESSION['usr_caja'] = $sesion['usr_caja'];
+
                 echo '<script>
 
                     window.location = "./";

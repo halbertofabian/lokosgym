@@ -1,6 +1,7 @@
 <?php
 require_once '../modelo/categorias.modelo.php';
 require_once '../modelo/productos.modelo.php';
+require_once '../modelo/cajas.modelo.php';
 require_once '../controlador/categorias.controlador.php';
 require_once '../controlador/productos.controlador.php';
 require_once '../modelo/rutas.php';
@@ -72,7 +73,15 @@ class AjaxVentas
             echo $salida;
         }
     }
+
+    public function ajaxBuscarVentasFiltro()
+    {
+        $res = CajasModelo::mdlVentasFiltro($_POST);
+        echo json_encode($res, true);
+    }
 }
+
+
 
 
 if (isset($_POST["consulta"])) {
@@ -80,4 +89,11 @@ if (isset($_POST["consulta"])) {
     $nota->valueSearch = $_POST["consulta"];
     $nota->categoria = $_POST["categoria"];
     $nota->ajaxCargarProductosBuscados();
+}
+
+if (isset($_POST['btnBuscarVentasFiltro'])) {
+
+
+    $buscar = new AjaxVentas();
+    $buscar->ajaxBuscarVentasFiltro();
 }

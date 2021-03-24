@@ -24,6 +24,21 @@
             <i class="fas fa-cash-register"></i>
             <span>POS</span></a>
     </li>
+    <?php if ($_SESSION['usr_caja'] <= 0) :  ?>
+        <li class="nav-item">
+            <a class="nav-link" href="<?php echo $url ?>abrir-caja">
+                <i class="fas fa-cash-register"></i>
+                <span>Abrir caja</span></a>
+        </li>
+    <?php elseif ($_SESSION['usr_caja'] > 0) : ?>
+
+        <li class="nav-item">
+            <a class="nav-link" href="<?php echo $url ?>cerrar-caja">
+                <i class="fas fa-cash-register"></i>
+                <span>Cerrar caja</span></a>
+        </li>
+
+    <?php endif; ?>
     <!-- Nav Item - Usuarios-->
     <li class="nav-item">
         <a class="nav-link collapsed" href="#" data-toggle="collapse" data-target="#Usuarios" aria-expanded="true" aria-controls="Usuarios">
@@ -51,7 +66,7 @@
                 <a class="collapse-item" href="<?php echo $url ?>alta-membresia"> <i class="fas fa-user"></i> Alta</a>
                 <a class="collapse-item" href="<?php echo $url ?>renovar-membresia"><i class="fas fa-address-card"></i> Renovar</a>
                 <a class="collapse-item" href="<?php echo $url ?>membresias"><i class="fas fa-address-card"></i> Listar </a>
-                
+
             </div>
         </div>
     </li>
@@ -82,6 +97,9 @@
                 <a class="collapse-item" href="<?php echo $url ?>ventas">
                     <i class="fas fa-cart-arrow-down"></i>
                     <span>Ventas</span></a>
+                    <a class="collapse-item" href="<?php echo $url ?>pagos">
+                    <i class="fas fa-cart-arrow-down"></i>
+                    <span>Pagos</span></a>
 
 
             </div>

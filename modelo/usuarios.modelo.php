@@ -26,15 +26,15 @@ class UsuariosModelo
     }
     public static function mdlActualizarUsuarios($datos)
     {
-        
 
-            $sqlUpdate = "UPDATE   tbl_usuarios SET usuario = :usuario ,
+
+        $sqlUpdate = "UPDATE   tbl_usuarios SET usuario = :usuario ,
             correo = :correo , clave  = :clave, nombre = :nombre ,
             apellido = :apellido , domicilio = :domicilio , telefono = :telefono 
             WHERE id = :id ";
 
         $stmt = Conexion::conectar()->prepare($sqlUpdate);
-        
+
         $stmt->bindParam(':usuario', $datos['usuario']);
         $stmt->bindParam(':correo', $datos['correo']);
         $stmt->bindParam(':clave', $datos['clave']);
@@ -69,21 +69,42 @@ class UsuariosModelo
         }
     }
 
-    public static function mdlIniciarSesion($datos){
+    public static function mdlIniciarSesion($datos)
+    {
         $sqlSesion = "SELECT   * FROM tbl_usuarios  WHERE 
         (usuario = :usuario OR correo = :correo OR telefono = :telefono)
          AND clave = :clave ";
 
-         $stmt = Conexion::conectar()->prepare($sqlSesion);
+        $stmt = Conexion::conectar()->prepare($sqlSesion);
 
-         $stmt -> bindParam(':usuario', $datos['value']);
-         $stmt -> bindParam(':correo', $datos['value']);
-         $stmt -> bindParam(':telefono', $datos['value']);
-         $stmt -> bindParam(':clave', $datos['pass']);
+        $stmt->bindParam(':usuario', $datos['value']);
+        $stmt->bindParam(':correo', $datos['value']);
+        $stmt->bindParam(':telefono', $datos['value']);
+        $stmt->bindParam(':clave', $datos['pass']);
 
-         $stmt -> execute();
-         return $stmt -> fetch();
+        $stmt->execute();
+        return $stmt->fetch();
 
-         $stmt = null;
+        $stmt = null;
+    }
+
+    public static function mdlActualizarCajaUsuario($usr_id, $usr_caja)
+    {
+        try {
+            //code...
+            $sql = "UPDATE tbl_usuarios SET usr_caja = ? WHERE id = ? ";
+            $con = Conexion::conectar();
+            $pps = $con->prepare($sql);
+            $pps->bindValue(1, $usr_caja);
+            $pps->bindValue(2, $usr_id);
+            $pps->execute();
+            return $pps->rowCount() > 0;
+        } catch (PDOException $th) {
+            //throw $th;
+            return false;
+        } finally {
+            $pps = null;
+            $con = null;
+        }
     }
 }

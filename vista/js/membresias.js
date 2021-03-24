@@ -2,6 +2,22 @@
 /*=============================================
 crear cliente
 =============================================*/
+$(document).ready(function () {
+    var pmbs_fecha_inicio = $("#pmbs_fecha_inicio").val();
+    var pmbs_fecha_fin = $("#pmbs_fecha_fin").val();
+    var pmbs_mp = $("#pmbs_mp").val();
+
+    var pmbs_vendedor = $("#pmbs_vendedor").val()
+    buscarPagosFiltro(
+        [
+            pmbs_fecha_inicio,
+            pmbs_fecha_fin,
+            pmbs_mp,
+            pmbs_vendedor
+        ]);
+})
+
+
 $("#btn-crearCliente").on("click", function () {
 
     var datos = $('#form-ClienteNuevo').serialize();
@@ -114,6 +130,88 @@ $("#pmbs_rmbs").on("change", function () {
 
 })
 
+
+
+
+$("#btnBuscarPagosFiltro").on("click", function () {
+
+
+
+
+    var pmbs_fecha_inicio = $("#pmbs_fecha_inicio").val();
+    var pmbs_fecha_fin = $("#pmbs_fecha_fin").val();
+    var pmbs_mp = $("#pmbs_mp").val();
+
+    var pmbs_vendedor = $("#pmbs_vendedor").val()
+
+    buscarPagosFiltro(
+        [
+            pmbs_fecha_inicio,
+            pmbs_fecha_fin,
+            pmbs_mp,
+            pmbs_vendedor
+        ]);
+
+})
+
+
+function buscarPagosFiltro(arrayDatos) {
+    var datos = new FormData();
+    datos.append("pmbs_fecha_inicio", arrayDatos[0])
+    datos.append("pmbs_fecha_fin", arrayDatos[1])
+    datos.append("pmbs_mp", arrayDatos[2])
+    datos.append("pmbs_vendedor", arrayDatos[3])
+    datos.append("btnBuscarPagosFiltro", true)
+
+    $.ajax({
+        url: "ajax/membresias.ajax.php",
+        method: "POST",
+        data: datos,
+        cache: false,
+        contentType: false,
+        processData: false,
+        dataType: "json",
+        beforeSend: function () {
+            startLoadButton();
+        },
+        success: function (res) {
+
+            stopLoadButton("Buscar");
+
+            var contenido = "";
+            var ventastotal = 0;
+
+            res.forEach(pgs => {
+
+                ventastotal += Number(pgs.pmbs_monto);
+
+                contenido +=
+                    `  
+                
+                <tr>
+                
+                    <td>${pgs.pmbs_id}</td>
+                    <td>${pgs.nombre}</td>
+                    <td>${pgs.pmbs_mp}</td>
+                    <td>${pgs.pmbs_monto}</td>
+                    <td>${pgs.pmbs_fecha_pago}</td>
+                    <td>
+                        <a target="_blank" href="./extensiones/tcpdf/pdf/pagos.php?pmbs_id=${pgs.pmbs_id}" class="btn btn-dafault"><i class="fa fa-print" aria-hidden="true"></i></a>
+                    </td>
+                
+                </tr>
+                
+                `;
+
+            });
+
+            $("#PagosBody").html(contenido);
+            $("#pmbs_total").html(ventastotal);
+
+        }
+    })
+
+}
 
 
 var select = document.getElementById('GDclienteNM');

@@ -27,9 +27,10 @@ session_start();
   <!-- Custom styles for this template-->
   <link href="<?php echo $url ?>vista/css/sb-admin-2.min.css" rel="stylesheet">
 
-  <script src="https://unpkg.com/sweetalert/dist/sweetalert.min.js"></script>
+  <!-- <script src="https://unpkg.com/sweetalert/dist/sweetalert.min.js"></script> -->
 
 
+  <script src="<?php echo $url ?>vista/js/sweetalert.min.js"></script>
 
 
 
@@ -83,12 +84,15 @@ session_start();
 
               $rutas[0] == 'cajas' ||
               $rutas[0] == 'ventas' ||
+              $rutas[0] == 'pagos' ||
               $rutas[0] == 'clientes' ||
               $rutas[0] == 'pos' ||
               $rutas[0] == 'salir' ||
               $rutas[0] == 'alta-membresia' ||
               $rutas[0] == 'renovar-membresia' ||
-              $rutas[0] == 'membresias'
+              $rutas[0] == 'membresias' ||
+              $rutas[0] == 'abrir-caja' ||
+              $rutas[0] == 'cerrar-caja'
 
             ) {
               include_once 'vista/modulos/' . $rutas[0] . '.php';
@@ -171,6 +175,7 @@ session_start();
   <script src="<?php echo $url ?>vista/js/productos.js"></script>
   <script src="<?php echo $url ?>vista/js/ventas.js"></script>
   <script src="<?php echo $url ?>vista/js/membresias.js"></script>
+  <script src="<?php echo $url ?>vista/js/cajas.js"></script>
 
 </body>
 

@@ -2,6 +2,7 @@
 
 require_once "../controlador/clientes.controlador.php";
 require_once "../modelo/membresias.modelo.php";
+require_once "../modelo/cajas.modelo.php";
 require_once "../modelo/clientes.modelo.php";
 
 class AjaxMembresias
@@ -49,6 +50,12 @@ class AjaxMembresias
 
 		echo json_encode($respuesta, true);
 	}
+
+	public function ajaxBuscarPagosFiltro()
+    {
+        $res = CajasModelo::mdlPagosFiltro($_POST);
+        echo json_encode($res, true);
+    }
 }
 
 if (isset($_POST["GDnombre"])) {
@@ -69,4 +76,12 @@ if (isset($_POST['btnConsultarMembresiaCliente'])) {
 	$buscarClienteMembresia = new AjaxMembresias();
 	$buscarClienteMembresia->rmbs_id = $_POST['rmbs_id'];
 	$buscarClienteMembresia->ajaxBuscarMembresiaCliente();
+}
+
+
+if (isset($_POST['btnBuscarPagosFiltro'])) {
+
+
+    $buscar = new AjaxMembresias();
+    $buscar->ajaxBuscarPagosFiltro();
 }

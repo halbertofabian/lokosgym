@@ -1,6 +1,14 @@
 <!-- Begin Page Content -->
 
-<audio id="audio" controls style="display: none" >
+<?php
+
+if ($_SESSION['usr_caja'] <= 0) {
+    PlantillaControlador::msj('warning', 'Error', 'Necesita abrir caja para realizar está operación', $url . 'abrir-caja');
+    die();
+}
+
+?>
+<audio id="audio" controls style="display: none">
     <source type="audio/wav" src="vista/audio/scanner-beep-checkout.mp3">
 </audio>
 <div class="container-fluid">
@@ -107,7 +115,7 @@
                                             <div class="input-group-prepend">
                                                 <div class="input-group-text"><i class="fa fa-users"></i></div>
                                             </div>
-                                            <select name="GDcliente" class="form-control" id="GDcliente" required>
+                                            <select name="GDcliente" class="form-control select2" id="GDcliente" required>
                                                 <option value="">Seleccionar cliente</option>
                                                 <option value="1" selected>General</option>
                                                 <?php $clientes = ClientesControlador::ctrMostrarCliente(null);
@@ -229,10 +237,10 @@
 
                                                     <select class="form-control" id="nuevoMetodoPago" name="nuevoMetodoPago" required>
                                                         <option value="">Seleccione método de pago</option>
-                                                        <option value="Efectivo" selected>Efectivo</option>
-                                                        <option value="TC">Tarjeta Crédito</option>
-                                                        <option value="TD">Tarjeta Débito</option>
-                                                        <option value="CC">Crédito Cliente</option>
+                                                        <option value="Efectivo" selected>EFECTIVO</option>
+                                                        <option value="Tarjeta">TARJETA CREDITO / DEBITO</option>
+                                                        
+                                                        
                                                     </select>
 
                                                 </div>

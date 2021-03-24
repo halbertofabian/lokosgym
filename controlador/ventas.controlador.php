@@ -61,9 +61,19 @@ class VentasControlador
                 echo "<br> '$key' => '$value' <br>";
             }*/
 
+
+            if($_POST['listaMetodoPago'] != ""){
+
+                $_POST['venta_mp'] = "TARJETA CREDITO / DEBITO";
+
+            }
             if($_POST['listaMetodoPago']==""){
                 $_POST['listaMetodoPago']="Efectivo-".$_POST['nuevoValorEfectivo'];
+                $_POST['venta_mp'] = "EFECTIVO";
+
             }
+
+
            // echo $_POST['listaMetodoPago'];
             //  echo $articulos;
 
@@ -82,7 +92,9 @@ class VentasControlador
                 'neto' => $_POST['nuevoPrecioNeto'],
                 'total' => $_POST['totalVenta'],
                 'descuento' => $_POST['nuevoImpuestoVenta'],
-                'fecha' => $fecha_registro
+                'fecha' => $fecha_registro,
+                'estado_corte' =>  $_SESSION["usr_caja"],
+                'venta_mp' => $_POST['venta_mp']
             );
             // Realizar venta
             $crearVenta = VentasModelo::mdlCrearVenta($tbl_ventas);

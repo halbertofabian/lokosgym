@@ -1,5 +1,5 @@
  <!-- Begin Page Content -->
- <div class="container-fluid">
+ <!-- <div class="container-fluid">
 
      <nav aria-label="breadcrumb">
          <ol class="breadcrumb">
@@ -10,7 +10,7 @@
          </ol>
 
      </nav>
-     <!-- Button trigger modal -->
+     
 
 
      <button type="button" id="daterange-btn" class="d-none d-sm-inline-block btn btn-default   mr-sm-2 shadow-sm  float-right mb-4">
@@ -110,5 +110,85 @@
 
 
 
- </div>
+ </div> -->
  <!-- /.container-fluid -->
+
+ <div class="container">
+     <div class="row">
+         <div class="col-md-4">
+             <div class="form-group">
+                 <label for="vts_vendedor">Usuario</label>
+                 <select class="form-control" name="vts_vendedor" id="vts_vendedor">
+                     <option value="">Seleccione un usuario</option>
+                     <?php
+                     
+                     $usuarios = UsuariosModelo::mdlMostrarUsuarios(null);
+                     foreach ($usuarios as $key => $usr) :
+                     
+                     ?>
+
+                     <option value="<?php echo $usr['id'] ?>"><?php echo $usr['nombre'] ?></option>
+
+                     <?php endforeach; ?>
+                 </select>
+             </div>
+         </div>
+         <div class="col-md-8"></div>
+         <div class="col-md-4">
+             <div class="form-group">
+                 <label for="vts_fecha_inicio">Fecha inicio</label>
+                 <input type="datetime-local" name="vts_fecha_inicio" id="vts_fecha_inicio" class="form-control todayTimeStart">
+             </div>
+         </div>
+         <div class="col-md-4">
+             <div class="form-group">
+                 <label for="vts_fecha_fin">Fecha fin</label>
+                 <input type="datetime-local" name="vts_fecha_fin" id="vts_fecha_fin" class="form-control todayTimeEnd">
+             </div>
+         </div>
+         <div class="col-md-4">
+             <div class="form-group">
+                 <label for="vts_mp">Tipo de pago</label>
+                 <select class="form-control" name="vts_mp" id="vts_mp">
+                     <option value="">Seleccione un metodo de pago</option>
+                     <option>EFECTIVO</option>
+                     <option>BANCO</option>
+                 </select>
+             </div>
+         </div>
+
+         <div class="col-12">
+             <button id="btnBuscarVentasFiltro" class="btn btn-primary float-right btn-load  mb-3">Buscar</button>
+         </div>
+     </div>
+
+     <div class="row">
+         <div class="col-12">
+             <table class="table" id="">
+                 <thead>
+                     <tr>
+                         <th># Venta</th>
+                         <th>Vendedor</th>
+                         <th>MP</th>
+                         <th>Total</th>
+                         <th>Fecha</th>
+                     </tr>
+                 </thead>
+                 <tbody id="ventasBody">
+
+                 </tbody>
+             </table>
+         </div>
+
+         <div class="col-12">
+             <div class="card">
+
+                 <div class="card-body">
+                     <h4 class="card-title">Total</h4>
+                     <p class="card-text"><strong id="vts_total"></strong></p>
+                 </div>
+             </div>
+         </div>
+
+     </div>
+ </div>

@@ -6,8 +6,8 @@ $(".nuevaImagen").change(function () {
 	var imagen = this.files[0];
 
 	/*=============================================
-  	VALIDAMOS EL FORMATO DE LA IMAGEN SEA JPG O PNG
-  	=============================================*/
+		VALIDAMOS EL FORMATO DE LA IMAGEN SEA JPG O PNG
+		=============================================*/
 
 	if (imagen["type"] != "image/jpeg" && imagen["type"] != "image/png") {
 
@@ -51,20 +51,34 @@ $(".nuevaImagen").change(function () {
 
 var date = new Date();
 var day = date.getDate();
-var month= date.getMonth()+1;
-var year=date.getFullYear();
-if(month<10){
-	month="0"+ month;
+var month = date.getMonth() + 1;
+var year = date.getFullYear();
+if (month < 10) {
+	month = "0" + month;
 }
-if(day<10){
-	day="0"+ day;
+if (day < 10) {
+	day = "0" + day;
 }
-var toDay= year+"-"+month+"-"+day;
+var toDay = year + "-" + month + "-" + day;
 $(".today").val(toDay);
+$(".todayTimeStart").val(toDay + "T00:00");
+$(".todayTimeEnd").val(toDay + "T23:59");
+
+
+function startLoadButton() {
+    $(".btn-load").attr("disabled", true);
+    $(".btn-load").html(` <span class="spinner-border spinner-border-sm" role="status" aria-hidden="true"></span>
+            Por favor espere...`)
+}
+function stopLoadButton(label) {
+    $(".btn-load").attr("disabled", false);
+    $(".btn-load").html(`${label}`)
+}
 
 
 
 $('.js-example-basic-single').select2();
+$('.select2').select2();
 
 var elem = document.documentElement;
 function openFullscreen() {
@@ -98,12 +112,12 @@ $(".inputN").number(true, 2);
 
 // $(document).ready(function () {
 // 	$(".dataTable").DataTable({
-  
-	  
+
+
 // 	  "ordering": false,
-  
+
 // 	  "language": {
-  
+
 // 		"sProcessing": "Procesando...",
 // 		"sLengthMenu": "Mostrar _MENU_ registros",
 // 		"sZeroRecords": "No se encontraron resultados",
@@ -113,7 +127,7 @@ $(".inputN").number(true, 2);
 // 		"sInfoFiltered": "(filtrado de un total de _MAX_ registros)",
 // 		"sInfoPostFix": "",
 // 		"sSearch": "Buscar:",
-  
+
 // 		"sUrl": "",
 // 		"sInfoThousands": ",",
 // 		"sLoadingRecords": "Cargando...",
@@ -127,9 +141,8 @@ $(".inputN").number(true, 2);
 // 		  "sSortAscending": ": Activar para ordenar la columna de manera ascendente",
 // 		  "sSortDescending": ": Activar para ordenar la columna de manera descendente"
 // 		}
-  
+
 // 	  }
-  
+
 // 	});
 //   });
-  
