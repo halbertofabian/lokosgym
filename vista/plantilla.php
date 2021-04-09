@@ -66,6 +66,8 @@ session_start();
 
           <?php
 
+          
+
           include_once 'vista/modulos/navbar.php';
 
           ?>
