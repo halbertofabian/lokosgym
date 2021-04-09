@@ -26,7 +26,6 @@ class imprimirTicketPago
         Paseos del Sol, Zapopan. <br><br>
         Tel: 31335471 <br>
         Facebook: LokosGym <br>
-        Tel: LokosGym <br>
         Instagram: LokosGym <br>
         www.lokosgym.com
 	";
