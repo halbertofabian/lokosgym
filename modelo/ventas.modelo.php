@@ -79,7 +79,7 @@ class VentasModelo
     public static function mdlMostrarVentaTicket($codigo)
     {
         $sql = "SELECT dv.id_venta,dv.cantidad, dv.precio, dv.neto,
-         dv.total, tp.codigo, tp.caracteristicas_producto, 
+         dv.total, tp.codigo,tp.producto, tp.caracteristicas_producto, 
          tp.precio_publico, tv.id_venta,tv.id_cliente,tv.id_vendedor,
          tv.forma_pago,tv.neto,tv.total,tv.descuento,tv.fecha,tu.nombre,tu.apellido,tc.nombre_cliente 
          FROM tbl_detalle_ventas dv JOIN tbl_productos tp

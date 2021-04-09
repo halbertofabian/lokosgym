@@ -22,11 +22,16 @@ class imprimirTicketPago
         //$sucursal = ControladorSucursal::ctrMostrarSucursal();
         $direccion = "
 	
-		Mariano Otero #5733
-		Guadalajara, Jalisco. MX.
+        Mariano Otero #5733 <br>
+        Paseos del Sol, Zapopan. <br><br>
+        Tel: 31335471 <br>
+        Facebook: LokosGym <br>
+        Tel: LokosGym <br>
+        Instagram: LokosGym <br>
+        www.lokosgym.com
 	";
-        $nombre_suc = "LOKOS GYM";
-        //$telefono_suc = "7341006945";
+        $nombre_suc = '<img src="../../../vista/img/logo_lokos.jpeg" width="110px"> ';
+		//$telefono_suc = "7341006945";
         $web = "";
         $tipo_impresion = "58mm";
         $politicas_ventas = "
@@ -120,9 +125,7 @@ $total = number_format($respuestaVenta["total"],2);*/
 				</strong> 
 				<br>
 		
-				<div style="text-align:center; font-size:8px;">
-					<strong>RFC: </strong>
-				</div>
+				
 				
 				
 				
@@ -138,10 +141,9 @@ $total = number_format($respuestaVenta["total"],2);*/
 
 			
 				</div>
-				<strong style="text-align:right">P/ $valorVenta</strong>
+				<strong style="text-align:left">Ticket: $valorVenta</strong>
 				<br>
-				
-				$fecha_venta
+                                <strong style="text-align:left">Fecha: $fecha_venta</strong>
 				<br>
 				Atiende: $vendedor
 				<br>
@@ -231,9 +233,9 @@ EOF;
 	
 	<tr>
 	
-		<td style="width:$impresion px; text-align:center">
+		<td style="width:$impresion px; text-align:center; font-size:7px">
 			$politicas_ventas
-			**GRACIAS POR SU COMPRA** 
+			GRACIAS POR SU COMPRA 
 		</td>
 
 	</tr>

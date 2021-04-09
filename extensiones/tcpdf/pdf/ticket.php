@@ -24,8 +24,16 @@ class imprimirFactura
 		//$sucursal = ControladorSucursal::ctrMostrarSucursal();
 		$direccion = "
 	
-		Av Mariano Otero 5733, Paseos del Sol, 45070 Guadalajara, Jal.	";
-		$nombre_suc = "LOKOS GYM";
+		Mariano Otero #5733 <br>
+		Paseos del Sol, Zapopan. <br><br>
+		Tel: 31335471 <br>
+		Facebook: LokosGym <br>
+		Tel: LokosGym <br>
+		Instagram: LokosGym <br>
+		www.lokosgym.com
+		
+		";
+		$nombre_suc = '<img src="../../../vista/img/logo_lokos.jpeg" width="110px"> ';
 		//$telefono_suc = "7341006945";
 		$web = "";
 		$tipo_impresion = "58mm";
@@ -157,10 +165,9 @@ $total = number_format($respuestaVenta["total"],2);*/
 
 			
 				</div>
-				<strong style="text-align:right">V/ $valorVenta</strong>
+				<strong style="text-align:left">Ticket: $valorVenta</strong>
 				<br>
-				
-				$fecha_venta
+				<strong style="text-align:left">Fecha: $fecha_venta</strong>
 				<br>
 				Atiende: $vendedor
 				<br>
@@ -200,13 +207,14 @@ EOF;
 			$descuento = $value['precio'] / 100 *   $value['descuento'];
 			$descuento = $value['precio'] - $descuento;
 			$totalDescuento = $descuento * $value['cantidad'];
+			$totalDescuento = number_format($totalDescuento,2);
 			$bloque2 = <<<EOF
 
 <table style="font-size:9px;">
 
 	<tr>
 	
-		<td style="width:$impresion px; text-align:center">
+		<td style="width:$impresion px; text-align:left">
 		 $value[producto] 
 		</td>
 
@@ -214,8 +222,8 @@ EOF;
 
 	<tr>
 	
-		<td style="width:$impresion px; text-align:right">
-		<strong>$ $value[precio] Und =>  $descuento  * $value[cantidad]= $ $totalDescuento </strong>
+		<td style="width:$impresion px; text-align:center">
+		<strong>$ $value[precio]   x $value[cantidad]= $ $totalDescuento </strong>
 		<br>
 		</td>
 
@@ -279,9 +287,9 @@ EOF;
 
 	<tr>
 	
-		<td style="width:$impresion px; text-align:center">
+		<td style="width:$impresion px; text-align:center; font-size:7px">
 			$politicas_ventas
-			**GRACIAS POR SU COMPRA** 
+			GRACIAS POR SU COMPRA
 		</td>
 
 	</tr>
