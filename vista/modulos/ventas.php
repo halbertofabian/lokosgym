@@ -172,6 +172,7 @@
                          <th>MP</th>
                          <th>Total</th>
                          <th>Fecha</th>
+                         <th>Ticket</th>
                      </tr>
                  </thead>
                  <tbody id="ventasBody">

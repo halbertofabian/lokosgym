@@ -1,6 +1,6 @@
 <?php
 if ($_SESSION['usr_caja'] <= 0) {
-    PlantillaControlador::msj('warning', 'CAJA CERRADA', 'Usted aún no ha abierto caja',$url . 'abrir-caja');
+    PlantillaControlador::msj('warning', 'CAJA CERRADA', 'Usted aún no ha abierto caja', $url . 'abrir-caja');
     return;
 }
 
@@ -50,4 +50,28 @@ if ($_SESSION['usr_caja'] <= 0) {
             </div>
         </div>
     </form>
+</div>
+
+<div class="container">
+    <?php $t = CajasControlador::ctrTotales($_SESSION['usr_caja']) ?>
+    <div class="row">
+        <div class="col-md-6 mt-1">
+            <div class="card">
+                <div class="card-body">
+                    <h4 class="card-title">Efectivo</h4>
+                    <p class="card-text"><?php echo number_format($t['total_efectivo'], 2) ?></p>
+                </div>
+            </div>
+        </div>
+    </div>
+    <div class="row">
+        <div class="col-md-6 mt-1">
+            <div class="card">
+                <div class="card-body">
+                    <h4 class="card-title">Banco</h4>
+                    <p class="card-text"><?php echo number_format($t['total_banco'], 2) ?></p>
+                </div>
+            </div>
+        </div>
+    </div>
 </div>

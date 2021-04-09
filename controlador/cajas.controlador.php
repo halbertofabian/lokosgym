@@ -154,4 +154,31 @@ class CajasControlador
             }
         }
     }
+
+    public static function ctrTotales($crt_id)
+    {
+
+
+
+        $montos = array(
+            'monto_venta_e' => CajasModelo::mdlReporteVentasByMPCorte('EFECTIVO', $crt_id),
+            'monto_venta_b' => CajasModelo::mdlReporteVentasByMPCorte('TARJETA CREDITO / DEBITO', $crt_id),
+            'monto_pagos_e' => CajasModelo::mdlReportePagosByMPCorte('EFECTIVO', $crt_id),
+            'monto_pagos_b' => CajasModelo::mdlReportePagosByMPCorte('', $crt_id),
+        );
+
+
+        $monto_e = $montos['monto_venta_e']['venta_total'] + $montos['monto_pagos_e']['pagos_total'];
+
+        $monto_b = $montos['monto_venta_b']['venta_total'] + $montos['monto_pagos_b']['pagos_total'];
+
+
+        $totalEfectivo = $monto_e;
+        $totalBanco = $monto_b;
+
+        return array(
+            "total_efectivo" => $totalEfectivo,
+            "total_banco" => $totalBanco
+        );
+    }
 }

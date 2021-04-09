@@ -1139,6 +1139,7 @@ function buscarVentasFiltro(arrayDatos) {
                     <td>${vts.venta_mp}</td>
                     <td>${vts.total}</td>
                     <td>${vts.fecha}</td>
+                    <td><a target="_blank" href="./extensiones/tcpdf/pdf/ticket.php?codigo=${vts.id_venta}" class="btn btn-secondary"><i class="fas fa-print"></i></td>
                 
                 </tr>
                 
