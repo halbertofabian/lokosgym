@@ -45,6 +45,15 @@ class MembresiasModelo
         $stmt = null;
     }
 
+    public static function mdlMostrarPagosMembresiaCaja($pmbs_corte)
+    {
+        $sql = "SELECT pgs.*,usr.nombre FROM tbl_pagos_pmbs pgs JOIN tbl_usuarios usr ON usr.id = pgs.id_vendedor WHERE pmbs_corte = ? ORDER BY pgs.pmbs_id DESC  ";
+        $con = conexion::conectar();
+        $pps = $con->prepare($sql);
+        $pps->bindValue(1, $pmbs_corte);
+        $pps->execute();
+        return $pps->fetchAll();
+    }
     //
 
     public static function mdlMostrarMembresiaID($mbs_id)
@@ -94,7 +103,7 @@ class MembresiasModelo
     }
 
 
-    public static function mdlActualizarMembresiaCliente($rmbs_fecha_termino,$rmbs_id)
+    public static function mdlActualizarMembresiaCliente($rmbs_fecha_termino, $rmbs_id)
     {
         try {
             //code...
@@ -106,7 +115,7 @@ class MembresiasModelo
             $pps->bindValue(2, $rmbs_id);
 
             $pps->execute();
-            return $pps->rowCount()>0;
+            return $pps->rowCount() > 0;
         } catch (PDOException $th) {
             throw $th;
             return false;
@@ -141,6 +150,4 @@ class MembresiasModelo
             $con = null;
         }
     }
-
-   
 }

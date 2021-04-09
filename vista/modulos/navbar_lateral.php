@@ -105,7 +105,7 @@
             </div>
         </div>
     </li>
-    <!-- <li class="nav-item">
+    <li class="nav-item">
         <a class="nav-link collapsed" href="#" data-toggle="collapse" data-target="#Gestion" aria-expanded="true" aria-controls="Gestion">
             <i class="fas fa-tasks"></i>
             <span>Gestión</span>
@@ -119,7 +119,7 @@
 
             </div>
         </div>
-    </li> -->
+    </li>
 
 
 

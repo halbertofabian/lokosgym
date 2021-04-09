@@ -92,7 +92,8 @@ session_start();
               $rutas[0] == 'renovar-membresia' ||
               $rutas[0] == 'membresias' ||
               $rutas[0] == 'abrir-caja' ||
-              $rutas[0] == 'cerrar-caja'
+              $rutas[0] == 'cerrar-caja' ||
+              $rutas[0] == 'corte'
 
             ) {
               include_once 'vista/modulos/' . $rutas[0] . '.php';

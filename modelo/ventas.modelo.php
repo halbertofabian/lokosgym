@@ -110,6 +110,17 @@ class VentasModelo
 
         $stmt = null;
     }
+
+    public static function mdlMostrarVentasByCorte($estado_corte)
+    {
+        $sql = "SELECT tv.*,tu.nombre FROM tbl_ventas tv JOIN tbl_usuarios tu ON tv.id_vendedor = tu.id WHERE estado_corte = ? GROUP BY tv.id_venta DESC ";
+        $stmt = Conexion::conectar()->prepare($sql);
+        $stmt->bindValue(1, $estado_corte);
+        $stmt->execute();
+      
+        return $stmt->fetchAll();
+        $stmt = null;
+    }
     public static function mdlMostrarVentasRangoFachas($dateStart, $dateEnd)
     {
         if ($dateStart == null) {

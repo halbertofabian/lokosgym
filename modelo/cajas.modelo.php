@@ -109,7 +109,6 @@ class CajasModelo
                 $sql = "SELECT copn.*,usr.*,cja.* FROM tbl_caja_open_copn copn  JOIN  tbl_usuarios usr ON usr.id = copn.copn_usuario_abrio JOIN tbl_caja_cja cja ON cja.cja_id_caja = copn.copn_id_caja    ORDER BY copn_id DESC ";
                 $con = Conexion::conectar();
                 $pps = $con->prepare($sql);
-                $pps->bindValue(1, $_SESSION['session_suc']['scl_id']);
                 $pps->execute();
                 return $pps->fetchAll();
             }
