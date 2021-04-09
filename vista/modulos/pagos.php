@@ -43,6 +43,7 @@
         </div>
 
         <div class="col-12">
+
             <button id="btnBuscarPagosFiltro" class="btn btn-primary float-right btn-load  mb-3">Buscar</button>
         </div>
     </div>
@@ -72,6 +73,8 @@
                 <div class="card-body">
                     <h4 class="card-title">Total</h4>
                     <p class="card-text"><strong id="pmbs_total"></strong></p>
+                    <a id="btnExportarPagos" href="<?php echo $url . 'export/exportar-pagos.php'; ?>" class="btn btn-success float-right ml-1"><i class="fas fa-file-excel"></i> Descargar Excel</a>
+
                 </div>
             </div>
         </div>

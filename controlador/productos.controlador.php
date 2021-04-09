@@ -1,7 +1,5 @@
 <?php
 
-use Mike42\Escpos\Printer;
-
 class  ProductosControlador
 {
 
@@ -383,7 +381,6 @@ class  ProductosControlador
                        
     
                       </script>';
-                    
             }
         }
     }

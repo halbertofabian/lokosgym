@@ -13,8 +13,15 @@ foreach ($detallesVenta as  $val) {
   $totalInventario += $val['existencia'] * $val['precio_compra'];
 }
 
-echo number_format($totalInventario);
+
 ?>
+
+<?php
+
+$estadosSocios = MembresiasControlador::ctrContadorEstadoSocios();
+
+?>
+
 <!-- Content Row -->
 <div class="row">
 
@@ -83,8 +90,64 @@ echo number_format($totalInventario);
     </div>
   </div>
 
+  <div class="col-xl-3 col-md-6 mb-4">
+    <div class="card border-left-danger shadow h-100 py-2">
+      <div class="card-body">
+        <div class="row no-gutters align-items-center">
+          <div class="col mr-2">
+            <div class="text-xs font-weight-bold text-success text-uppercase mb-1"> <a href="<?php echo $url . 'index.php?ruta=membresias&estado=Active' ?>">Socios Activos</a> </div>
+            <div class="h5 mb-0 font-weight-bold text-gray-800"> <?php echo $estadosSocios['sociosActivos'] ?></div>
+          </div>
+          <div class="col-auto">
+            <i class="fas fa-user-check fa-2x text-gray-300" aria-hidden="true"></i>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <div class="col-xl-3 col-md-6 mb-4">
+    <div class="card border-left-danger shadow h-100 py-2">
+      <div class="card-body">
+        <div class="row no-gutters align-items-center">
+          <div class="col mr-2">
+            <div class="text-xs font-weight-bold text-warning text-uppercase mb-1"><a href="<?php echo $url . 'index.php?ruta=membresias&estado=EndDay' ?>"> Socios expiran hoy</a></div>
+            <div class="h5 mb-0 font-weight-bold text-gray-800"> <?php echo $estadosSocios['sociosInactivosHoy'] ?></div>
+          </div>
+          <div class="col-auto">
+            <i class="fas fa-user-check fa-2x text-gray-300" aria-hidden="true"></i>
+            <i class="fas fa-user-times    "></i>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <div class="col-xl-3 col-md-6 mb-4">
+    <div class="card border-left-danger shadow h-100 py-2">
+      <div class="card-body">
+        <div class="row no-gutters align-items-center">
+          <div class="col mr-2">
+            <div class="text-xs font-weight-bold text-danger text-uppercase mb-1"><a href="<?php echo $url . 'index.php?ruta=membresias&estado=Inactive' ?>"> Socios Inactivos</a> </div>
+            <div class="h5 mb-0 font-weight-bold text-gray-800"> <?php echo $estadosSocios['sociosInactivos'] ?></div>
+          </div>
+          <div class="col-auto">
+            <i class="fas fa-user-times fa-2x text-gray-300" aria-hidden="true"></i>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+
 
   <div class="col-12">
+
+    <?php if (isset($_GET['fechaInicial'])) : ?>
+      <a href="<?php echo $url . 'export/exportar-ventas.php?fechaInicial=' . $_GET['fechaInicial'] . '&fechaFinal=' . $_GET['fechaFinal'] ?>" class="btn btn-success float-right"><i class="fas fa-file-excel"></i> Descargar Excel</a>
+    <?php else : ?>
+      <a href="<?php echo $url . 'export/exportar-ventas.php' ?>" class="btn btn-success float-right"><i class="fas fa-file-excel"></i> Descargar Excel</a>
+    <?php endif; ?>
+
     <button type="button" id="daterange-btn-home" class="d-none d-sm-inline-block btn btn-default   mr-sm-2 shadow-sm  float-right mb-4">
       <span>
         <i class="fa fa-calendar"></i> Rango de fecha
@@ -97,10 +160,10 @@ echo number_format($totalInventario);
         <tr>
           <th>Producto</th>
           <th>Precio compra</th>
-          <th>Precio venta - Descuento</th>
+          <th>Precio venta</th>
           <th>Cantidad</th>
           <th>Total</th>
-          <th>Descuento</th>
+          <!-- <th>Descuento</th> -->
 
           <th>Ganancias (Total de ventas - Total de compra)</th>
 
@@ -115,7 +178,7 @@ echo number_format($totalInventario);
           <th>Precio venta - Descuento</th>
           <th>Cantidad</th>
           <th>Total</th>
-          <th>Descuento</th>
+          <!-- <th>Descuento</th> -->
 
 
           <th>Ganancias (Total de ventas - Total de compra)</th>
@@ -159,11 +222,10 @@ echo number_format($totalInventario);
 
             <td><?php echo $value['producto'] ?></td>
             <td><?php echo $value['precio_compra'] ?></td>
-            <td><?php echo $value['precio'] . " -  " . $value['descuento'] . "% = ";
-                echo $totalV = $value['precio'] - ($value['precio'] * $value['descuento'] / 100) ?></td>
+            <td><?php echo $value['precio'] ?></td>
             <td><?php echo $value['cantidad'] ?></td>
             <td><?php echo "<strong class='text-success'>" .  $totalV * $value['cantidad'] . "</strong>"  ?></td>
-            <td><?php echo $value['descuento'] ?></td>
+            <!-- <td><?php echo $value['descuento'] ?></td>  -->
 
 
             <td><?php echo "<strong class='text-danger'>";
@@ -219,4 +281,7 @@ echo number_format($totalInventario);
       </div>
     </div>
   </div>
+
+
+
 </div>

@@ -4,7 +4,7 @@ class VentasModelo
 {
     public static function mdlMostrarUltimaVenta()
     {
-        $sql = "SELECT * FROM tbl_ventas GROUP BY id_venta DESC ";
+        $sql = "SELECT * FROM tbl_ventas  ORDER BY fecha DESC ";
         $stmt = Conexion::conectar()->prepare($sql);
 
         $stmt->execute();
@@ -16,8 +16,8 @@ class VentasModelo
     public static function mdlCrearVenta($datos)
     {
         $sqlInsert = "INSERT INTO tbl_ventas (id_venta,id_cliente,
-        id_vendedor,forma_pago,neto,total,descuento,fecha,estado_corte,venta_mp) VALUES(:id_venta,:id_cliente,
-        :id_vendedor,:forma_pago,:neto,:total,:descuento,:fecha,:estado_corte,:venta_mp)";
+        id_vendedor,forma_pago,neto,total,descuento,fecha) VALUES(:id_venta,:id_cliente,
+        :id_vendedor,:forma_pago,:neto,:total,:descuento,:fecha)";
 
         $stmt = Conexion::conectar()->prepare($sqlInsert);
 
@@ -29,12 +29,8 @@ class VentasModelo
         $stmt->bindParam(':total', $datos['total']);
         $stmt->bindParam(':descuento', $datos['descuento']);
         $stmt->bindParam(':fecha', $datos['fecha']);
-        $stmt->bindParam(':estado_corte', $datos['estado_corte']);
-        $stmt->bindParam(':venta_mp', $datos['venta_mp']);
 
-        $stmt->execute();
-
-        return $stmt->rowCount() > 0;
+        return $stmt->execute();
 
 
 

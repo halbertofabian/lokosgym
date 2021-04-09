@@ -42,7 +42,7 @@ class MembresiasControlador
                 $crearPago = MembresiasModelo::mdlRegistrarMembresiaPago($_POST);
 
                 if ($crearPago) {
-                    
+
                     echo '
                             <script>
                                 
@@ -98,7 +98,7 @@ class MembresiasControlador
             $fechaRen = MembresiasModelo::mdlActualizarMembresiaCliente($_POST['rmbs_fecha_termino'], $_POST['pmbs_rmbs']);
 
 
-            
+
 
             if ($fechaRen) {
 
@@ -112,12 +112,12 @@ class MembresiasControlador
                 $_POST['pmbs_corte'] = $_SESSION["usr_caja"];
                 $_POST['id_vendedor'] = $_SESSION["id"];
 
-                
-                
+
+
                 $crearPago = MembresiasModelo::mdlRegistrarMembresiaPago($_POST);
 
                 if ($crearPago) {
-                    
+
                     echo '
                             <script>
                                 
@@ -161,5 +161,34 @@ class MembresiasControlador
                       </script>';
             }
         }
+    }
+
+    public static function ctrContadorEstadoSocios()
+    {
+        $sociosActivos = 0;
+        $sociosInactivos = 0;
+        $sociosInactivosHoy = 0;
+        date_default_timezone_set('America/Mexico_City');
+        $fecha = date('Y-m-d');
+
+        $sucrcipiones = MembresiasModelo::mdlMostrarTodasMembresiaCliente();
+
+        foreach ($sucrcipiones as $key => $mbs) {
+            # code...
+
+            if ($mbs['rmbs_fecha_termino'] < $fecha) {
+                $sociosInactivos += 1;
+            } elseif ($mbs['rmbs_fecha_termino'] == $fecha) {
+                $sociosInactivosHoy += 1;
+            } else {
+                $sociosActivos += 1;
+            }
+        }
+
+        return array(
+            'sociosInactivos' => $sociosInactivos,
+            'sociosInactivosHoy' => $sociosInactivosHoy,
+            'sociosActivos' => $sociosActivos
+        );
     }
 }

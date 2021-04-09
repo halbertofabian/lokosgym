@@ -7,6 +7,37 @@
     <?php
 
     $listaM = MembresiasModelo::mdlMostrarTodasMembresiaCliente();
+    date_default_timezone_set('America/Mexico_City');
+    $fecha = date('Y-m-d');
+    $hora = date('H:i:s');
+    $fecha_hoy = $fecha;
+
+    $listActive = [];
+    $listInactive = [];
+    $listEndDay = [];
+    foreach ($listaM as $key => $mbs) {
+        if ($mbs['rmbs_fecha_termino'] > $fecha_hoy) {
+            array_push($listActive, $mbs);
+        } elseif ($mbs['rmbs_fecha_termino'] == $fecha_hoy) {
+            array_push($listEndDay, $mbs);
+        } else {
+            array_push($listInactive, $mbs);
+        }
+    }
+
+
+    if (isset($_GET['estado'])) {
+        $status = $_GET['estado'];
+
+        if ($status == 'Active') {
+            $listaM = $listActive;
+        } elseif ($status == 'Inactive') {
+            $listaM = $listInactive;
+        } elseif ($status == 'EndDay') {
+            $listaM = $listEndDay;
+        }
+    }
+
 
     // echo '<pre>', print_r($listaM), "</pre>";
 
@@ -34,14 +65,11 @@
                     <?php
 
                     foreach ($listaM as $key => $mbs) :
-                        date_default_timezone_set('America/Mexico_City');
-                        $fecha = date('Y-m-d');
-                        $hora = date('H:i:s');
-                        $fecha_hoy = $fecha;
 
-                        $estado =  $mbs['rmbs_fecha_termino'] < $fecha_hoy ? '<strong class="text-danger"> Inactivo </strong>' : ' <strong class="text-success"> Activo </strong>';
+
+                        $estado =  $mbs['rmbs_fecha_termino'] < $fecha_hoy ? '<strong class="text-danger"> Vencido </strong>' : ' <strong class="text-success"> Activo </strong>';
                         $estado =  $mbs['rmbs_fecha_termino'] == $fecha_hoy ? '<strong class="text-warning"> Termina hoy </strong>' : $estado;
-                        
+
                     ?>
 
                         <tr>

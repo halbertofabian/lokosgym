@@ -208,6 +208,8 @@ function buscarPagosFiltro(arrayDatos) {
             $("#PagosBody").html(contenido);
             $("#pmbs_total").html(ventastotal);
 
+            $("#btnExportarPagos").attr("href", "export/exportar-pagos.php?pmbs_fecha_inicio=" + arrayDatos[0] + "&pmbs_fecha_fin=" + arrayDatos[1] + "&pmbs_mp=" + arrayDatos[2] + "&pmbs_vendedor=" + arrayDatos[3])
+
         }
     })
 

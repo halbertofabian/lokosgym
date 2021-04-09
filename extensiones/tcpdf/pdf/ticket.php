@@ -1,8 +1,8 @@
-<?php 
+<?php
 ob_start();
 error_reporting(E_ALL & ~E_NOTICE);
-  ini_set('display_errors', 0);
-  ini_set('log_errors', 1);
+ini_set('display_errors', 0);
+ini_set('log_errors', 1);
 session_start();
 
 
@@ -24,9 +24,7 @@ class imprimirFactura
 		//$sucursal = ControladorSucursal::ctrMostrarSucursal();
 		$direccion = "
 	
-		Mariano Otero #5733
-		Guadalajara, Jalisco. MX.
-	";
+		Av Mariano Otero 5733, Paseos del Sol, 45070 Guadalajara, Jal.	";
 		$nombre_suc = "LOKOS GYM";
 		//$telefono_suc = "7341006945";
 		$web = "";
@@ -143,11 +141,7 @@ $total = number_format($respuestaVenta["total"],2);*/
 				$nombre_suc 
 				
 				</strong> 
-				<br>
-		
-				<div style="text-align:center; font-size:8px;">
-					<strong>RFC: </strong>
-				</div>
+				
 				
 				
 				
@@ -213,7 +207,7 @@ EOF;
 	<tr>
 	
 		<td style="width:$impresion px; text-align:center">
-		$value[codigo] $value[caracteristicas_producto]
+		 $value[producto] 
 		</td>
 
 	</tr>

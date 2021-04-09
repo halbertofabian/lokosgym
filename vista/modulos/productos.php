@@ -151,7 +151,7 @@
                                  <div class="input-group-prepend">
                                      <div class="input-group-text"><i class="fas fa-project-diagram"></i><strong class="text-danger"> * </strong></div>
                                  </div>
-                                 <select name="GDcategoria" class="form-control js-example-basic-single" id="GDcategoria" required>
+                                 <select name="GDcategoria" class="form-control " id="GDcategoria" required>
                                      <option value="">Seleccione una categoría</option>
                                      <?php
                                         //Categorias 

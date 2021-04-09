@@ -115,7 +115,7 @@ if ($_SESSION['usr_caja'] <= 0) {
                                             <div class="input-group-prepend">
                                                 <div class="input-group-text"><i class="fa fa-users"></i></div>
                                             </div>
-                                            <select name="GDcliente" class="form-control select2" id="GDcliente" required>
+                                            <select name="GDcliente" class="form-control js-example-basic-single" id="GDcliente" required>
                                                 <option value="">Seleccionar cliente</option>
                                                 <option value="1" selected>General</option>
                                                 <?php $clientes = ClientesControlador::ctrMostrarCliente(null);
@@ -170,7 +170,7 @@ if ($_SESSION['usr_caja'] <= 0) {
                                                     <thead>
 
                                                         <tr>
-                                                            <th>Descuento</th>
+                                                            
                                                             <th>Total</th>
                                                         </tr>
 
@@ -184,12 +184,12 @@ if ($_SESSION['usr_caja'] <= 0) {
 
                                                                 <div class="input-group">
 
-                                                                    <input type="number" class="form-control" min="0" id="nuevoImpuestoVenta" name="nuevoImpuestoVenta" placeholder="0" value="0">
+                                                                    <input type="hidden" class="form-control" min="0" id="nuevoImpuestoVenta" name="nuevoImpuestoVenta" placeholder="0" value="0">
 
                                                                     <input type="hidden" name="nuevoPrecioImpuesto" id="nuevoPrecioImpuesto" required>
 
                                                                     <input type="hidden" name="nuevoPrecioNeto" id="nuevoPrecioNeto" required>
-                                                                    <span class="input-group-text"><i class="fa fa-percent"></i></span>
+                                                                    <!-- <span class="input-group-text"><i class="fa fa-percent"></i></span> -->
 
                                                                 </div>
 
@@ -197,7 +197,7 @@ if ($_SESSION['usr_caja'] <= 0) {
                                                             </td>
 
                                                             <td style="width: 65%">
-                                                                <input type="text" class="form-control" id="nuevoTotalVentaSin" name="nuevoTotalVentaSin" total="" placeholder="00000" readonly required>
+                                                                <input type="hidden" class="form-control" id="nuevoTotalVentaSin" name="nuevoTotalVentaSin" total="" placeholder="00000" readonly required>
                                                                 <br>
 
                                                                 <div class="input-group">

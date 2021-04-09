@@ -19,7 +19,7 @@ if ($_SESSION['usr_caja'] <= 0) {
                 <div class="input-group-prepend">
                     <div class="input-group-text"><i class="fa fa-users"></i></div>
                 </div>
-                <select name="GDclienteNM" class="form-control" id="GDclienteNM" required>
+                <select name="GDclienteNM" class="form-control " id="GDclienteNM" required>
                     <option value="">Seleccionar cliente</option>
                     <?php $clientes = ClientesControlador::ctrMostrarCliente(null);
 

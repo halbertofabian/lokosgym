@@ -78,7 +78,7 @@ function stopLoadButton(label) {
 
 
 $('.js-example-basic-single').select2();
-$('.select2').select2();
+
 
 var elem = document.documentElement;
 function openFullscreen() {

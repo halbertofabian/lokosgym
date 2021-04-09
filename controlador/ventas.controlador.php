@@ -16,16 +16,16 @@ class VentasControlador
         return VentasModelo::mdlMostrarVentas();
     }
     // Rango de fechas
-    public static function ctrMostrarVentasRangoFachas($dateStart,$dateEnd)
+    public static function ctrMostrarVentasRangoFachas($dateStart, $dateEnd)
     {
-        return VentasModelo::mdlMostrarVentasRangoFachas($dateStart,$dateEnd);
+        return VentasModelo::mdlMostrarVentasRangoFachas($dateStart, $dateEnd);
     }
-    public static function ctrMostrarVentasRangoFachasHome($dateStart,$dateEnd)
+    public static function ctrMostrarVentasRangoFachasHome($dateStart, $dateEnd)
     {
-        return VentasModelo::mdlMostrarVentasRangoFachasHome($dateStart,$dateEnd);
+        return VentasModelo::mdlMostrarVentasRangoFachasHome($dateStart, $dateEnd);
     }
-    
-    
+
+
     public static function ctrMostrarVentaTicket($codigo)
     {
         return VentasModelo::mdlMostrarVentaTicket($codigo);
@@ -48,7 +48,7 @@ class VentasControlador
             })
             .then((willDelete) => {
               if (willDelete) {
-                location.href = "caja"
+                location.href = "pos"
               }
             });
 
@@ -61,24 +61,14 @@ class VentasControlador
                 echo "<br> '$key' => '$value' <br>";
             }*/
 
-
-            if($_POST['listaMetodoPago'] != ""){
-
-                $_POST['venta_mp'] = "TARJETA CREDITO / DEBITO";
-
+            if ($_POST['listaMetodoPago'] == "") {
+                $_POST['listaMetodoPago'] = "Efectivo-" . $_POST['nuevoValorEfectivo'];
             }
-            if($_POST['listaMetodoPago']==""){
-                $_POST['listaMetodoPago']="Efectivo-".$_POST['nuevoValorEfectivo'];
-                $_POST['venta_mp'] = "EFECTIVO";
-
-            }
-
-
-           // echo $_POST['listaMetodoPago'];
+            // echo $_POST['listaMetodoPago'];
             //  echo $articulos;
 
 
-           date_default_timezone_set('America/Mexico_City');
+            date_default_timezone_set('America/Mexico_City');
 
             $fecha = date('Y-m-d');
             $hora = date('H:i:s');
@@ -92,14 +82,10 @@ class VentasControlador
                 'neto' => $_POST['nuevoPrecioNeto'],
                 'total' => $_POST['totalVenta'],
                 'descuento' => $_POST['nuevoImpuestoVenta'],
-                'fecha' => $fecha_registro,
-                'estado_corte' =>  $_SESSION["usr_caja"],
-                'venta_mp' => $_POST['venta_mp']
+                'fecha' => $fecha_registro
             );
             // Realizar venta
             $crearVenta = VentasModelo::mdlCrearVenta($tbl_ventas);
-
-          
             if ($crearVenta) {
 
 
@@ -141,7 +127,7 @@ class VentasControlador
                 /*echo "<pre> ";
                     print_r($productos);
                  echo "</pre>";*/
-             }
+            }
         }
 
         # code...
