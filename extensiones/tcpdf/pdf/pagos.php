@@ -140,7 +140,7 @@ $total = number_format($respuestaVenta["total"],2);*/
 
 			
 				</div>
-				<strong style="text-align:left">Ticket: $valorVenta</strong>
+				<strong style="text-align:left">Ticket: $ventaTicket[pmbs_id]</strong>
 				<br>
                                 <strong style="text-align:left">Fecha: $fecha_venta</strong>
 				<br>
@@ -185,9 +185,8 @@ EOF;
 	<tr>
 	
 		<td style="width:$impresion px; text-align:left">
-        TIPO MEMBRESIA: <br> <strong> $ventaTicket[mbs_tipo] </strong> <br>
-        FECHA INICIO: <strong> $ventaTicket[rmbs_fecha_inicio] </strong> <br>
-        FECHA FIN: <strong> $ventaTicket[rmbs_fecha_termino] </strong>
+        TIPO MEMBRESIA: <br> <strong> $ventaTicket[tipo] </strong> <br>
+        RENOVACION: <strong> $ventaTicket[vigencia] </strong>
 		</td>
 
 	</tr>
@@ -195,7 +194,7 @@ EOF;
 	<tr>
 	
 		<td style="width:$impresion px; text-align:right">
-		<strong>Total: $ $ventaTicket[mbs_costo] </strong>
+		<strong>Total: $ $ventaTicket[pmbs_monto] </strong>
 		<br>
        
 		</td>

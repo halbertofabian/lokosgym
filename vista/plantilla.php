@@ -179,6 +179,7 @@ session_start();
   <script src="<?php echo $url ?>vista/js/ventas.js"></script>
   <script src="<?php echo $url ?>vista/js/membresias.js"></script>
   <script src="<?php echo $url ?>vista/js/cajas.js"></script>
+  <script src="<?php echo $url ?>vista/js/clientes.js"></script>
 
 </body>
 

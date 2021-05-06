@@ -78,6 +78,27 @@ class MembresiasModelo
         $stmt = null;
     }
 
+
+    public static function mdlConsultarClientes($id_cliente, $nombre_cliente)
+    {
+
+        $sqlSelect = "SELECT * FROM tbl_clientes WHERE id_cliente LIKE '%$id_cliente%' AND nombre_cliente LIKE '%$nombre_cliente%'";
+        $stmt = Conexion::conectar()->prepare($sqlSelect);
+        $stmt->execute();
+        return $stmt->fetchAll();
+        $stmt = null;
+    }
+
+    public static function mdlConsultarClientesMembresias()
+    {
+
+        $sqlSelect = "SELECT * FROM tbl_clientes";
+        $stmt = Conexion::conectar()->prepare($sqlSelect);
+        $stmt->execute();
+        return $stmt->fetchAll();
+        $stmt = null;
+    }
+
     public static function mdlRegistrarMembresiaCliente($mbs)
     {
         try {
@@ -129,16 +150,16 @@ class MembresiasModelo
     {
         try {
             //code...
-            $sql = "INSERT INTO tbl_pagos_pmbs  (pmbs_rmbs,pmbs_fecha_pago,pmbs_mp,pmbs_monto,pmbs_ref,pmbs_corte,id_vendedor) VALUES (?,?,?,?,?,?,?)";
+            $sql = "INSERT INTO tbl_pagos_pmbs  (pmbs_fecha_pago,pmbs_mp,pmbs_monto,pmbs_ref,pmbs_corte,id_vendedor,id_cliente) VALUES (?,?,?,?,?,?,?)";
             $con = Conexion::conectar();
             $pps = $con->prepare($sql);
-            $pps->bindValue(1, $pmbs['pmbs_rmbs']);
-            $pps->bindValue(2, $pmbs['pmbs_fecha_pago']);
-            $pps->bindValue(3, $pmbs['pmbs_mp']);
-            $pps->bindValue(4, $pmbs['pmbs_monto']);
-            $pps->bindValue(5, $pmbs['pmbs_ref']);
-            $pps->bindValue(6, $pmbs['pmbs_corte']);
-            $pps->bindValue(7, $pmbs['id_vendedor']);
+            $pps->bindValue(1, $pmbs['pmbs_fecha_pago']);
+            $pps->bindValue(2, $pmbs['pmbs_mp']);
+            $pps->bindValue(3, $pmbs['pmbs_monto']);
+            $pps->bindValue(4, $pmbs['pmbs_ref']);
+            $pps->bindValue(5, $pmbs['pmbs_corte']);
+            $pps->bindValue(6, $pmbs['id_vendedor']);
+            $pps->bindValue(7, $pmbs['id_cliente']);
 
             $pps->execute();
             return $pps->rowCount() > 0;
@@ -148,6 +169,26 @@ class MembresiasModelo
         } finally {
             $pps = null;
             $con = null;
+        }
+    }
+
+    public static function mdlCambiarVigencia($vigencia, $tipo, $cliente)
+    {
+        try {
+            $sql = "UPDATE tbl_clientes  SET vigencia = ?, tipo = ? WHERE id_cliente = ? ";
+            $con = Conexion::conectar();
+            $pps = $con->prepare($sql);
+            $pps->bindValue(1, $vigencia);
+            $pps->bindValue(2, $tipo);
+            $pps->bindValue(3, $cliente);
+            $pps->execute();
+            return $pps->rowCount()>0;
+        } catch (PDOException $th) {
+            throw $th;
+            return false;
+        } finally {
+            $pps = null;
+            $pps = null;
         }
     }
 }

@@ -341,14 +341,14 @@ class CajasModelo
         try {
             //code...
             if ($pmbs_id == "") {
-                $sql = "SELECT pmbs.*,rmbs.*,cts.*,mbs.*,usr.* FROM tbl_pagos_pmbs pmbs JOIN tbl_registro_membresias_rmbs rmbs ON rmbs.rmbs_id = pmbs.pmbs_rmbs JOIN tbl_usuarios usr ON  usr.id = pmbs.id_vendedor JOIN tbl_clientes cts ON cts.id_cliente = rmbs.cliente_id JOIN tbl_membresias_mbs mbs ON mbs.mbs_id = rmbs.mbs_id ORDER BY pmbs.pmbs_id DESC LIMIT 1";
+                $sql = "SELECT pmbs.*,cts.*,usr.* FROM tbl_pagos_pmbs pmbs  JOIN tbl_usuarios usr ON  usr.id = pmbs.id_vendedor JOIN tbl_clientes cts ON cts.id_cliente = pmbs.id_cliente  ORDER BY pmbs.pmbs_id DESC LIMIT 1";
 
                 $con = Conexion::conectar();
                 $pps = $con->prepare($sql);
                 $pps->execute();
                 return $pps->fetch();
             } elseif ($pmbs_id != null) {
-                $sql = "SELECT pmbs.*,rmbs.*,cts.*,mbs.*,usr.* FROM tbl_pagos_pmbs pmbs JOIN tbl_registro_membresias_rmbs rmbs ON rmbs.rmbs_id = pmbs.pmbs_rmbs JOIN tbl_usuarios usr ON  usr.id = pmbs.id_vendedor JOIN tbl_clientes cts ON cts.id_cliente = rmbs.cliente_id JOIN tbl_membresias_mbs mbs ON mbs.mbs_id = rmbs.mbs_id WHERE pmbs.pmbs_id = ? ";
+                $sql = "SELECT pmbs.*,cts.*,usr.* FROM tbl_pagos_pmbs pmbs  JOIN tbl_usuarios usr ON  usr.id = pmbs.id_vendedor JOIN tbl_clientes cts ON cts.id_cliente = pmbs.id_cliente  WHERE pmbs.pmbs_id = ? ";
 
                 $con = Conexion::conectar();
                 $pps = $con->prepare($sql);

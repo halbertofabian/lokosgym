@@ -206,7 +206,7 @@ function buscarPagosFiltro(arrayDatos) {
             });
 
             $("#PagosBody").html(contenido);
-            $("#pmbs_total").html(ventastotal);
+            $("#pmbs_total").html($.number(ventastotal, 2));
 
             $("#btnExportarPagos").attr("href", "export/exportar-pagos.php?pmbs_fecha_inicio=" + arrayDatos[0] + "&pmbs_fecha_fin=" + arrayDatos[1] + "&pmbs_mp=" + arrayDatos[2] + "&pmbs_vendedor=" + arrayDatos[3])
 
@@ -215,6 +215,62 @@ function buscarPagosFiltro(arrayDatos) {
 
 }
 
+$("#formRenovar").on("submit", function (e) {
+    e.preventDefault();
+
+    var data = new FormData();
+
+    data.append("mbs_cts_nombre", $("#mbs_cts_nombre").val())
+    data.append("mbs_cts_id", $("#mbs_cts_id").val())
+    data.append("btnBuscarCliente", true)
+
+    $.ajax({
+        url: "ajax/membresias.ajax.php",
+        method: "POST",
+        data: data,
+        cache: false,
+        contentType: false,
+        processData: false,
+        dataType: "json",
+        beforeSend: function () {
+            startLoadButton();
+        },
+        success: function (res) {
+
+            console.log(res);
+
+            var tbody = "";
+            res.forEach(data => {
+
+                console.log(data);
+
+                data.data.forEach(cts => {
+                    tbody +=
+
+                        `
+                    <tr>
+                        <td>${cts.id_cliente}</td>
+                        <td>${cts.nombre_cliente}</td>
+                        <td>${cts.telefono_cliente}</td>
+                        <td>${cts.observaciones}</td>
+                        <td>${data.estado}</td>
+                        <td>${cts.vigencia}</td>
+                        <td>${cts.tipo}</td>
+                
+                    </tr>
+                
+                `;
+
+                    $("#tbodyClientesM").html(tbody)
+                });
+
+
+
+            });
+        }
+    })
+
+})
 
 var select = document.getElementById('GDclienteNM');
 select.addEventListener('change',

@@ -95,35 +95,43 @@ class MembresiasControlador
         if (isset($_POST['btnRegistrarMembresiaPago'])) {
 
 
-            $fechaRen = MembresiasModelo::mdlActualizarMembresiaCliente($_POST['rmbs_fecha_termino'], $_POST['pmbs_rmbs']);
+            // $fechaRen = MembresiasModelo::mdlActualizarMembresiaCliente($_POST['rmbs_fecha_termino'], $_POST['pmbs_rmbs']);
+
+
+            // Actualizar Fecha de renovación
+            $fechaRen = MembresiasModelo::mdlCambiarVigencia(
+                $_POST['rmbs_fecha_termino'],
+                $_POST['pmbs_tipo'],
+                $_POST['id_cliente']
+            );
 
 
 
+            date_default_timezone_set('America/Mexico_City');
+            $fecha = date('Y-m-d');
+            $hora = date('H:i:s');
+            $fecha_registro = $fecha . ' ' . $hora;
 
-            if ($fechaRen) {
+            $_POST['pmbs_fecha_pago'] = $fecha_registro;
 
-                date_default_timezone_set('America/Mexico_City');
-                $fecha = date('Y-m-d');
-                $hora = date('H:i:s');
-                $fecha_registro = $fecha . ' ' . $hora;
+            $_POST['pmbs_corte'] = $_SESSION["usr_caja"];
+            $_POST['id_vendedor'] = $_SESSION["id"];
 
-                $_POST['pmbs_fecha_pago'] = $fecha_registro;
-
-                $_POST['pmbs_corte'] = $_SESSION["usr_caja"];
-                $_POST['id_vendedor'] = $_SESSION["id"];
-
+            $_POST['pmbs_monto'] = str_replace(",", "", $_POST['pmbs_monto']);
 
 
-                $crearPago = MembresiasModelo::mdlRegistrarMembresiaPago($_POST);
+            
 
-                if ($crearPago) {
+            $crearPago = MembresiasModelo::mdlRegistrarMembresiaPago($_POST);
 
-                    echo '
+            if ($crearPago) {
+
+                echo '
                             <script>
                                 
                                 window.open("./extensiones/tcpdf/pdf/pagos.php?pmbs_id=", "_blank");
                             </script>';
-                    echo '<script>
+                echo '<script>
 
                 swal({
              title: "¡Muy bien!",
@@ -139,27 +147,27 @@ class MembresiasControlador
            });
 
                 </script>';
-                }
-            } else {
-
-                echo '<script>
-                swal({
-                    title: "¡Mal :( !",
-                    text: "Algo salio mal, intente de nuevo cambiando la fecha de renovación, debe de ser diferente a la actual",
-                    icon: "error",
-                    buttons: [,true],
-                    
-                  })
-                  .then((willDelete) => {
-                    if (willDelete) {
-                        location.href = "renovar-membresia" 
-                    }
-                  });
-    
-                       
-    
-                      </script>';
             }
+            // } else {
+
+            //     echo '<script>
+            //     swal({
+            //         title: "¡Mal :( !",
+            //         text: "Algo salio mal, intente de nuevo cambiando la fecha de renovación, debe de ser diferente a la actual",
+            //         icon: "error",
+            //         buttons: [,true],
+
+            //       })
+            //       .then((willDelete) => {
+            //         if (willDelete) {
+            //             location.href = "renovar-membresia" 
+            //         }
+            //       });
+
+
+
+            //           </script>';
+            // }
         }
     }
 
@@ -171,14 +179,14 @@ class MembresiasControlador
         date_default_timezone_set('America/Mexico_City');
         $fecha = date('Y-m-d');
 
-        $sucrcipiones = MembresiasModelo::mdlMostrarTodasMembresiaCliente();
+        $sucrcipiones = MembresiasModelo::mdlConsultarClientesMembresias();
 
         foreach ($sucrcipiones as $key => $mbs) {
             # code...
 
-            if ($mbs['rmbs_fecha_termino'] < $fecha) {
+            if ($mbs['vigencia'] < $fecha) {
                 $sociosInactivos += 1;
-            } elseif ($mbs['rmbs_fecha_termino'] == $fecha) {
+            } elseif ($mbs['vigencia'] == $fecha) {
                 $sociosInactivosHoy += 1;
             } else {
                 $sociosActivos += 1;

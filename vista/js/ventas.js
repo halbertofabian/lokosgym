@@ -1148,7 +1148,7 @@ function buscarVentasFiltro(arrayDatos) {
             });
 
             $("#ventasBody").html(contenido);
-            $("#vts_total").html(ventastotal);
+            $("#vts_total").html($.number(ventastotal, 2));
 
         }
     })

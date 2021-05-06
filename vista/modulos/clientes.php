@@ -16,15 +16,36 @@
          <i class="fas fa-user-tag"></i> Nuevo cliente
      </button>
 
+     <div class="row">
+         <div class="col-md-6">
+             <div class="form-group">
+                 <label for=""></label>
+                 <input type="file" name="cts_excel" id="cts_excel" class="form-control">
+                 
+             </div>
+             <div class="form-group">
+                 <button type="button" id="btnImportarCliente" class="d-none d-sm-inline-block btn btn-success ml-1 mr-1 shadow-sm  float-right mb-4">
+                     <i class="fas fa-file-excel"></i> Importar clientes
+                 </button>
+             </div>
+         </div>
+         <div class="col-md-6">
+
+         </div>
+     </div>
+
+
+
      <table class="table table-bordered" id="dataTable" width="100%" cellspacing="0">
          <thead>
              <tr>
                  <th>#</th>
                  <th>Nombre</th>
                  <th>Telefono</th>
-                 <th>Whatsapp</th>
-                 <th>Crédito</th>
-                 <th>Acciones</th>
+                 <th>Observaciones</th>
+                 <th>Estado</th>
+                 <th>Vigencia</th>
+                 <th>Tipo</th>
 
              </tr>
          </thead>
@@ -33,9 +54,10 @@
                  <th>#</th>
                  <th>Nombre</th>
                  <th>Telefono</th>
-                 <th>Whatsapp</th>
-                 <th>Crédito</th>
-                 <th>Acciones</th>
+                 <th>Observaciones</th>
+                 <th>Estado</th>
+                 <th>Vigencia</th>
+                 <th>Tipo</th>
 
              </tr>
          </tfoot>
@@ -47,31 +69,17 @@
 
                 foreach ($clientes as $key => $value) :
 
-                    ?>
+                ?>
 
                  <tr>
-                     <td><?php echo $key + 1 ?></td>
-                     <td><?php echo $value['nombre_cliente'] ?></td>
-                     <td><?php echo $value['telefono_cliente'] ?></td>
-                     <td>
+                     <td><?= $value['id_cliente'] ?></td>
+                     <td><?= $value['nombre_cliente'] ?></td>
+                     <td><?= $value['telefono_cliente'] ?></td>
+                     <td><?= $value['observaciones'] ?></td>
+                     <td><?= $value['estado'] ?></td>
+                     <td><?= $value['vigencia'] ?></td>
+                     <td><?= $value['tipo'] ?></td>
 
-                         <a href="#" class="btn btn-success" target="_blank">
-                             <i class="fab fa-whatsapp"></i>
-                             <?php echo str_replace("/", "", $value['wsp_cliente']) ?>
-                         </a>
-
-
-                     </td>
-                     <td><?php echo $value['credito_cliente'] ?></td>
-                     <td>
-
-                         <a href="" class="btn btn-warning disabled">
-                             <i class="fas fa-edit"></i>
-                         </a>
-                         <a class="btn btn-danger btnBorrarCliente disabled">
-                             <i class="fas fa-trash"></i>
-                         </a>
-                     </td>
                  </tr>
 
 
@@ -110,14 +118,7 @@
                          <div class="col-12">
                              <p>Campos obligatorios <strong class="text-danger">(*)</strong> </p>
                          </div>
-                         <div class="col-12">
-                             <nav aria-label="breadcrumb">
-
-                                 <ol class="breadcrumb float-left">
-                                     <li class="breadcrumb-item active" aria-current="page"><strong>1001</strong></li>
-                                 </ol>
-                             </nav>
-                         </div>
+                         
 
 
                          <div class="accordion" id="accordionExample">
@@ -160,14 +161,16 @@
                                                      <input type="number" name="GDtelefono" class="form-control" id="GDtelefono" placeholder="Teléfono">
                                                  </div>
                                              </div>
-                                             <div class="col-12 col-md-3">
+                                             <input type="hidden" name="GDcodigo_wsp" class="form-control" id="GDcodigo_wsp" placeholder="Código" value="52">
+                                             <input type="hidden" name="GDwsp" class="form-control" id="GDwsp" placeholder="Whatsapp">
+
+                                             <!-- <div class="col-12 col-md-3">
                                                  <label class="" for="GDcodigo_wsp">Código</label>
 
                                                  <div class="input-group mb-2">
                                                      <div class="input-group-prepend">
                                                          <div class="input-group-text"><strong class="text-dark"> + </strong></div>
                                                      </div>
-                                                     <input type="number" name="GDcodigo_wsp" class="form-control" id="GDcodigo_wsp" placeholder="Código" value="52">
                                                  </div>
 
                                              </div>
@@ -178,10 +181,9 @@
                                                      <div class="input-group-prepend">
                                                          <div class="input-group-text"><i class="fas fa-barcode"></i></div>
                                                      </div>
-                                                     <input type="number" name="GDwsp" class="form-control" id="GDwsp" placeholder="Whatsapp">
                                                  </div>
 
-                                             </div>
+                                             </div> -->
                                          </div>
                                      </div>
                                  </div>
@@ -194,7 +196,7 @@
                                          </button>
                                      </h2>
                                  </div>
-                                 <div id="collapseTwo" class="collapse" aria-labelledby="headingTwo" data-parent="#accordionExample">
+                                 <div id="" class="collapse" aria-labelledby="headingTwo" data-parent="#accordionExample">
                                      <div class="card-body">
                                          <div class="row">
                                              <div class="col-12 col-md-6">
@@ -276,7 +278,7 @@
                                          </button>
                                      </h2>
                                  </div>
-                                 <div id="collapseT" class="collapse" aria-labelledby="headingTwo" data-parent="#accordionExample">
+                                 <div id="" class="collapse" aria-labelledby="headingTwo" data-parent="#accordionExample">
                                      <div class="card-body">
                                          <div class="row">
 

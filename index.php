@@ -33,6 +33,7 @@ ob_start();
 
     $rutas = array();
 
+    
     $startTemplate = PlantillaControlador::startTemplate();
 
   

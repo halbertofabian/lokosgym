@@ -6,7 +6,7 @@
 
     <?php
 
-    $listaM = MembresiasModelo::mdlMostrarTodasMembresiaCliente();
+    $listaM = MembresiasModelo::mdlConsultarClientesMembresias();
     date_default_timezone_set('America/Mexico_City');
     $fecha = date('Y-m-d');
     $hora = date('H:i:s');
@@ -16,9 +16,9 @@
     $listInactive = [];
     $listEndDay = [];
     foreach ($listaM as $key => $mbs) {
-        if ($mbs['rmbs_fecha_termino'] > $fecha_hoy) {
+        if ($mbs['vigencia'] > $fecha_hoy) {
             array_push($listActive, $mbs);
-        } elseif ($mbs['rmbs_fecha_termino'] == $fecha_hoy) {
+        } elseif ($mbs['vigencia'] == $fecha_hoy) {
             array_push($listEndDay, $mbs);
         } else {
             array_push($listInactive, $mbs);
@@ -53,11 +53,10 @@
                     <tr>
                         <th>#</th>
                         <th>Cliente</th>
-                        <th>Fecha inicio</th>
-                        <th>Fecha termino</th>
+                        <th>Vigencia</th>
                         <th>Estado</th>
                         <th>Tipo de membresia</th>
-                        <th>Costo</th>
+                        
                     </tr>
                 </thead>
                 <tbody>
@@ -67,19 +66,17 @@
                     foreach ($listaM as $key => $mbs) :
 
 
-                        $estado =  $mbs['rmbs_fecha_termino'] < $fecha_hoy ? '<strong class="text-danger"> Vencido </strong>' : ' <strong class="text-success"> Activo </strong>';
-                        $estado =  $mbs['rmbs_fecha_termino'] == $fecha_hoy ? '<strong class="text-warning"> Termina hoy </strong>' : $estado;
+                        $estado =  $mbs['vigencia'] < $fecha_hoy ? '<strong class="text-danger"> Vencido </strong>' : ' <strong class="text-success"> Activo </strong>';
+                        $estado =  $mbs['vigencia'] == $fecha_hoy ? '<strong class="text-warning"> Termina hoy </strong>' : $estado;
 
                     ?>
 
                         <tr>
-                            <td><?php echo $mbs['rmbs_id'] ?></td>
+                            <td><?php echo $mbs['id_cliente'] ?></td>
                             <td><?php echo $mbs['nombre_cliente'] ?></td>
-                            <td><?php echo $mbs['rmbs_fecha_inicio'] ?></td>
-                            <td><?php echo $mbs['rmbs_fecha_termino'] ?></td>
+                            <td><?php echo $mbs['vigencia'] ?></td>
                             <td><?php echo $estado ?></td>
-                            <td><?php echo $mbs['mbs_tipo'] ?></td>
-                            <td><?php echo $mbs['rmbs_costo_renovacion'] ?></td>
+                            <td><?php echo $mbs['tipo'] ?></td>
                         </tr>
 
 
