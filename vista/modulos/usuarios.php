@@ -22,6 +22,7 @@
                  <th>#</th>
                  <th>Usuario</th>
                  <th>Correo</th>
+                 <th>Perfil</th>
                  <th>Nombre</th>
                  <th>Telefono</th>
                  <th>Acciones</th>
@@ -33,6 +34,7 @@
                  <th>#</th>
                  <th>Usuario</th>
                  <th>Correo</th>
+                 <th>Perfil</th>
                  <th>Nombre</th>
                  <th>Telefono</th>
                  <th>Acciones</th>
@@ -42,7 +44,7 @@
          <tbody>
              <?php $usuarios = UsuariosControlador::ctrMostrarUsuarios(null);
                 foreach ($usuarios as $key => $value) :
-                    ?>
+                ?>
                  <tr>
                      <td><?php echo $key + 1; ?></td>
 
@@ -52,6 +54,7 @@
 
                      </td>
                      <td><?php echo  $value['correo']; ?></td>
+                     <td><?php echo  $value['usr_perfil']; ?></td>
                      <td><?php echo  $value['nombre'] . ' ' . $value['apellido'] ?></td>
                      <td><?php echo  $value['telefono']; ?></td>
                      <td>
@@ -171,6 +174,16 @@
                                  <input type="text" name="GDmaterno" class="form-control" id="GDmaterno" placeholder="Apellido materno">
                              </div>
 
+                         </div>
+
+                         <div class="col-md-4">
+                             <div class="form-group">
+                                 <label for="usr_perfil">Perfil</label>
+                                 <select class="form-control" name="usr_perfil" id="usr_perfil">
+                                     <option>Administrador</option>
+                                     <option>Cajero</option>
+                                 </select>
+                             </div>
                          </div>
 
                      </div>

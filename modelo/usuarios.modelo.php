@@ -7,8 +7,8 @@ class UsuariosModelo
     public static function mdlAgregarUsuarios($datos)
     {
         $sqlInsert = "INSERT INTO tbl_usuarios (usuario,correo,
-            clave,nombre,apellido,domicilio,telefono) VALUES(:usuario,:correo,
-            :clave,:nombre,:apellido,:domicilio,:telefono)";
+            clave,nombre,apellido,domicilio,telefono,usr_perfil) VALUES(:usuario,:correo,
+            :clave,:nombre,:apellido,:domicilio,:telefono,:usr_perfil)";
 
         $stmt = Conexion::conectar()->prepare($sqlInsert);
 
@@ -19,6 +19,7 @@ class UsuariosModelo
         $stmt->bindParam(':apellido', $datos['apellido']);
         $stmt->bindParam(':domicilio', $datos['domicilio']);
         $stmt->bindParam(':telefono', $datos['telefono']);
+        $stmt->bindParam(':usr_perfil', $datos['usr_perfil']);
 
         return $stmt->execute();
 
@@ -30,7 +31,8 @@ class UsuariosModelo
 
         $sqlUpdate = "UPDATE   tbl_usuarios SET usuario = :usuario ,
             correo = :correo , clave  = :clave, nombre = :nombre ,
-            apellido = :apellido , domicilio = :domicilio , telefono = :telefono 
+            apellido = :apellido , domicilio = :domicilio , telefono = :telefono, 
+            usr_perfil = :usr_perfil 
             WHERE id = :id ";
 
         $stmt = Conexion::conectar()->prepare($sqlUpdate);
@@ -42,6 +44,7 @@ class UsuariosModelo
         $stmt->bindParam(':apellido', $datos['apellido']);
         $stmt->bindParam(':domicilio', $datos['domicilio']);
         $stmt->bindParam(':telefono', $datos['telefono']);
+        $stmt->bindParam(':usr_perfil', $datos['usr_perfil']);
         $stmt->bindParam(':id', $datos['id']);
 
         return $stmt->execute();

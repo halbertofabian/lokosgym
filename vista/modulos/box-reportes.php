@@ -143,9 +143,13 @@ $estadosSocios = MembresiasControlador::ctrContadorEstadoSocios();
   <div class="col-12">
 
     <?php if (isset($_GET['fechaInicial'])) : ?>
-      <a href="<?php echo $url . 'export/exportar-ventas.php?fechaInicial=' . $_GET['fechaInicial'] . '&fechaFinal=' . $_GET['fechaFinal'] ?>" class="btn btn-success float-right"><i class="fas fa-file-excel"></i> Descargar Excel</a>
+      <?php if ($_SESSION['perfil'] != 'Cajero') : ?>
+        <a href="<?php echo $url . 'export/exportar-ventas.php?fechaInicial=' . $_GET['fechaInicial'] . '&fechaFinal=' . $_GET['fechaFinal'] ?>" class="btn btn-success float-right"><i class="fas fa-file-excel"></i> Descargar Excel</a>
+      <?php endif; ?>
     <?php else : ?>
-      <a href="<?php echo $url . 'export/exportar-ventas.php' ?>" class="btn btn-success float-right"><i class="fas fa-file-excel"></i> Descargar Excel</a>
+      <?php if ($_SESSION['perfil'] != 'Cajero') : ?>
+        <a href="<?php echo $url . 'export/exportar-ventas.php' ?>" class="btn btn-success float-right"><i class="fas fa-file-excel"></i> Descargar Excel</a>
+      <?php endif; ?>
     <?php endif; ?>
 
     <button type="button" id="daterange-btn-home" class="d-none d-sm-inline-block btn btn-default   mr-sm-2 shadow-sm  float-right mb-4">

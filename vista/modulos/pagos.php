@@ -73,8 +73,9 @@
                 <div class="card-body">
                     <h4 class="card-title">Total</h4>
                     <p class="card-text"><strong id="pmbs_total"></strong></p>
-                    <a id="btnExportarPagos" href="<?php echo $url . 'export/exportar-pagos.php'; ?>" class="btn btn-success float-right ml-1"><i class="fas fa-file-excel"></i> Descargar Excel</a>
-
+                    <?php if ($_SESSION['perfil'] != 'Cajero') : ?>
+                        <a id="btnExportarPagos" href="<?php echo $url . 'export/exportar-pagos.php'; ?>" class="btn btn-success float-right ml-1"><i class="fas fa-file-excel"></i> Descargar Excel</a>
+                    <?php endif; ?>
                 </div>
             </div>
         </div>

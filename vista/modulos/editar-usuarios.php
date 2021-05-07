@@ -22,24 +22,24 @@
                 </script>
                 '
 
-                ?>
+        ?>
 
 
-     <?php return;
-            else : 
-            //echo '<pre>';
-            //print_r($usuario);
-            //echo '</pre>';
+         <?php return;
+            else :
+                //echo '<pre>';
+                //print_r($usuario);
+                //echo '</pre>';
 
-            $apellido = explode(' ',$usuario['apellido']);
-            $paterno = $apellido[0];
-            $materno = $apellido[1];
-           // echo '<pre>';
-            //print_r($apellido);
-            //echo '</pre>';
+                $apellido = explode(' ', $usuario['apellido']);
+                $paterno = $apellido[0];
+                $materno = $apellido[1];
+                // echo '<pre>';
+                //print_r($apellido);
+                //echo '</pre>';
             ?>
 
-<form action="#" method="post">
+             <form action="#" method="post">
                  <div class="modal-body">
 
                      <div class="row">
@@ -53,7 +53,7 @@
                                  <div class="input-group-prepend">
                                      <div class="input-group-text"><i class="fas fa-project-diagram"></i><strong class="text-danger"> * </strong></div>
                                  </div>
-                                 <input type="hidden" name="GDid" class="form-control" id="GDid"  value="<?php echo $usuario['id']; ?>" required readonly>
+                                 <input type="hidden" name="GDid" class="form-control" id="GDid" value="<?php echo $usuario['id']; ?>" required readonly>
                                  <input type="text" name="GDusuario" class="form-control" id="GDusuario" placeholder="Usuario" pattern="^[-_a-zA-Z0-9]+$" value="<?php echo $usuario['usuario']; ?>" required>
                              </div>
 
@@ -74,8 +74,8 @@
                                  <div class="input-group-prepend">
                                      <div class="input-group-text"><i class="fas fa-project-diagram"></i><strong class="text-danger"> * </strong></div>
                                  </div>
-                                 <input type="hidden" name="GDclaveVieja" class="form-control" id="GDclaveVieja"  value="<?php echo $usuario['clave']; ?>" required readonly>
-                                 <input type="password" name="GDclave" class="form-control" id="GDclave" placeholder="Contraseña" >
+                                 <input type="hidden" name="GDclaveVieja" class="form-control" id="GDclaveVieja" value="<?php echo $usuario['clave']; ?>" required readonly>
+                                 <input type="password" name="GDclave" class="form-control" id="GDclave" placeholder="Contraseña">
                              </div>
 
                          </div>
@@ -122,6 +122,30 @@
 
                          </div>
 
+                         <div class="col-md-4">
+                             <div class="form-group">
+                                 <label for="usr_perfil">Perfil</label>
+                                 <select class="form-control" name="usr_perfil" id="usr_perfil">
+
+                                     <?php
+
+                                        $perfiles = array(0 => 'Administrador', 1 => 'Cajero');
+                                        foreach ($perfiles as $pfs) :
+
+                                            if ($pfs == $usuario['usr_perfil']) {
+                                                $select = "selected";
+                                            } else {
+                                                $select = "";
+                                            }
+
+                                        ?>
+                                         <option value="<?= $pfs; ?>" <?= $select ?>> <?= $pfs; ?> </option>
+                                     <?php
+                                        endforeach; ?>
+                                 </select>
+                             </div>
+                         </div>
+
                      </div>
                      <div class="row">
 
@@ -141,22 +165,22 @@
                      </div>
 
                      <div class="modal-footer">
-                     <a class="btn btn-secondary" href="<?php echo $url ?>usuarios">Cancelar</a>
+                         <a class="btn btn-secondary" href="<?php echo $url ?>usuarios">Cancelar</a>
                          <input type="submit" class="btn btn-primary" value="Actualizar" name="btnActualizarUsuario">
                      </div>
                  </div>
                  <?php
                     $actualizar = new UsuariosControlador();
-                    $actualizar -> ctrActualizarUsuario();
+                    $actualizar->ctrActualizarUsuario();
                     ?>
              </form>
-     <?php endif; ?>
+         <?php endif; ?>
      <?php else :
             echo ' <script>
         location.href = "' . $url . 'productos"
         </script>';
 
-            ?>
+        ?>
 
 
      <?php endif; ?>

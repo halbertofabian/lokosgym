@@ -272,14 +272,14 @@ $("#formRenovar").on("submit", function (e) {
 
 })
 
-var select = document.getElementById('GDclienteNM');
-select.addEventListener('change',
-    function () {
-        var selectedOption = this.options[select.selectedIndex];
-        //alert(selectedOption.value + ': ' + selectedOption.text);
-        if (selectedOption.value > 0) {
-            $("#cntn-membresia").removeClass("d-none");
-            $("#GDnombreCM").val(selectedOption.text);
-            $("#GDidCliente").val(selectedOption.value);
-        }
-    });
+// var select = document.getElementById('GDclienteNM');
+// select.addEventListener('change',
+//     function () {
+//         var selectedOption = this.options[select.selectedIndex];
+//         //alert(selectedOption.value + ': ' + selectedOption.text);
+//         if (selectedOption.value > 0) {
+//             $("#cntn-membresia").removeClass("d-none");
+//             $("#GDnombreCM").val(selectedOption.text);
+//             $("#GDidCliente").val(selectedOption.value);
+//         }
+//     });

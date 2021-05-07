@@ -18,7 +18,8 @@ class UsuariosControlador
                     'telefono' => $_POST["GDtelefono"],
                     'nombre' => $_POST["GDnombre"],
                     'apellido' => $_POST["GDpaterno"] . ' ' . $_POST["GDmaterno"],
-                    'domicilio' => $_POST["GDdireccion"]
+                    'domicilio' => $_POST["GDdireccion"],
+                    'usr_perfil' => $_POST['usr_perfil']
 
                 );
                 /*echo '<pre>';
@@ -110,6 +111,7 @@ class UsuariosControlador
                 $_SESSION['apellido'] = $sesion['apellido'];
                 $_SESSION['telefono'] = $sesion['telefono'];
                 $_SESSION['id'] = $sesion['id'];
+                $_SESSION['perfil'] = $sesion['usr_perfil'];
 
                 $_SESSION['usr_caja'] = $sesion['usr_caja'];
 
@@ -152,7 +154,8 @@ class UsuariosControlador
                     'telefono' => $_POST["GDtelefono"],
                     'nombre' => $_POST["GDnombre"],
                     'apellido' => $_POST["GDpaterno"] . ' ' . $_POST["GDmaterno"],
-                    'domicilio' => $_POST["GDdireccion"]
+                    'domicilio' => $_POST["GDdireccion"],
+                    'usr_perfil' => $_POST['usr_perfil']
 
                 );
                 /*echo '<pre>';

@@ -27,8 +27,8 @@
     <?php if ($_SESSION['usr_caja'] <= 0) :  ?>
         <li class="nav-item">
             <a class="nav-link" href="<?php echo $url ?>abrir-caja">
-                <i class="fas fa-cash-register"></ >
-                <span>Abrir caja</span></a>
+                <i class="fas fa-cash-register"></>
+                    <span>Abrir caja</span></a>
         </li>
     <?php elseif ($_SESSION['usr_caja'] > 0) : ?>
 
@@ -47,12 +47,11 @@
         </a>
         <div id="Usuarios" class="collapse" aria-labelledby="headingTwo" data-parent="#accordionSidebar">
             <div class="bg-white py-2 collapse-inner rounded">
-                <a class="collapse-item" href="<?php echo $url ?>usuarios"> <i class="fas fa-user"></i> Personal</a>
+                <?php if ($_SESSION['perfil'] != 'Cajero') : ?>
+                    <a class="collapse-item" href="<?php echo $url ?>usuarios"> <i class="fas fa-user"></i> Personal</a>
+                <?php endif; ?>
                 <a class="collapse-item" href="<?php echo $url ?>clientes"><i class="fas fa-address-card"></i> Clientes</a>
-                <a class="collapse-item" href="<?php echo $url ?>">
-                    <i class="fas fa-user-tag"></i>
-                    <span>Roles</span>
-                </a>
+
             </div>
         </div>
     </li>
@@ -97,7 +96,7 @@
                 <a class="collapse-item" href="<?php echo $url ?>ventas">
                     <i class="fas fa-cart-arrow-down"></i>
                     <span>Ventas</span></a>
-                    <a class="collapse-item" href="<?php echo $url ?>pagos">
+                <a class="collapse-item" href="<?php echo $url ?>pagos">
                     <i class="fas fa-cart-arrow-down"></i>
                     <span>Pagos</span></a>
 
@@ -105,21 +104,23 @@
             </div>
         </div>
     </li>
-    <li class="nav-item">
-        <a class="nav-link collapsed" href="#" data-toggle="collapse" data-target="#Gestion" aria-expanded="true" aria-controls="Gestion">
-            <i class="fas fa-tasks"></i>
-            <span>Gestión</span>
-        </a>
-        <div id="Gestion" class="collapse" aria-labelledby="headingTwo" data-parent="#accordionSidebar">
-            <div class="bg-white py-2 collapse-inner rounded">
-                <a class="collapse-item" href="<?php echo $url ?>corte">
-                    <i class="fas fa-hand-holding-usd"></i>
-                    <span>Corte</span></a>
+    <?php if ($_SESSION['perfil'] != 'Cajero') : ?>
+        <li class="nav-item">
+            <a class="nav-link collapsed" href="#" data-toggle="collapse" data-target="#Gestion" aria-expanded="true" aria-controls="Gestion">
+                <i class="fas fa-tasks"></i>
+                <span>Gestión</span>
+            </a>
+            <div id="Gestion" class="collapse" aria-labelledby="headingTwo" data-parent="#accordionSidebar">
+                <div class="bg-white py-2 collapse-inner rounded">
+                    <a class="collapse-item" href="<?php echo $url ?>corte">
+                        <i class="fas fa-hand-holding-usd"></i>
+                        <span>Corte</span></a>
 
 
+                </div>
             </div>
-        </div>
-    </li>
+        </li>
+    <?php endif; ?>
 
 
 
