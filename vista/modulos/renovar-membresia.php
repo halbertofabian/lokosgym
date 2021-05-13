@@ -1,9 +1,6 @@
 <?php
 
-if ($_SESSION['usr_caja'] <= 0) {
-    PlantillaControlador::msj('warning', 'Error', 'Necesita abrir caja para realizar está operación', $url . 'abrir-caja');
-    return;
-}
+
 
 ?>
 <div class="container-fluid">

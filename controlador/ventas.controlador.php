@@ -34,6 +34,11 @@ class VentasControlador
     public static function ctrCrearVenta()
     {
         if (isset($_POST['btnVender'])) {
+            $url = Rutas::ctrRtas();
+            if ($_SESSION['usr_caja'] <= 0) {
+                PlantillaControlador::msj('warning', 'Error', 'Necesita abrir caja para realizar está operación', $url . 'abrir-caja');
+                return;
+            }
 
             if ($_POST['listaProductos'] == "") {
 
@@ -64,9 +69,8 @@ class VentasControlador
             if ($_POST['listaMetodoPago'] == "") {
                 $_POST['listaMetodoPago'] = "Efectivo-" . $_POST['nuevoValorEfectivo'];
                 $venta_mp = "EFECTIVO";
-            }else{
+            } else {
                 $venta_mp = "TARJETA CREDITO / DEBITO";
-                
             }
             // echo $_POST['listaMetodoPago'];
             //  echo $articulos;

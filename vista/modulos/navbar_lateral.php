@@ -27,7 +27,7 @@
     <?php if ($_SESSION['usr_caja'] <= 0) :  ?>
         <li class="nav-item">
             <a class="nav-link" href="<?php echo $url ?>abrir-caja">
-                <i class="fas fa-cash-register"></>
+                <i class="fas fa-cash-register"></i>
                     <span>Abrir caja</span></a>
         </li>
     <?php elseif ($_SESSION['usr_caja'] > 0) : ?>

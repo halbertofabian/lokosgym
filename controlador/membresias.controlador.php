@@ -94,6 +94,11 @@ class MembresiasControlador
 
         if (isset($_POST['btnRegistrarMembresiaPago'])) {
 
+            $url = Rutas::ctrRtas();
+            if ($_SESSION['usr_caja'] <= 0) {
+                PlantillaControlador::msj('warning', 'Error', 'Necesita abrir caja para realizar está operación', $url . 'abrir-caja');
+                return;
+            }
 
             // $fechaRen = MembresiasModelo::mdlActualizarMembresiaCliente($_POST['rmbs_fecha_termino'], $_POST['pmbs_rmbs']);
 
@@ -120,7 +125,7 @@ class MembresiasControlador
             $_POST['pmbs_monto'] = str_replace(",", "", $_POST['pmbs_monto']);
 
 
-            
+
 
             $crearPago = MembresiasModelo::mdlRegistrarMembresiaPago($_POST);
 

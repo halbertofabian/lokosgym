@@ -20,6 +20,7 @@ if ($_SESSION['usr_caja'] <= 0) {
                         <p class="card-text">Responsable <strong><?php echo $copn['nombre']; ?> </strong> </p>
                         <p class="card-text">Caja <strong><?php echo $copn['cja_nombre']; ?> </strong> </p>
                         <p class="card-text">Fecha de apertura <strong><?php echo $copn['copn_fecha_abrio']; ?> </strong> </p>
+                        <p class="card-text"># Folio de caja <strong><?php echo $copn['copn_id'] ?></strong> </p>
                     </div>
                 </div>
             </div>
