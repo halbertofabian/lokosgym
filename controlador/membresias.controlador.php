@@ -107,7 +107,8 @@ class MembresiasControlador
             $fechaRen = MembresiasModelo::mdlCambiarVigencia(
                 $_POST['rmbs_fecha_termino'],
                 $_POST['pmbs_tipo'],
-                $_POST['id_cliente']
+                $_POST['id_cliente'],
+                $_POST['fecha_registro']
             );
 
 

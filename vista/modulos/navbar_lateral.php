@@ -18,6 +18,11 @@
             <i class="fas fa-home"></i>
             <span>Inicio</span></a>
     </li>
+    <li class="nav-item">
+        <a class="nav-link" href="<?php echo $url ?>asistencia">
+            <i class="fas fa-check-double    "></i>
+            <span>Asistencia</span></a>
+    </li>
     <!-- Nav Item - Caja -->
     <li class="nav-item">
         <a class="nav-link" href="<?php echo $url ?>pos">

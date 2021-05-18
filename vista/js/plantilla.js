@@ -70,6 +70,7 @@ function startLoadButton() {
     $(".btn-load").html(` <span class="spinner-border spinner-border-sm" role="status" aria-hidden="true"></span>
             Por favor espere...`)
 }
+
 function stopLoadButton(label) {
     $(".btn-load").attr("disabled", false);
     $(".btn-load").html(`${label}`)

@@ -172,15 +172,16 @@ class MembresiasModelo
         }
     }
 
-    public static function mdlCambiarVigencia($vigencia, $tipo, $cliente)
+    public static function mdlCambiarVigencia($vigencia, $tipo, $cliente,$fecha_registro)
     {
         try {
-            $sql = "UPDATE tbl_clientes  SET vigencia = ?, tipo = ? WHERE id_cliente = ? ";
+            $sql = "UPDATE tbl_clientes  SET vigencia = ?, tipo = ?, fecha_registro = ? WHERE id_cliente = ? ";
             $con = Conexion::conectar();
             $pps = $con->prepare($sql);
             $pps->bindValue(1, $vigencia);
             $pps->bindValue(2, $tipo);
-            $pps->bindValue(3, $cliente);
+            $pps->bindValue(3, $fecha_registro);
+            $pps->bindValue(4, $cliente);
             $pps->execute();
             return $pps->rowCount()>0;
         } catch (PDOException $th) {

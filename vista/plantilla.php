@@ -100,6 +100,7 @@ session_start();
               $rutas[0] == 'membresias' ||
               $rutas[0] == 'abrir-caja' ||
               $rutas[0] == 'cerrar-caja' ||
+              $rutas[0] == 'asistencia' ||
               $rutas[0] == 'corte'
 
             ) {
@@ -185,6 +186,7 @@ session_start();
   <script src="<?php echo $url ?>vista/js/membresias.js"></script>
   <script src="<?php echo $url ?>vista/js/cajas.js"></script>
   <script src="<?php echo $url ?>vista/js/clientes.js"></script>
+  <script src="<?php echo $url ?>vista/js/camara.js"></script>
 
 </body>
 

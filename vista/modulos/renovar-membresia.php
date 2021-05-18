@@ -104,7 +104,7 @@
                             <td><?= $cts['vigencia'] ?></td>
                             <td><?= $cts['tipo'] ?></td>
                             <td>
-                                <button class="btn btn-primary btnModalM" tipo="<?= $cts['tipo'] ?>" vigencia="<?= $cts['vigencia'] ?>" nombre_cliente="<?= $cts['nombre_cliente'] ?>" id_cliente="<?= $cts['id_cliente'] ?>" data-toggle="modal" data-target="#mdlMembresia"><i class="fas fa-dollar-sign"></i></button>
+                                <button class="btn btn-primary btnModalM"  tipo="<?= $cts['tipo'] ?>" vigencia="<?= $cts['vigencia'] ?>" nombre_cliente="<?= $cts['nombre_cliente'] ?>" id_cliente="<?= $cts['id_cliente'] ?>" fecha_registro="<?= $cts['fecha_registro'] ?>" data-toggle="modal" data-target="#mdlMembresia"><i class="fas fa-dollar-sign"></i></button>
                             </td>
 
                         </tr>
@@ -121,15 +121,31 @@
 
 <script>
     $(".btnModalM").on("click", function() {
+
+        $("#nombre_cliente_text").html("")
+        $("#id_cliente").val("")
+        $("#rmbs_fecha_termino").val("")
+        $("#pmbs_tipo").val("")
+        $("#fecha_registro").val("")
+
+
         var id_cliente = $(this).attr("id_cliente")
         var nombre_cliente = $(this).attr("nombre_cliente")
         var vigencia = $(this).attr("vigencia")
         var tipo = $(this).attr("tipo")
+        var fecha_registro = $(this).attr("fecha_registro")
 
         $("#nombre_cliente_text").html(nombre_cliente)
         $("#id_cliente").val(id_cliente)
         $("#rmbs_fecha_termino").val(vigencia)
         $("#pmbs_tipo").val(tipo)
+
+        if(fecha_registro == ""){
+            
+            $("#fecha_registro").val(toDay)
+        }else{
+            $("#fecha_registro").val(fecha_registro)
+        }
         
     })
 </script>
@@ -162,7 +178,14 @@
                         <div class="col-md-6">
                             <div class="form-group">
                                 <label for="pmbs_monto">Costo de renovación</label>
-                                <input type="text" name="pmbs_monto" id="pmbs_monto" class="form-control inputN" placeholder="">
+                                <input type="text" name="pmbs_monto" id="pmbs_monto" class="form-control inputN" placeholder="" required>
+
+                            </div>
+                        </div>
+                        <div class="col-md-6">
+                            <div class="form-group">
+                                <label for="fecha_registro">Fecha de inicio</label>
+                                <input type="date" name="fecha_registro" id="fecha_registro" class="form-control" >
 
                             </div>
                         </div>

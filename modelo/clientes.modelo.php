@@ -88,4 +88,42 @@ class ClientesModelo
 
         $pps = null;
     }
+
+    public static function mdlMostrarAsistencias($ast_socio)
+    {
+        try {
+            //code...
+            $sql = "SELECT * FROM tbl_asistencia_ast WHERE ast_socio = ? ORDER BY ast_id DESC ";
+            $con = Conexion::conectar();
+            $pps = $con->prepare($sql);
+            $pps->bindValue(1, $ast_socio);
+            $pps->execute();
+            return $pps->fetchAll();
+        } catch (PDOException $th) {
+            //throw $th;
+            return false;
+        } finally {
+            $pps = null;
+            $con = null;
+        }
+    }
+
+    public static function mdlRegistrarAsistencia($datos){
+         try {
+             //code...
+             $sql = "INSERT  INTO tbl_asistencia_ast (ast_socio,ast_fecha_inicio) VALUES(?,?)";
+             $con = Conexion::conectar();
+             $pps = $con->prepare($sql);
+             $pps->bindValue(1,$datos['ast_socio']);
+             $pps->bindValue(2,$datos['ast_fecha_inicio']);
+             $pps->execute();
+             return $pps->rowCount()>0;
+         } catch (PDOException $th) {
+             //throw $th;
+             return false;
+         }finally{
+             $pps = null;
+             $con = null;
+         }
+    }
 }

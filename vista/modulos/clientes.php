@@ -1,4 +1,5 @@
  <!-- Begin Page Content -->
+
  <div class="container-fluid">
 
      <nav aria-label="breadcrumb">
@@ -21,7 +22,7 @@
              <div class="form-group">
                  <label for=""></label>
                  <input type="file" name="cts_excel" id="cts_excel" class="form-control">
-                 
+
              </div>
              <div class="form-group">
                  <button type="button" id="btnImportarCliente" class="d-none d-sm-inline-block btn btn-success ml-1 mr-1 shadow-sm  float-right mb-4">
@@ -118,7 +119,7 @@
                          <div class="col-12">
                              <p>Campos obligatorios <strong class="text-danger">(*)</strong> </p>
                          </div>
-                         
+
 
 
                          <div class="accordion" id="accordionExample">
@@ -161,6 +162,8 @@
                                                      <input type="number" name="GDtelefono" class="form-control" id="GDtelefono" placeholder="Teléfono">
                                                  </div>
                                              </div>
+                                            
+
                                              <input type="hidden" name="GDcodigo_wsp" class="form-control" id="GDcodigo_wsp" placeholder="Código" value="52">
                                              <input type="hidden" name="GDwsp" class="form-control" id="GDwsp" placeholder="Whatsapp">
 
