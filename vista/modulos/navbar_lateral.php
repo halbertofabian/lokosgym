@@ -4,9 +4,9 @@
     <!-- Sidebar - Brand -->
     <a class="sidebar-brand d-flex align-items-center justify-content-center" href="<?php echo $url ?>">
         <div class="sidebar-brand-icon rotate-n-15">
-            <i class="fas fa-toolbox"></i>
+            <i class="fa fa-cubes" aria-hidden="true"></i>
         </div>
-        <div class="sidebar-brand-text mx-3">R <sup>GYM</sup></div>
+        <div class="sidebar-brand-text mx-3">SOFT <sup>GYM</sup></div>
     </a>
 
     <!-- Divider -->
