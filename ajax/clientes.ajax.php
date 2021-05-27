@@ -36,14 +36,24 @@ class AjaxCliente
 
 	public function ajaxAsistencia()
 	{
+		$foto='';
 		$cliente = ClientesControlador::ctrMostrarCliente($this->idCliente);
 		$asistencia = ClientesModelo::mdlMostrarAsistencias($this->idCliente);
+		
+		$urlfoto ="../upload/fotos/f_" . $cliente['id_cliente'] . ".jpg";
+		if (!file_exists($urlfoto)) {
+			$foto='no';
+		}else{
+			$foto='si';
+		}
+		
 
 		echo json_encode(
 			array(
 
 				'cliente' => $cliente,
-				'asistencia' => $asistencia
+				'asistencia' => $asistencia,
+				'foto'=>$foto
 
 			),
 			true
@@ -59,6 +69,11 @@ class AjaxCliente
 
 		);
 		echo json_encode($res, true);
+	}
+	public function ajaxactualizafot()
+	{
+		$actFt = ClientesControlador::ctrActualizaFoto();
+		echo json_encode($actFt, true);
 	}
 }
 
@@ -91,4 +106,9 @@ if (isset($_POST['btnRegistrarAsistencia'])) {
 	$clienteAsistencia->ast_socio = $_POST["ast_socio"];
 	$clienteAsistencia->ast_fecha_inicio = $_POST["ast_fecha_inicio"];
 	$clienteAsistencia->ajaxRegistrarAsistencia();
+}
+
+if (isset($_POST['btnactulizarfoto'])) {
+	$actualizafot = new AjaxCliente();
+	$actualizafot->ajaxactualizafot();
 }

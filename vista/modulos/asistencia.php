@@ -11,10 +11,7 @@
                         <select name="GDcliente" class="form-control js-example-basic-single" id="GDcliente" required>
                             <option value="">Seleccione un socio</option>
                             <?php $clientes = ClientesControlador::ctrMostrarCliente(null);
-
-
                             foreach ($clientes as $key => $value) :
-
                             ?>
                                 <option value="<?php echo $value['id_cliente'] ?>"><?= $value['nombre_cliente'] . '-' . $value['id_cliente'] ?></option>
                             <?php endforeach; ?>
@@ -30,7 +27,7 @@
         <div class="card-body">
             <h4 class="card-title">Datos</h4>
             <div class="row">
-                <div class="col-md-5">
+                <div class="col-md-3">
                     <table class="table">
                         <thead>
                             <tr>
@@ -53,7 +50,7 @@
                         </thead>
                     </table>
                 </div>
-                <div class="col-md-4">
+                <div class="col-md-3">
                     <table class="table">
                         <thead>
                             <tr>
@@ -71,13 +68,41 @@
                         </thead>
                     </table>
                 </div>
-                <div class="col-md-3 text-center">
+                <div class="col-md-6 text-center">
 
                     <p>FOTOGRAFIA DEL SOCIO</p>
 
-                    <img width="250" src="https://images.vexels.com/media/users/3/137047/isolated/preview/5831a17a290077c646a48c4db78a81bb-icono-de-perfil-de-usuario-azul-by-vexels.png" alt="" srcset="">
+                    <img class="img-thumbnail" id="img-default" width="70%" src="https://images.vexels.com/media/users/3/137047/isolated/preview/5831a17a290077c646a48c4db78a81bb-icono-de-perfil-de-usuario-azul-by-vexels.png" alt="" srcset="">
+                    
+                    <div class="row">
+                        <div class="col-md-12">
+                            <canvas id="canvas" class="d-none" width="490" height="370" style="border:1px solid #d3d3d3;"></canvas>
+                        </div>
+                        <div class="col-md-12">
+                            <fieldset class="form-group">
+                                <div class="row">
+                                    <div class="col-md-12">
+                                        <button class="btn btn-primary  mt-1 d-none" id="cancelarfoto" type="button">Cerrar</button>
+                                    </div>
+                                    <div class="col-md-12">
+                                        <button class="btn btn-primary  mt-1 " id="tfoto" type="button">Abrir camara</button>
+                                    </div>
+                                    <div class="col-md-12">
 
+                                    </div>
+                                    <div class="col-md-12">
+                                        <video width="80%" class="d-none" id="video" autoplay="autoplay" class=""></video>
+                                        <button class="btn btn-primary mt-2 d-none" id="actualizarft" type="button">Actualizar foto</button>
+                                    </div>
+                                </div>
+                            </fieldset>
+
+                        </div>
+
+                    </div>
                 </div>
+
+
             </div>
 
         </div>
@@ -124,6 +149,7 @@
         </div>
     </div>
 
+
 </div>
 
 
@@ -138,7 +164,7 @@
         var datos = new FormData();
         datos.append("GDcliente", $("#GDcliente").val());
         datos.append("btnBuscarClienteAsistencia", true);
-
+        $("#img-default").attr("src", '')
         $.ajax({
 
             url: 'ajax/clientes.ajax.php',
@@ -165,6 +191,14 @@
                 $("#tipo").html(cliente.tipo)
                 $("#observaciones").html(cliente.observaciones)
 
+
+                var rutaImg = './upload/fotos/f_' + cliente.id_cliente + '.jpg';
+                if (res.foto == 'si') {
+                    $("#img-default").attr("src", rutaImg);
+                } else {
+                    $("#img-default").attr("src", 'https://images.vexels.com/media/users/3/137047/isolated/preview/5831a17a290077c646a48c4db78a81bb-icono-de-perfil-de-usuario-azul-by-vexels.png');
+                }
+
                 var fecha_vigencia = cliente.vigencia;
 
                 var estado = "";
@@ -186,25 +220,20 @@
                 asistencia.forEach(ast => {
 
                     tbodyAsistencia += ` 
-
                     <tr>
-
                         <td>${ast.ast_id}</td>
                         <td>${ast.ast_fecha_inicio}</td>
-
                     </tr>
-
-                    
                     `
-
                 });
 
                 $("#tbodyRegistroAsistencia").html(tbodyAsistencia)
-
-
             }
         })
     }
+
+
+
 
     $(".btnRegistrarAsistencia").on("click", function() {
         var GDcliente = $("#GDcliente").val();
@@ -247,7 +276,6 @@
 
             }
         })
-
 
 
     })

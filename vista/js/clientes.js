@@ -98,3 +98,119 @@ $("#btnImportarCliente").on("click", function (e) {
             }
         });
 })
+
+
+
+//FOTO DE CLIENTE
+var localstream, canvas, video, cxt;
+
+function turnOnCamera() {
+    canvas = document.getElementById("canvas");
+    cxt = canvas.getContext("2d");
+    video = document.getElementById("video");
+
+    if (!navigator.getUserMedia)
+        navigator.getUserMedia = navigator.webkitGetUserMedia || navigator.mozGetUserMedia ||
+            navigator.msGetUserMedia;
+    if (!window.URL)
+        window.URL = window.webkitURL;
+
+    if (navigator.getUserMedia) {
+        navigator.getUserMedia({
+            "video": true, "audio": false
+        }, function (stream) {
+            try {
+                localstream = stream;
+                video.srcObject = stream;
+                video.play();
+            } catch (error) {
+                video.srcObject = null;
+            }
+        }, function (err) {
+            swal("Error", err, "error");
+        });
+    } else {
+        swal("Mensaje", "User Media No Disponible", "error");
+        return;
+    }
+}
+
+function turnOffCamera() {
+    video.pause();
+    video.srcObject = null;
+    localstream.getTracks()[0].stop();
+}
+
+$("#tfoto").click(function () {
+    //$("#img-default").addClass("d-none");
+    $("#video").removeClass("d-none");
+    $("#tfoto").addClass("d-none");
+    $("#cancelarfoto").removeClass("d-none");
+    $("#actualizarft").removeClass("d-none");
+    turnOnCamera();
+});
+
+$("#cancelarfoto").click(function () {
+    $("#img-default").removeClass("d-none");
+    $("#video").addClass("d-none");
+    $("#cancelarfoto").addClass("d-none");
+    $("#tfoto").removeClass("d-none");
+    $("#actualizarft").addClass("d-none");
+    turnOffCamera();
+    var data = canvas.toDataURL("image/jpeg");
+    var info = data.split(",", 2);
+    if (data != "") {
+        $("#img-default").addClass("d-none");
+    } else {
+        $("#canvas").addClass("d-none");
+    }
+
+});
+
+/**GUardar foto */
+$("#actualizarft").on("click", function () {
+
+    //$("#canvas").removeClass("d-none");
+
+    usrid = $("#id_cliente").text();
+
+    cxt.drawImage(video, 0, 0, 490, 370);
+    var data = canvas.toDataURL("image/jpeg");
+    var info = data.split(",", 2);
+
+    var datos = new FormData();
+    datos.append("id", usrid);
+    datos.append("foto", info[1]);
+    datos.append("btnactulizarfoto", true);
+    $.ajax({
+        url: 'ajax/clientes.ajax.php',
+        method: "POST",
+        data: datos,
+        cache: false,
+        contentType: false,
+        processData: false,
+        dataType: "json",
+        beforeSend: function () {
+        },
+        success: function (res) {
+            if (res == 'act') {
+                swal({
+                    title: "Muy bien",
+                    text: "Se actualizo foto del cliente",
+                    icon: "success",
+                    buttons: [false, "OK"],
+                    dangerMode: false,
+                    closeOnClickOutside: false,
+                })
+                    .then((willDelete) => {
+                        if (willDelete) {
+                            window.location.reload();
+                        }
+                    })
+            } else {
+
+            }
+        }
+    })
+
+})

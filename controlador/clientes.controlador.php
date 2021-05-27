@@ -283,4 +283,21 @@ class ClientesControlador
             );
         }
     }
+
+    public static function ctrActualizaFoto()
+    {
+        $aux='';
+        $foto = base64_decode($_POST["foto"]);
+        $route_photo = "../upload/fotos/f_" . $_POST["id"] . ".jpg";
+        $file = fopen($route_photo, "w");
+        if($file){
+            $fotos = fwrite($file, $foto);
+            fclose($file);
+            if($fotos){
+                $aux= 'act';
+            }
+
+        } 
+        return $aux;
+    }
 }
