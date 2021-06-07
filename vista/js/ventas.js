@@ -1150,6 +1150,8 @@ function buscarVentasFiltro(arrayDatos) {
             $("#ventasBody").html(contenido);
             $("#vts_total").html($.number(ventastotal, 2));
 
+            $("#btnExpVts").attr("href", "export/exportar-ventas2.php?fechaInicial=" + arrayDatos[0] + "&fechaFinal=" + arrayDatos[1] + "&mp=" + arrayDatos[2] + "&user=" + arrayDatos[3])
+
         }
     })
 

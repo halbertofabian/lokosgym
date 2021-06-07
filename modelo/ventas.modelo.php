@@ -119,7 +119,7 @@ class VentasModelo
         $stmt = Conexion::conectar()->prepare($sql);
         $stmt->bindValue(1, $estado_corte);
         $stmt->execute();
-      
+
         return $stmt->fetchAll();
         $stmt = null;
     }
@@ -183,6 +183,60 @@ class VentasModelo
 
         //return print_r($stmt->errorInfo());
 
+        $stmt = null;
+    }
+
+    public static function mdlMostrarVentasRangoFachasHome2($dateStart, $dateEnd, $usuario, $mp)
+    {
+
+        if ($dateStart != null && $dateEnd != null && $usuario != null && $mp != null) {
+            $sql = "SELECT p.producto,p.precio_compra,dv.cantidad,dv.precio,dv.id_venta,v.total,v.descuento,v.fecha,v.venta_mp,us.nombre 
+            FROM tbl_detalle_ventas dv 
+            JOIN tbl_productos p ON dv.id_producto = p.id 
+            JOIN tbl_ventas v ON dv.id_venta = v.id_venta
+            JOIN tbl_usuarios us ON v.id_vendedor= us.id
+            WHERE (v.fecha BETWEEN '$dateStart' AND '$dateEnd') AND (v.id_vendedor=?) AND (v.venta_mp=?) ORDER BY dv.id_venta DESC";
+            $stmt = Conexion::conectar()->prepare($sql);
+            $stmt->bindValue(1, $usuario);
+            $stmt->bindValue(2, $mp);
+            $stmt->execute();
+        }elseif($usuario == null && $mp!=null){
+            $sql = "SELECT p.producto,p.precio_compra,dv.cantidad,dv.precio,dv.id_venta,v.total,v.descuento,v.fecha,v.venta_mp,us.nombre 
+            FROM tbl_detalle_ventas dv 
+            JOIN tbl_productos p ON dv.id_producto = p.id 
+            JOIN tbl_ventas v ON dv.id_venta = v.id_venta
+            JOIN tbl_usuarios us ON v.id_vendedor= us.id
+            WHERE (v.fecha BETWEEN '$dateStart' AND '$dateEnd') AND (v.venta_mp=?) ORDER BY dv.id_venta DESC";
+            $stmt = Conexion::conectar()->prepare($sql);
+           
+            $stmt->bindValue(1, $mp);
+            $stmt->execute();
+        }
+        elseif($mp == null && $usuario!=null){
+            $sql = "SELECT p.producto,p.precio_compra,dv.cantidad,dv.precio,dv.id_venta,v.total,v.descuento,v.fecha,v.venta_mp,us.nombre 
+            FROM tbl_detalle_ventas dv 
+            JOIN tbl_productos p ON dv.id_producto = p.id 
+            JOIN tbl_ventas v ON dv.id_venta = v.id_venta
+            JOIN tbl_usuarios us ON v.id_vendedor= us.id
+            WHERE (v.fecha BETWEEN '$dateStart' AND '$dateEnd') AND (v.id_vendedor=?) ORDER BY dv.id_venta DESC";
+            $stmt = Conexion::conectar()->prepare($sql);
+            $stmt->bindValue(1, $usuario);
+            $stmt->execute();
+        }
+        elseif($mp == null && $usuario ==null){
+            $sql = "SELECT p.producto,p.precio_compra,dv.cantidad,dv.precio,dv.id_venta,v.total,v.descuento,v.fecha,v.venta_mp,us.nombre 
+            FROM tbl_detalle_ventas dv 
+            JOIN tbl_productos p ON dv.id_producto = p.id 
+            JOIN tbl_ventas v ON dv.id_venta = v.id_venta
+            JOIN tbl_usuarios us ON v.id_vendedor= us.id
+            WHERE (v.fecha BETWEEN '$dateStart' AND '$dateEnd') ORDER BY dv.id_venta DESC";
+            $stmt = Conexion::conectar()->prepare($sql);
+          
+            $stmt->execute();
+        }
+
+        return $stmt->fetchAll();
+        //return print_r($stmt->errorInfo());
         $stmt = null;
     }
 
