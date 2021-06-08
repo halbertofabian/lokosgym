@@ -11,7 +11,8 @@
 
      </nav>
      <!-- Button trigger modal -->
-     <?php if ($_SESSION['perfil'] != 'Cajero') : ?>
+     <?php if ($_SESSION['perfil'] != 'Administrador') : ?>
+
          <a id="btn-exp-pts" href="<?php echo $url . 'export/exportar-productos.php'; ?>" class="btn btn-success float-right ml-1"><i class="fas fa-file-excel"></i> Descargar Excel</a>
      <?php endif; ?>
 
