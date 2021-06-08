@@ -197,6 +197,7 @@ function buscarPagosFiltro(arrayDatos) {
                     <td>${pgs.pmbs_fecha_pago}</td>
                     <td>
                         <a target="_blank" href="./extensiones/tcpdf/pdf/pagos.php?pmbs_id=${pgs.pmbs_id}" class="btn btn-dafault"><i class="fa fa-print" aria-hidden="true"></i></a>
+                        <td><button class="btn btn-danger btn-elimina-pago" id="${pgs.pmbs_id}"><i class="fas fa-trash"></i></button></td>
                     </td>
                 
                 </tr>
@@ -283,3 +284,47 @@ $("#formRenovar").on("submit", function (e) {
 //             $("#GDidCliente").val(selectedOption.value);
 //         }
 //     });
+$(".table tbody").on("click", ".btn-elimina-pago", function () {
+    var clicked = this;
+    var id = $(this).attr("id");
+    swal({
+        title: "Esta seguro de hacer esta accion?",
+        text: "Esta accion no es reversible",
+        icon: "warning",
+        buttons: true,
+        dangerMode: true,
+    })
+        .then((willDelete) => {
+            if (willDelete) {
+                var datos = new FormData();
+                datos.append("pmbs_id", id)
+                datos.append("btn-elimina-pago", true)
+
+                $.ajax({
+                    url: "ajax/membresias.ajax.php",
+                    method: "POST",
+                    data: datos,
+                    cache: false,
+                    contentType: false,
+                    processData: false,
+                    dataType: "json",
+                    beforeSend: function () {
+
+                    },
+                    success: function (res) {
+                        if (res) {
+                            $(clicked).closest('tr').remove();
+                            swal("¡Bien!", "Se elimino el registro :)", "success");
+
+                        } else {
+                            swal("¡Error!", "No se puedo eliminar el registro", "error");
+                        }
+                    }
+                })
+
+            } else {
+
+            }
+        });
+
+})

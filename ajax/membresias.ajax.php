@@ -17,37 +17,20 @@ class AjaxMembresias
 
 	public function ajaxCrearCliente()
 	{
-
-
-
-
-
 		//$valor = $this->datos;
-
 		$respuesta = ClientesControlador::ctrAgregarClienteAjax();
-
 		echo json_encode($respuesta, true);
 	}
 
 	public function ajaxBuscarUltimoCliente()
 	{
-
-
-
-
 		$respuesta = MembresiasModelo::mdlMostrarUltimoCliente();
-
 		echo json_encode($respuesta, true);
 	}
 
 	public function ajaxBuscarMembresiaCliente()
 	{
-
-
-
-
 		$respuesta = MembresiasModelo::mdlMostrarMembresiaCliente($this->rmbs_id);
-
 		echo json_encode($respuesta, true);
 	}
 
@@ -56,8 +39,19 @@ class AjaxMembresias
 		$res = CajasModelo::mdlPagosFiltro($_POST);
 		echo json_encode($res, true);
 	}
+
+	public function ajaxEliminarPago()
+    {
+        $res = MembresiasModelo::eliminarPagoById($_POST);
+        echo json_encode($res, true);
+    }
 }
 
+if (isset($_POST['btn-elimina-pago'])) {
+
+    $elimina = new AjaxMembresias();
+    $elimina->ajaxEliminarPago();
+}
 if (isset($_POST["GDnombre"])) {
 
 	$crearMembreria = new AjaxMembresias();
@@ -113,9 +107,11 @@ if (isset($_POST['btnBuscarCliente'])) {
 		array_push($arrayDatos, $array);
 		# code...
 	}
-
-
-
-
 	echo json_encode($arrayDatos, true);
 }
+if (isset($_POST['btn-elimina-venta'])) {
+
+    $elimina = new AjaxVentas();
+    $elimina->ajaxEliminarVenta();
+}
+

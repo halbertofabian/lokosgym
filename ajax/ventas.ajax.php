@@ -5,6 +5,7 @@ require_once '../modelo/cajas.modelo.php';
 require_once '../controlador/categorias.controlador.php';
 require_once '../controlador/productos.controlador.php';
 require_once '../modelo/rutas.php';
+require_once '../modelo/ventas.modelo.php';
 
 
 
@@ -79,6 +80,12 @@ class AjaxVentas
         $res = CajasModelo::mdlVentasFiltro($_POST);
         echo json_encode($res, true);
     }
+
+    public function ajaxEliminarVenta()
+    {
+        $res = VentasModelo::eliminarVentaById($_POST);
+        echo json_encode($res, true);
+    }
 }
 
 
@@ -96,4 +103,10 @@ if (isset($_POST['btnBuscarVentasFiltro'])) {
 
     $buscar = new AjaxVentas();
     $buscar->ajaxBuscarVentasFiltro();
+}
+
+if (isset($_POST['btn-elimina-venta'])) {
+
+    $elimina = new AjaxVentas();
+    $elimina->ajaxEliminarVenta();
 }

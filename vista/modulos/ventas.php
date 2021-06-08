@@ -187,6 +187,9 @@
                  <div class="card-body">
                      <h4 class="card-title">Total</h4>
                      <p class="card-text"><strong id="vts_total"></strong></p>
+                     <?php if ($_SESSION['perfil'] != 'Cajero') : ?>
+                        <a id="btnExpVts" href="#" class="btn btn-success float-right ml-1"><i class="fas fa-file-excel"></i> Descargar Excel</a>
+                    <?php endif; ?>
                  </div>
              </div>
          </div>

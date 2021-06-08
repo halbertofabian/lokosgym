@@ -1127,10 +1127,10 @@ function buscarVentasFiltro(arrayDatos) {
 
             res.forEach(vts => {
 
-                ventastotal+= Number(vts.total);
+                ventastotal += Number(vts.total);
 
-                contenido += 
-                `  
+                contenido +=
+                    `  
                 
                 <tr>
                 
@@ -1140,17 +1140,65 @@ function buscarVentasFiltro(arrayDatos) {
                     <td>${vts.total}</td>
                     <td>${vts.fecha}</td>
                     <td><a target="_blank" href="./extensiones/tcpdf/pdf/ticket.php?codigo=${vts.id_venta}" class="btn btn-secondary"><i class="fas fa-print"></i></td>
+                    <td><button class="btn btn-danger btn-elimina-venta" id="${vts.id_venta}"><i class="fas fa-trash"></i></button></td>
                 
                 </tr>
                 
                 `;
-                
+
             });
 
             $("#ventasBody").html(contenido);
             $("#vts_total").html($.number(ventastotal, 2));
 
+            $("#btnExpVts").attr("href", "export/exportar-ventas2.php?fechaInicial=" + arrayDatos[0] + "&fechaFinal=" + arrayDatos[1] + "&mp=" + arrayDatos[2] + "&user=" + arrayDatos[3])
+
         }
     })
 
 }
+
+$(".table tbody").on("click", ".btn-elimina-venta", function () {
+    var clicked = this;
+    var id = $(this).attr("id");
+
+    swal({
+        title: "Esta seguro de hacer esta accion?",
+        text: "Esta accion no es reversible",
+        icon: "warning",
+        buttons: true,
+        dangerMode: true,
+    })
+        .then((willDelete) => {
+            if (willDelete) {
+                var datos = new FormData();
+                datos.append("id_venta", id)
+                datos.append("btn-elimina-venta", true)
+
+                $.ajax({
+                    url: "ajax/ventas.ajax.php",
+                    method: "POST",
+                    data: datos,
+                    cache: false,
+                    contentType: false,
+                    processData: false,
+                    dataType: "json",
+                    beforeSend: function () {
+
+                    },
+                    success: function (res) {
+                        if (res) {
+                            $(clicked).closest('tr').remove();
+                            swal("¡Bien!", "Se elimino el registro :)", "success");
+
+                        } else {
+                            swal("¡Error!", "No se puedo eliminar el registro", "error");
+                        }
+                    }
+                })
+            } else {
+
+            }
+        });
+
+})
