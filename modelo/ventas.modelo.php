@@ -279,5 +279,24 @@ class VentasModelo
             $pps = null;
         }
     }
+
+    public static function eliminarVentaById($dts)
+    {
+        try {
+            //code...
+            $sql = "DELETE FROM tbl_ventas WHERE id_venta=?";
+            $con = Conexion::conectar();
+            $pps = $con->prepare($sql);
+            $pps->bindValue(1, $dts['id_venta']);
+            $pps->execute();
+            return $pps->rowCount() > 0;
+        } catch (PDOException $th) {
+            //throw $th;
+        } finally {
+            $pps = null;
+            $con = null;
+        }
+    }
     //`
+    
 }
