@@ -192,4 +192,22 @@ class MembresiasModelo
             $pps = null;
         }
     }
+
+    public static function eliminarPagoById($dts)
+    {
+        try {
+            //code...
+            $sql = "DELETE FROM tbl_pagos_pmbs WHERE pmbs_id=?";
+            $con = Conexion::conectar();
+            $pps = $con->prepare($sql);
+            $pps->bindValue(1, $dts['pmbs_id']);
+            $pps->execute();
+            return $pps->rowCount() > 0;
+        } catch (PDOException $th) {
+            //throw $th;
+        } finally {
+            $pps = null;
+            $con = null;
+        }
+    }
 }
