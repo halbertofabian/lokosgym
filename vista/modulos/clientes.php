@@ -47,6 +47,7 @@
                  <th>Estado</th>
                  <th>Vigencia</th>
                  <th>Tipo</th>
+                 <th>Acciones</th>
 
              </tr>
          </thead>
@@ -59,6 +60,7 @@
                  <th>Estado</th>
                  <th>Vigencia</th>
                  <th>Tipo</th>
+                 <th>Acciones</th>
 
              </tr>
          </tfoot>
@@ -82,6 +84,7 @@
                      <td><?= $value['estado'] ?></td>
                      <td><?= $value['vigencia'] ?></td>
                      <td><?= $value['tipo'] ?></td>
+                     <td><button class="btn btn-danger btn-elimina-cliente" id="<?= $value['id_cliente'] ?>"><i class="fas fa-trash"></i></button></td>
 
                  </tr>
 

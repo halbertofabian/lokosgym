@@ -68,7 +68,7 @@
                         <th>Estado</th>
                         <th>Vigencia</th>
                         <th>Tipo</th>
-                        <th>Acciones</th>
+                       
                     </tr>
                 </thead>
                 <tbody>
@@ -103,9 +103,8 @@
                             </td>
                             <td><?= $cts['vigencia'] ?></td>
                             <td><?= $cts['tipo'] ?></td>
-                            <td>
-                                <button class="btn btn-primary btnModalM"  tipo="<?= $cts['tipo'] ?>" vigencia="<?= $cts['vigencia'] ?>" nombre_cliente="<?= $cts['nombre_cliente'] ?>" id_cliente="<?= $cts['id_cliente'] ?>" fecha_registro="<?= $cts['fecha_registro'] ?>" data-toggle="modal" data-target="#mdlMembresia"><i class="fas fa-dollar-sign"></i></button>
-                            </td>
+                            
+                            
 
                         </tr>
                         <!-- Modal -->

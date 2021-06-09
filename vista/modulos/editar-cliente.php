@@ -4,7 +4,7 @@
      <nav aria-label="breadcrumb">
          <ol class="breadcrumb">
              <li class="breadcrumb-item"><a href="<?php echo $url ?>">Inicio</a></li>
-             <li class="breadcrumb-item active" aria-current="page">Ediar Usuarios</li>
+             <li class="breadcrumb-item active" aria-current="page">Editar Clientes</li>
 
 
          </ol>
@@ -13,12 +13,12 @@
      <!-- Button trigger modal -->
      <?php if (isset($rutas[1]) && $rutas[1] != "") :
 
-            $usuario = UsuariosControlador::ctrMostrarUsuarios($rutas[1]);
-            if (!$usuario) :
+            $cliente = ClientesModelo::MostrarinfoById2($rutas[1]);
+            if (!$cliente) :
 
                 echo '
                 <script>
-                location.href = "' . $url . 'usuarios"
+                location.href = "' . $url . 'clientes"
                 </script>
                 '
 
@@ -27,16 +27,11 @@
 
          <?php return;
             else :
-                //echo '<pre>';
-                //print_r($usuario);
-                //echo '</pre>';
 
-                $apellido = explode(' ', $usuario['apellido']);
-                $paterno = $apellido[0];
-                $materno = $apellido[1];
-                // echo '<pre>';
-                //print_r($apellido);
-                //echo '</pre>';
+               // $apellido = explode(' ', $cliente['apellido']);
+               // $paterno = $apellido[0];
+              //  $materno = $apellido[1];
+                
             ?>
 
              <form action="#" method="post">
@@ -48,115 +43,83 @@
                          </div>
 
                          <div class="col-12 col-md-6">
-                             <label class="sr-only" for="GDusuario">Usuario</label>
+                         <label class="" for="nombre_cliente">Cliente</label>
                              <div class="input-group mb-2">
                                  <div class="input-group-prepend">
                                      <div class="input-group-text"><i class="fas fa-project-diagram"></i><strong class="text-danger"> * </strong></div>
                                  </div>
-                                 <input type="hidden" name="GDid" class="form-control" id="GDid" value="<?php echo $usuario['id']; ?>" required readonly>
-                                 <input type="text" name="GDusuario" class="form-control" id="GDusuario" placeholder="Usuario" pattern="^[-_a-zA-Z0-9]+$" value="<?php echo $usuario['usuario']; ?>" required>
+                                 
+                                 <input type="hidden" name="id_cliente" class="form-control" id="id_cliente" value="<?= $cliente['id_cliente'] ?>" required readonly>
+                                 <input type="text" name="nombre_cliente" class="form-control" id="nombre_cliente" placeholder="Nombre" pattern="^[-_a-zA-Z0-9 ]+$" value="<?= $cliente['nombre_cliente']; ?>" required>
                              </div>
 
                          </div>
                          <div class="col-12 col-md-6">
-                             <label class="sr-only" for="GDcorreo">Correo</label>
+                             <label class="" for="correo_cliente">Correo</label>
                              <div class="input-group mb-2">
                                  <div class="input-group-prepend">
                                      <div class="input-group-text"><i class="fas fa-project-diagram"></i></div>
                                  </div>
-                                 <input type="email" name="GDcorreo" class="form-control" id="GDcorreo" value="<?php echo $usuario['correo']; ?>" placeholder="Correo">
+                                 <input type="email" name="correo_cliente" class="form-control" id="correo_cliente" value="<?=$cliente['correo_cliente'] ?>" placeholder="Correo">
                              </div>
 
                          </div>
+                         
                          <div class="col-12 col-md-6">
-                             <label class="sr-only" for="GDclave">Contraseña</label>
+                             <label class="" for="telefono_cliente">Teléfono</label>
+                             <div class="input-group mb-2">
+                                 <div class="input-group-prepend">
+                                     <div class="input-group-text"><i class="fas fa-project-diagram"></i></div>
+                                 </div>
+                                 <input type="text" name="telefono_cliente" class="form-control" id="telefono_cliente" value="<?=$cliente['telefono_cliente']; ?>" placeholder="Teléfono">
+                             </div>
+
+                         </div>
+
+                         <div class="col-12 col-md-6">
+                             <label class="" for="vigencia">Vigencia</label>
                              <div class="input-group mb-2">
                                  <div class="input-group-prepend">
                                      <div class="input-group-text"><i class="fas fa-project-diagram"></i><strong class="text-danger"> * </strong></div>
                                  </div>
-                                 <input type="hidden" name="GDclaveVieja" class="form-control" id="GDclaveVieja" value="<?php echo $usuario['clave']; ?>" required readonly>
-                                 <input type="password" name="GDclave" class="form-control" id="GDclave" placeholder="Contraseña">
+                                 <input type="date" name="vigencia" class="form-control" id="vigencia" value="<?=$cliente['vigencia'] ?>" required>
                              </div>
-
-                         </div>
-                         <div class="col-12 col-md-6">
-                             <label class="sr-only" for="GDtelefono">Teléfono</label>
-                             <div class="input-group mb-2">
-                                 <div class="input-group-prepend">
-                                     <div class="input-group-text"><i class="fas fa-project-diagram"></i></div>
-                                 </div>
-                                 <input type="text" name="GDtelefono" class="form-control" id="GDtelefono" value="<?php echo $usuario['telefono']; ?>" placeholder="Teléfono">
-                             </div>
-
                          </div>
                      </div>
                      <div class="row">
-                         <div class="col-12 col-md-4">
-                             <label class="sr-only" for="GDnombre">Nombre</label>
-                             <div class="input-group mb-2">
-                                 <div class="input-group-prepend">
-                                     <div class="input-group-text"><i class="fas fa-project-diagram"></i><strong class="text-danger"> * </strong></div>
-                                 </div>
-                                 <input type="text" name="GDnombre" class="form-control" id="GDnombre" value="<?php echo $usuario['nombre']; ?>" placeholder="Nombre" required>
-                             </div>
-
-                         </div>
-                         <div class="col-12 col-md-4">
-                             <label class="sr-only" for="GDpaterno">Apellido paterno</label>
+                         
+                         <div class="col-12 col-md-6">
+                             <label class="" for="tipo">Tipo</label>
                              <div class="input-group mb-2">
                                  <div class="input-group-prepend">
                                      <div class="input-group-text"><i class="fas fa-project-diagram"></i></div>
                                  </div>
-                                 <input type="text" name="GDpaterno" class="form-control" id="GDpaterno" value="<?php echo $paterno; ?>" placeholder="Apellido paterno">
+                                 <input type="text" name="tipo" class="form-control" id="tipo" value="<?=$cliente['tipo']?>" placeholder="Tipo">
                              </div>
 
                          </div>
-                         <div class="col-12 col-md-4">
-                             <label class="sr-only" for="GDmaterno">Apellido materno</label>
+                         <div class="col-12 col-md-6">
+                             <label class="" for="fecha_registro">Fecha de registro</label>
                              <div class="input-group mb-2">
                                  <div class="input-group-prepend">
                                      <div class="input-group-text"><i class="fas fa-project-diagram"></i></div>
                                  </div>
-                                 <input type="text" name="GDmaterno" class="form-control" id="GDmaterno" value="<?php echo $materno; ?>" placeholder="Apellido materno">
+                                 <input type="date" name="fecha_registro" class="form-control" id="fecha_registro" value="<?=$cliente['fecha_registro'] ?>" >
                              </div>
 
-                         </div>
-
-                         <div class="col-md-4">
-                             <div class="form-group">
-                                 <label for="usr_perfil">Perfil</label>
-                                 <select class="form-control" name="usr_perfil" id="usr_perfil">
-
-                                     <?php
-
-                                        $perfiles = array(0 => 'Administrador', 1 => 'Cajero');
-                                        foreach ($perfiles as $pfs) :
-
-                                            if ($pfs == $usuario['usr_perfil']) {
-                                                $select = "selected";
-                                            } else {
-                                                $select = "";
-                                            }
-
-                                        ?>
-                                         <option value="<?= $pfs; ?>" <?= $select ?>> <?= $pfs; ?> </option>
-                                     <?php
-                                        endforeach; ?>
-                                 </select>
-                             </div>
                          </div>
 
                      </div>
                      <div class="row">
 
 
-                         <div class="col-12">
-                             <label class="sr-only" for="GDdireccion">Dirección</label>
+                         <div class="col-12 col-md-6">
+                             <label class="" for="observaciones">Observaciones</label>
                              <div class="input-group mb-2">
                                  <div class="input-group-prepend">
                                      <div class="input-group-text"><i class="fas fa-project-diagram"></i></div>
                                  </div>
-                                 <textarea name="GDdireccion" id="GDdireccion" class="form-control" cols="30" rows="4" placeholder="Dirección"><?php echo $usuario['domicilio']; ?></textarea>
+                                 <textarea name="observaciones" id="observaciones" class="form-control" cols="30" rows="4" placeholder="Observaciones"><?php echo $cliente['observaciones']; ?></textarea>
 
                              </div>
 
@@ -165,13 +128,13 @@
                      </div>
 
                      <div class="modal-footer">
-                         <a class="btn btn-secondary" href="<?php echo $url ?>usuarios">Cancelar</a>
-                         <input type="submit" class="btn btn-primary" value="Actualizar" name="btnActualizarUsuario">
+                         <a class="btn btn-secondary" href="<?php echo $url ?>clientes">Cancelar</a>
+                         <input type="submit" class="btn btn-primary" value="Actualizar" name="btnActualizarCliente">
                      </div>
                  </div>
                  <?php
-                    $actualizar = new UsuariosControlador();
-                    $actualizar->ctrActualizarUsuario();
+                    $actualizar = new ClientesControlador();
+                    $actualizar->ctrActualizarCliente();
                     ?>
              </form>
          <?php endif; ?>

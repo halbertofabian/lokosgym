@@ -75,6 +75,12 @@ class AjaxCliente
 		$actFt = ClientesControlador::ctrActualizaFoto();
 		echo json_encode($actFt, true);
 	}
+
+	public function ajaxEliminarCliente()
+    {
+        $res = ClientesModelo::eliminarClienteById($_POST);
+        echo json_encode($res, true);
+    }
 }
 
 
@@ -111,4 +117,10 @@ if (isset($_POST['btnRegistrarAsistencia'])) {
 if (isset($_POST['btnactulizarfoto'])) {
 	$actualizafot = new AjaxCliente();
 	$actualizafot->ajaxactualizafot();
+}
+
+if (isset($_POST['btn-elimina-cliente'])) {
+
+    $elimina = new AjaxCliente();
+    $elimina->ajaxEliminarCliente();
 }

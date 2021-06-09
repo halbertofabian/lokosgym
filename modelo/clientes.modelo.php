@@ -146,4 +146,55 @@ class ClientesModelo
             $con = null;
         }
     }
+    public static function MostrarinfoById2($id)
+    {
+        try {
+            //code...
+            $sql = "SELECT * FROM tbl_clientes WHERE id_cliente =?";
+            $con = Conexion::conectar();
+            $pps = $con->prepare($sql);
+            $pps->bindValue(1, $id);
+            $pps->execute();
+            return $pps->fetch();
+        } catch (PDOException $th) {
+            //throw $th;
+            return false;
+        } finally {
+            $pps = null;
+            $con = null;
+        }
+    }
+
+    public static function mdlActualizarCliente($cliente)
+    {
+        $sqlInsert = "UPDATE tbl_clientes SET nombre_cliente = ?,correo_cliente=?,telefono_cliente = ?,
+        observaciones = ?,vigencia = ? ,tipo = ?, fecha_registro=? WHERE id_cliente = ?";
+
+        $pps = Conexion::conectar()->prepare($sqlInsert);
+        $pps->bindValue(1, $cliente['nombre_cliente']);
+        $pps->bindValue(2, $cliente['correo_cliente']);
+        $pps->bindValue(3, $cliente['telefono_cliente']);
+        $pps->bindValue(4, $cliente['observaciones']);
+        $pps->bindValue(5, $cliente['vigencia']);
+        $pps->bindValue(6, $cliente['tipo']);
+        $pps->bindValue(7, $cliente['fecha_registro']);
+        $pps->bindValue(8, $cliente['id_cliente']);
+
+        $pps->execute();
+        return $pps->rowCount() > 0;
+
+        $pps = null;
+    }
+
+    public static function eliminarClienteById($cliente)
+    {
+        $sql= "DELETE FROM tbl_clientes WHERE id_cliente = ?";
+        $pps = Conexion::conectar()->prepare($sql);
+        $pps->bindValue(1, $cliente['id_cliente']);
+
+        $pps->execute();
+        return $pps->rowCount() > 0;
+
+        $pps = null;
+    }
 }
