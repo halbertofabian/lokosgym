@@ -69,7 +69,7 @@
             <div class="bg-white py-2 collapse-inner rounded">
                 <!-- <a class="collapse-item" href="<?php echo $url ?>alta-membresia"> <i class="fas fa-user"></i> Alta</a> -->
                 <a class="collapse-item" href="<?php echo $url ?>renovar-membresia"><i class="fas fa-address-card"></i> Renovar / Activas</a>
-                <a class="collapse-item" href="<?php echo $url ?>renovar-membresia"><i class="fas fa-address-card"></i> Listar </a>
+                <a class="collapse-item" href="<?php echo $url ?>listar-membresia"><i class="fas fa-address-card"></i> Listar </a>
 
             </div>
         </div>

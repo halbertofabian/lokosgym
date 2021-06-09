@@ -108,22 +108,42 @@ class ClientesModelo
         }
     }
 
-    public static function mdlRegistrarAsistencia($datos){
-         try {
-             //code...
-             $sql = "INSERT  INTO tbl_asistencia_ast (ast_socio,ast_fecha_inicio) VALUES(?,?)";
-             $con = Conexion::conectar();
-             $pps = $con->prepare($sql);
-             $pps->bindValue(1,$datos['ast_socio']);
-             $pps->bindValue(2,$datos['ast_fecha_inicio']);
-             $pps->execute();
-             return $pps->rowCount()>0;
-         } catch (PDOException $th) {
-             //throw $th;
-             return false;
-         }finally{
-             $pps = null;
-             $con = null;
-         }
+    public static function mdlRegistrarAsistencia($datos)
+    {
+        try {
+            //code...
+            $sql = "INSERT  INTO tbl_asistencia_ast (ast_socio,ast_fecha_inicio) VALUES(?,?)";
+            $con = Conexion::conectar();
+            $pps = $con->prepare($sql);
+            $pps->bindValue(1, $datos['ast_socio']);
+            $pps->bindValue(2, $datos['ast_fecha_inicio']);
+            $pps->execute();
+            return $pps->rowCount() > 0;
+        } catch (PDOException $th) {
+            //throw $th;
+            return false;
+        } finally {
+            $pps = null;
+            $con = null;
+        }
+    }
+
+    public static function MostrarinfoById($dts)
+    {
+        try {
+            //code...
+            $sql = "SELECT * FROM tbl_clientes WHERE id_cliente =?";
+            $con = Conexion::conectar();
+            $pps = $con->prepare($sql);
+            $pps->bindValue(1, $dts['id_cliente']);
+            $pps->execute();
+            return $pps->fetch();
+        } catch (PDOException $th) {
+            //throw $th;
+            return false;
+        } finally {
+            $pps = null;
+            $con = null;
+        }
     }
 }
