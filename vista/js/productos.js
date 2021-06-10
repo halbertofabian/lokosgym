@@ -102,3 +102,90 @@ $(".table tbody").on("click", ".btn-elimina-producto", function () {
     });
 
 })
+
+$("#btnImportarProductos").on("click", function (e) {
+  e.preventDefault()
+
+  var excel = $("#pds_excel").val()
+  if (excel == "") {
+      return swal("Error", "Seleccione un archivo excel", "error");
+  }
+
+  swal({
+      title: "¿Estas seguro de querer importar la lista de productos?",
+      text: "Asegurate de tener el archivo con los requerimientos solicitados",
+      icon: "info",
+      buttons: ["Calcelar", "Si, importar lista"],
+      dangerMode: true,
+  })
+      .then((willDelete) => {
+          if (willDelete) {
+              var datos = new FormData()
+              var files = $("#pds_excel")[0].files[0];
+              datos.append("btnImportarProductos", true);
+              datos.append("archivoExcel", files);
+              $.ajax({
+
+                  url: 'ajax/productos.ajax.php',
+                  method: "POST",
+                  data: datos,
+                  cache: false,
+                  contentType: false,
+                  processData: false,
+                  dataType: "json",
+                  beforeSend: function () {
+
+                      $("#btnImportarProductos").attr("disabled", true)
+                      $("#btnImportarProductos").removeClass("btn-success")
+                      $("#btnImportarProductos").addClass("btn-secondary")
+                      $("#btnImportarProductos").html(`<span class="spinner-border spinner-border-sm" role="status" aria-hidden="true"></span>
+                      <span class="sr-only">Loading...</span> 
+                      Importando productos ...`);
+
+
+                  },
+                  success: function (res) {
+                      $("#btnImportarProductos").attr("disabled", false)
+                      $("#btnImportarProductos").addClass("btn-success")
+                      $("#btnImportarProductos").removeClass("btn-secondary")
+                      $("#btnImportarProductos").html(`<i class="fa fa-file-excel-o" aria-hidden="true"></i>
+                      Importar productos`);
+
+                      if (res.status) {
+
+                          swal({
+                              title: "Importación exitosa",
+                              text: res.mensaje + "\n Nuevos: " + res.insert + "\n Actualizar: " + res.update,
+                              icon: "success",
+                              buttons: [false, "Continuar"],
+                              dangerMode: false,
+                              closeOnClickOutside: false,
+                          })
+                              .then((willDelete) => {
+                                  if (willDelete) {
+                                      window.location.reload();
+                                  }
+                              })
+
+                      } else {
+                          swal({
+                              title: "Error",
+                              text: res.mensaje,
+                              icon: "error",
+                              buttons: [false, "Intentar de nuevo"],
+                              dangerMode: false,
+                              closeOnClickOutside: false,
+                          })
+                              .then((willDelete) => {
+                                  if (willDelete) {
+                                      window.location.reload();
+                                  }
+                              })
+                      }
+
+
+                  }
+              })
+          }
+      });
+})

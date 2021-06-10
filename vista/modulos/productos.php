@@ -11,14 +11,33 @@
 
      </nav>
      <!-- Button trigger modal -->
-     <?php if ($_SESSION['perfil'] != 'Administrador') : ?>
+     <?php if ($_SESSION['perfil'] == 'Administrador') : ?>
 
          <a id="btn-exp-pts" href="<?php echo $url . 'export/exportar-productos.php'; ?>" class="btn btn-success float-right ml-1"><i class="fas fa-file-excel"></i> Descargar Excel</a>
      <?php endif; ?>
 
-     <button type="button" class="d-none d-sm-inline-block btn btn-primary  shadow-sm  float-right mb-4" data-toggle="modal" data-target="#AgregarProducto">
-         <i class="fab fa-product-hunt"></i> Nuevo producto
-     </button>
+     <div class="row">
+         <div class="col-md-6">
+             <div class="form-group">
+               
+                 <label for=""></label>
+                 <input type="file" name="pds_excel" id="pds_excel" class="form-control">
+
+             </div>
+             <div class="form-group">
+                 <button type="button" id="btnImportarProductos" class="d-none d-sm-inline-block btn btn-success ml-1 mr-1 shadow-sm  float-right mb-4">
+                     <i class="fas fa-file-excel"></i> Importar productos
+                 </button>
+             </div>
+         </div>
+         <div class="col-md-6">
+             <button type="button" class="d-none d-sm-inline-block btn btn-primary  shadow-sm  float-right mb-4" data-toggle="modal" data-target="#AgregarProducto">
+                 <i class="fab fa-product-hunt"></i> Nuevo producto
+             </button>
+         </div>
+     </div>
+
+
 
 
 
@@ -51,7 +70,7 @@
              <?php
                 //Productos
                 $producto = ProductosControlador::ctrMostrarProducto(null);
-               
+
                 foreach ($producto as $key => $value) :
                 ?>
                  <tr>
@@ -66,9 +85,9 @@
                      <td><?php echo $value['existencia'] ?></td>
                      <td> <strong class="text-success"><?php echo $value['precio_publico'] ?> </strong> </td>
                      <td>
-                     <button class="btn btn-danger btn-elimina-producto" id="<?= $value[0] ?>">
-                     <i class="fas fa-trash"></i>
-                     </button>
+                         <button class="btn btn-danger btn-elimina-producto" id="<?= $value[0] ?>">
+                             <i class="fas fa-trash"></i>
+                         </button>
                      </td>
 
 
