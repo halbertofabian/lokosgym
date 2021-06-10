@@ -184,7 +184,11 @@ function buscarPagosFiltro(arrayDatos) {
             res.forEach(pgs => {
 
                 ventastotal += Number(pgs.pmbs_monto);
-
+                if (usr_rol == "Administrador") {
+                    acciones = `<button class="btn btn-danger btn-elimina-pago" id="${pgs.pmbs_id}"><i class="fas fa-trash"></i></button>`;
+                } else {
+                    acciones = ``;
+                }
                 contenido +=
                     `  
                 
@@ -197,8 +201,11 @@ function buscarPagosFiltro(arrayDatos) {
                     <td>${pgs.pmbs_fecha_pago}</td>
                     <td>
                         <a target="_blank" href="./extensiones/tcpdf/pdf/pagos.php?pmbs_id=${pgs.pmbs_id}" class="btn btn-dafault"><i class="fa fa-print" aria-hidden="true"></i></a>
-                        <td><button class="btn btn-danger btn-elimina-pago" id="${pgs.pmbs_id}"><i class="fas fa-trash"></i></button></td>
                     </td>
+                    <td>
+                    ${acciones}
+                    </td>
+
                 
                 </tr>
                 
@@ -330,7 +337,7 @@ $(".table tbody").on("click", ".btn-elimina-pago", function () {
 })
 
 $("#select-socio").on("change", function () {
-    
+
     var id = $(this).val();
     var datos = new FormData();
     datos.append("id_cliente", id)
@@ -344,13 +351,13 @@ $("#select-socio").on("change", function () {
         processData: false,
         dataType: "json",
         success: function (res) {
-            if(res){
-               $("#pmbs_tipo").val(res.tipo);
-               $("#fecha_registro").val(res.fecha_registro);
-               $("#rmbs_fecha_termino").val(res.vigencia);
+            if (res) {
+                $("#pmbs_tipo").val(res.tipo);
+                $("#fecha_registro").val(res.fecha_registro);
+                $("#rmbs_fecha_termino").val(res.vigencia);
 
             }
-           
+
         }
     })
 

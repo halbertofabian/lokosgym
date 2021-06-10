@@ -60,6 +60,7 @@ session_start();
     ?>
     <!-- Page Wrapper -->
     <div id="wrapper">
+     <div id="usr_rol" usr_rol="<?= $_SESSION['perfil'] ?>"></div>
 
       <?php include_once 'vista/modulos/navbar_lateral.php'; ?>
 

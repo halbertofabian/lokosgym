@@ -1,5 +1,8 @@
 
 
+var usr_rol =  $("#usr_rol").attr("usr_rol")
+
+
 
 $(".nuevaImagen").change(function () {
 

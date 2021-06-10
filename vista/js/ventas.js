@@ -1,4 +1,5 @@
 // VARIABLE LOCAL STORAGE 
+
 $(document).ready(function () {
     var vts_fecha_inicio = $("#vts_fecha_inicio").val();
     var vts_fecha_fin = $("#vts_fecha_fin").val();
@@ -1129,6 +1130,13 @@ function buscarVentasFiltro(arrayDatos) {
 
                 ventastotal += Number(vts.total);
 
+                var acciones = "";
+                if (usr_rol == "Administrador") {
+                    acciones = `<button class="btn btn-danger btn-elimina-venta" id="${vts.id_venta}"><i class="fas fa-trash"></i></button>`;
+                } else {
+                    acciones = ``;
+                }
+
                 contenido +=
                     `  
                 
@@ -1140,7 +1148,7 @@ function buscarVentasFiltro(arrayDatos) {
                     <td>${vts.total}</td>
                     <td>${vts.fecha}</td>
                     <td><a target="_blank" href="./extensiones/tcpdf/pdf/ticket.php?codigo=${vts.id_venta}" class="btn btn-secondary"><i class="fas fa-print"></i></td>
-                    <td><button class="btn btn-danger btn-elimina-venta" id="${vts.id_venta}"><i class="fas fa-trash"></i></button></td>
+                    <td>${acciones}</td>
                 
                 </tr>
                 
