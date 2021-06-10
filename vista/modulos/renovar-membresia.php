@@ -1,7 +1,17 @@
 <?php
 
 ?>
+
 <div class="container-fluid">
+    <nav aria-label="breadcrumb">
+        <ol class="breadcrumb">
+            <li class="breadcrumb-item"><a href="<?php echo $url ?>">Inicio</a></li>
+            <li class="breadcrumb-item active" aria-current="page">Renovar membresía</li>
+
+
+        </ol>
+
+    </nav>
     <form action="" method="post">
         <div class="card">
             <div class="card-body">

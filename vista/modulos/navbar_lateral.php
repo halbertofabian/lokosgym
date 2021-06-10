@@ -55,7 +55,7 @@
                 <?php if ($_SESSION['perfil'] != 'Cajero') : ?>
                     <a class="collapse-item" href="<?php echo $url ?>usuarios"> <i class="fas fa-user"></i> Personal</a>
                 <?php endif; ?>
-                <a class="collapse-item" href="<?php echo $url ?>clientes"><i class="fas fa-address-card"></i> Clientes</a>
+                <a class="collapse-item" href="<?php echo $url ?>clientes"><i class="fas fa-address-card"></i> Socios</a>
 
             </div>
         </div>

@@ -5,7 +5,7 @@
      <nav aria-label="breadcrumb">
          <ol class="breadcrumb">
              <li class="breadcrumb-item"><a href="<?php echo  $url ?>">Inicio</a></li>
-             <li class="breadcrumb-item active" aria-current="page">Clientes</li>
+             <li class="breadcrumb-item active" aria-current="page">Socios</li>
 
 
          </ol>
@@ -69,6 +69,7 @@
              <?php
                 $clientes = ClientesControlador::ctrMostrarCliente(null);
 
+                
 
                 foreach ($clientes as $key => $value) :
 
@@ -77,14 +78,23 @@
                  <tr>
                      <td><?= $value['id_cliente'] ?></td>
                      <td>
-                         <a class="btn btn-default " href="editar-cliente/<?= $value['id_cliente'] ?>"><i class="fas fa-eye"></i> <?= $value['nombre_cliente']  ?> </a>
+                         <?php if ($_SESSION['perfil'] == 'Administrador') : ?>
+                             <a class="btn btn-default " href="editar-cliente/<?= $value['id_cliente'] ?>"><i class="fas fa-eye"></i> <?= $value['nombre_cliente']  ?> </a>
+                         <?php else : ?>
+                             <?= $value['nombre_cliente']  ?>
+                         <?php endif; ?>
                      </td>
                      <td><?= $value['telefono_cliente'] ?></td>
                      <td><?= $value['observaciones'] ?></td>
                      <td><?= $value['estado'] ?></td>
                      <td><?= $value['vigencia'] ?></td>
                      <td><?= $value['tipo'] ?></td>
-                     <td><button class="btn btn-danger btn-elimina-cliente" id="<?= $value['id_cliente'] ?>"><i class="fas fa-trash"></i></button></td>
+                     <td>
+                         <?php if ($_SESSION['perfil'] == 'Administrador') : ?>
+                             <button class="btn btn-danger btn-elimina-cliente" id="<?= $value['id_cliente'] ?>"><i class="fas fa-trash"></i>
+                             </button>
+                         <?php endif; ?>
+                     </td>
 
                  </tr>
 

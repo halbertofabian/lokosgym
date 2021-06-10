@@ -51,7 +51,7 @@
              <?php
                 //Productos
                 $producto = ProductosControlador::ctrMostrarProducto(null);
-               
+
                 foreach ($producto as $key => $value) :
                 ?>
                  <tr>
@@ -66,9 +66,11 @@
                      <td><?php echo $value['existencia'] ?></td>
                      <td> <strong class="text-success"><?php echo $value['precio_publico'] ?> </strong> </td>
                      <td>
-                     <button class="btn btn-danger btn-elimina-producto" id="<?= $value[0] ?>">
-                     <i class="fas fa-trash"></i>
-                     </button>
+                         <?php if ($_SESSION['perfil'] == 'Administrador') : ?>
+                             <button class="btn btn-danger btn-elimina-producto" id="<?= $value[0] ?>">
+                                 <i class="fas fa-trash"></i>
+                             </button>
+                         <?php endif; ?>
                      </td>
 
 
