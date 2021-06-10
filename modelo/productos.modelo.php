@@ -110,7 +110,7 @@ class ProductosModelo
         $stmt = null;
     }
 
-    static public function mdlMostrarProductosBusqueda($consulta,$categoria)
+    static public function mdlMostrarProductosBusqueda($consulta, $categoria)
     {
 
         if ($categoria == "" && $consulta != "") {
@@ -154,5 +154,17 @@ class ProductosModelo
         $stmt->execute();
         return $stmt->fetch();
         $stmt = null;
+    }
+
+    public static function eliminarProductoById($id)
+    {
+        $sql = "DELETE FROM tbl_productos WHERE id=? ";
+        $pps = Conexion::conectar()->prepare($sql);
+        $pps->bindValue(1, $id);
+
+        $pps->execute();
+        return $pps->rowCount() > 0;
+
+        $pps = null;
     }
 }

@@ -286,18 +286,72 @@ class ClientesControlador
 
     public static function ctrActualizaFoto()
     {
-        $aux='';
+        $aux = '';
         $foto = base64_decode($_POST["foto"]);
         $route_photo = "../upload/fotos/f_" . $_POST["id"] . ".jpg";
         $file = fopen($route_photo, "w");
-        if($file){
+        if ($file) {
             $fotos = fwrite($file, $foto);
             fclose($file);
-            if($fotos){
-                $aux= 'act';
+            if ($fotos) {
+                $aux = 'act';
             }
-
-        } 
+        }
         return $aux;
+    }
+
+    public static function ctrActualizarCliente()
+    {
+        if (isset($_POST['btnActualizarCliente'])) {
+            $datos = array(
+                'id_cliente' => $_POST["id_cliente"],
+                'nombre_cliente' => $_POST["nombre_cliente"],
+                'correo_cliente' => $_POST["correo_cliente"],
+                'telefono_cliente' => $_POST["telefono_cliente"],
+                'observaciones' => $_POST["observaciones"],
+                'vigencia' => $_POST["vigencia"],
+                'tipo' => $_POST["tipo"],
+                'fecha_registro' => $_POST["fecha_registro"]
+            );
+           
+            $actualizar = ClientesModelo::mdlActualizarCliente($datos);
+            if ($actualizar) {
+                echo  '<script>
+                    swal({
+                        title: "¡Muy bien!",
+                        text: "Registro actualizado",
+                        icon: "success",
+                        buttons: [,true],
+                        
+                      })
+                      .then((willDelete) => {
+                        if (willDelete) {
+                            location.href = "clientes"
+                        }
+                      });
+                      
+                      
+                    </script>';
+            } else {
+                echo '
+                        <script>
+                        swal({
+                            title: "¡Mal :( !",
+                            text: "Algo salio mal, intente de nuevo",
+                            icon: "error",
+                            buttons: [,true],
+                            
+                          })
+                          .then((willDelete) => {
+                            if (willDelete) {
+                                window.history.back();
+                            }
+                          });
+                          
+                          
+                        </script>
+                    ';
+            }
+        }
     }
 }

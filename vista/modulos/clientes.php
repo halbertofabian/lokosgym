@@ -47,6 +47,7 @@
                  <th>Estado</th>
                  <th>Vigencia</th>
                  <th>Tipo</th>
+                 <th>Acciones</th>
 
              </tr>
          </thead>
@@ -59,6 +60,7 @@
                  <th>Estado</th>
                  <th>Vigencia</th>
                  <th>Tipo</th>
+                 <th>Acciones</th>
 
              </tr>
          </tfoot>
@@ -74,12 +76,15 @@
 
                  <tr>
                      <td><?= $value['id_cliente'] ?></td>
-                     <td><?= $value['nombre_cliente'] ?></td>
+                     <td>
+                         <a class="btn btn-default " href="editar-cliente/<?= $value['id_cliente'] ?>"><i class="fas fa-eye"></i> <?= $value['nombre_cliente']  ?> </a>
+                     </td>
                      <td><?= $value['telefono_cliente'] ?></td>
                      <td><?= $value['observaciones'] ?></td>
                      <td><?= $value['estado'] ?></td>
                      <td><?= $value['vigencia'] ?></td>
                      <td><?= $value['tipo'] ?></td>
+                     <td><button class="btn btn-danger btn-elimina-cliente" id="<?= $value['id_cliente'] ?>"><i class="fas fa-trash"></i></button></td>
 
                  </tr>
 
@@ -162,7 +167,7 @@
                                                      <input type="number" name="GDtelefono" class="form-control" id="GDtelefono" placeholder="Teléfono">
                                                  </div>
                                              </div>
-                                            
+
 
                                              <input type="hidden" name="GDcodigo_wsp" class="form-control" id="GDcodigo_wsp" placeholder="Código" value="52">
                                              <input type="hidden" name="GDwsp" class="form-control" id="GDwsp" placeholder="Whatsapp">

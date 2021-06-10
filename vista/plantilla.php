@@ -101,7 +101,9 @@ session_start();
               $rutas[0] == 'abrir-caja' ||
               $rutas[0] == 'cerrar-caja' ||
               $rutas[0] == 'asistencia' ||
-              $rutas[0] == 'corte'
+              $rutas[0] == 'corte' ||
+              $rutas[0] == 'listar-membresia' ||
+              $rutas[0] == 'editar-cliente'
 
             ) {
               include_once 'vista/modulos/' . $rutas[0] . '.php';

@@ -214,3 +214,48 @@ $("#actualizarft").on("click", function () {
     })
 
 })
+
+$(".table tbody").on("click", ".btn-elimina-cliente", function () {
+    var clicked = this;
+    var id = $(this).attr("id");
+
+    swal({
+        title: "Esta seguro de eliminar cliente?",
+        text: "Esta accion no es reversible",
+        icon: "warning",
+        buttons: true,
+        dangerMode: true,
+    })
+        .then((willDelete) => {
+            if (willDelete) {
+                var datos = new FormData();
+                datos.append("id_cliente", id)
+                datos.append("btn-elimina-cliente", true)
+
+                $.ajax({
+                    url: "ajax/clientes.ajax.php",
+                    method: "POST",
+                    data: datos,
+                    cache: false,
+                    contentType: false,
+                    processData: false,
+                    dataType: "json",
+                    beforeSend: function () {
+
+                    },
+                    success: function (res) {
+                        if (res) {
+                            $(clicked).closest('tr').remove();
+                            swal("¡Bien!", "Se elimino el cliente :)", "success");
+
+                        } else {
+                            swal("¡Error!", "No se puedo eliminar el cliente", "error");
+                        }
+                    }
+                })
+            } else {
+
+            }
+        });
+
+})

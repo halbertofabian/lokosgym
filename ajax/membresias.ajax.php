@@ -45,6 +45,11 @@ class AjaxMembresias
         $res = MembresiasModelo::eliminarPagoById($_POST);
         echo json_encode($res, true);
     }
+	public function ajaxMostrarInfoEstadoMem()
+    {
+        $res = ClientesModelo::MostrarinfoById($_POST);
+        echo json_encode($res, true);
+    }
 }
 
 if (isset($_POST['btn-elimina-pago'])) {
@@ -113,5 +118,11 @@ if (isset($_POST['btn-elimina-venta'])) {
 
     $elimina = new AjaxVentas();
     $elimina->ajaxEliminarVenta();
+}
+
+if (isset($_POST['btn-inf-membresia'])) {
+
+    $mostrar = new AjaxMembresias();
+    $mostrar->ajaxMostrarInfoEstadoMem();
 }
 

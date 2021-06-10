@@ -328,3 +328,30 @@ $(".table tbody").on("click", ".btn-elimina-pago", function () {
         });
 
 })
+
+$("#select-socio").on("change", function () {
+    
+    var id = $(this).val();
+    var datos = new FormData();
+    datos.append("id_cliente", id)
+    datos.append("btn-inf-membresia", true);
+    $.ajax({
+        url: "ajax/membresias.ajax.php",
+        method: "POST",
+        data: datos,
+        cache: false,
+        contentType: false,
+        processData: false,
+        dataType: "json",
+        success: function (res) {
+            if(res){
+               $("#pmbs_tipo").val(res.tipo);
+               $("#fecha_registro").val(res.fecha_registro);
+               $("#rmbs_fecha_termino").val(res.vigencia);
+
+            }
+           
+        }
+    })
+
+})
