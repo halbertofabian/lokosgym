@@ -9,10 +9,6 @@ $("#btnImportarCliente").on("click", function (e) {
         return swal("Error", "Seleccione un archivo excel", "error");
     }
 
-
-
-
-
     swal({
         title: "¿Estas seguro de querer importar la lista de clientes?",
         text: "Asegurate de tener el archivo con los requerimientos solicitados",

@@ -389,4 +389,112 @@ class  ProductosControlador
     {
         return ProductosModelo::mdlMostrarProductosBusqueda($consulta, $categoria);
     }
+
+    public static function ctrImportarProductos()
+    {
+        try {
+            //obtener fecha
+            date_default_timezone_set('America/Mexico_City');
+            $hoy = date("Y-m-d H:i:s");
+            //usuario que registra
+            $id = $_SESSION['id'];
+            
+
+            //$nombreArchivo = $_SERVER['DOCUMENT_ROOT'] . '/dupont/exportxlsx/tbl_productos_dupont.xls';
+            $nombreArchivo = $_FILES['archivoExcel']['tmp_name'];
+            // Cargar hoja de calculo
+            $leerExcel = PHPExcel_IOFactory::createReaderForFile($nombreArchivo);
+            $objPHPExcel = $leerExcel->load($nombreArchivo);
+            //var_dump($objPHPExcel);
+            $objPHPExcel->setActiveSheetIndex(0);
+            $numRows = $objPHPExcel->setActiveSheetIndex(0)->getHighestRow();
+            $countInsert = 0;
+            $countUpdate = 0;
+            //echo "NumRows => ",$objPHPExcel->getActiveSheet()->getCell('B' . 2)->getCalculatedValue();
+            for ($i = 2; $i <= $numRows; $i++) {
+                $codigo = $objPHPExcel->getActiveSheet()->getCell('A' . $i)->getCalculatedValue();
+                $producto = $objPHPExcel->getActiveSheet()->getCell('B' . $i)->getCalculatedValue();
+                $categoria = $objPHPExcel->getActiveSheet()->getCell('C' . $i)->getCalculatedValue();
+                $existencia = $objPHPExcel->getActiveSheet()->getCell('D' . $i)->getCalculatedValue();
+                $pcompra = $objPHPExcel->getActiveSheet()->getCell('E' . $i)->getCalculatedValue();
+                $ppublico = $objPHPExcel->getActiveSheet()->getCell('F' . $i)->getCalculatedValue();
+
+                $mostrarcategorias = ProductosModelo::mdlMostrarcats();
+                $categoriaexistente = false;
+                foreach ($mostrarcategorias as $key => $catinfo) {
+                    //cambiar el valor de la categoria por ID
+                    if ($catinfo['categoria'] == $categoria) {
+                        $categoria = $catinfo['id'];
+                        $categoriaexistente = true;
+                    }
+                }
+                
+                //Si no existe la categoria: Crear la nueva categoria
+                if ($categoriaexistente == false) {
+                    $crearcat = ProductosModelo::mdlCrearCat($categoria);
+
+
+                    if ($crearcat) {
+                        $idcatNew = ProductosModelo::mdlidNewCat();
+
+
+
+                        $categoria = $idcatNew['id'];
+
+                       
+                    }
+                }
+                //Buscar si existe el registro
+                $existeproducto = ProductosModelo::mdlMostrarProductoByCodigo($codigo);
+
+                //valores a pasar
+                $data = array(
+                    'id' => "",
+                    'codigo' => $codigo,
+                    'producto' => $producto,
+                    'marca' => "",
+                    'categoria' => $categoria,
+                    'descripcion' => "",
+                    'caracteristicas_producto' => "",
+                    'existencia' => $existencia,
+                    'existencia_min' => "",
+                    'precio_compra' => $pcompra,
+                    'precio_publico' => $ppublico,
+                    'precio_mayoreo' => "",
+                    'precio_especial' => "",
+                    'fecha' => $hoy,
+                    'usuario_registro' => $id,
+                    'imagen' => "vista/img/productos/default/anonymous.png"
+                );
+
+
+                if ($existeproducto) {
+                    //actualizar
+                    if (ProductosModelo::mdlActualizarProductoImport($data)) {
+                        $countUpdate += 1;
+                    }
+                } else {
+                    //insertar
+                    $insert = ProductosModelo::mdlCrearProductoImport($data);
+                    if ($insert) {
+                        $countInsert += 1;
+                    }
+                }
+            }
+            return array(
+                'status' => true,
+                'mensaje' => "Carga de productos con éxito",
+                'insert' =>  $countInsert,
+                'update' => $countUpdate
+            );
+        } catch (Exception $th) {
+            $th->getMessage();
+            return array(
+                'status' => false,
+                'mensaje' => "No se encuentra el archivo solicitado, por favor carga el archivo correcto",
+                'insert' =>  "",
+                'update' => ""
+            );
+        }
+    }
 }

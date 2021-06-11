@@ -2,6 +2,7 @@
 
 require_once "../controlador/productos.controlador.php";
 require_once "../modelo/productos.modelo.php";
+require_once '../lib/PHPExcel/Classes/PHPExcel/IOFactory.php';
 
 class AjaxProducto{
 
@@ -30,6 +31,13 @@ class AjaxProducto{
         $res = ProductosModelo::eliminarProductoById($id);
         echo json_encode($res, true);
     }
+
+	public function ajaxImportarProductos()
+	{
+		$respuesta = ProductosControlador::ctrImportarProductos();
+
+		echo json_encode($respuesta);
+	}
 	
 }
 
@@ -53,5 +61,9 @@ if (isset($_POST['btn-elimina-producto'])) {
 
     $elimina = new AjaxProducto();
     $elimina->ajaxEliminarProducto();
+}
+if (isset($_POST['btnImportarProductos'])) {
+	$productos = new AjaxProducto();
+	$productos->ajaxImportarProductos();
 }
 

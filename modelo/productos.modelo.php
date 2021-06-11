@@ -167,4 +167,114 @@ class ProductosModelo
 
         $pps = null;
     }
+
+    public static function mdlMostrarcats()
+    {
+        $sql = "SELECT id, categoria FROM tbl_categorias";
+        $stmt = Conexion::conectar()->prepare($sql);
+        $stmt->execute();
+        return $stmt->fetchAll();
+        $stmt = null;
+    }
+
+    public static function mdlCrearCat($categoria)
+    {
+        try {
+            //code...
+            $sql = "INSERT INTO tbl_categorias(categoria, caracteristicas_categoria) VALUES (?,?)";
+            $con = Conexion::conectar();
+            $pps = $con->prepare($sql);
+            $pps->bindValue(1, $categoria);
+            $pps->bindValue(2, "");
+            $pps->execute();
+            return $pps->rowCount() > 0;
+        } catch (PDOException $th) {
+            throw $th;
+            return false;
+        } finally {
+            $pps = null;
+            $con = null;
+        }
+    }
+
+    public static function mdlidNewCat()
+    {
+        $sql = "SELECT id FROM tbl_categorias ORDER BY id DESC LIMIT 1";
+        $stmt = Conexion::conectar()->prepare($sql);
+        $stmt->execute();
+        return $stmt->fetch();
+        $stmt = null;
+    }
+
+    public static function mdlMostrarProductoByCodigo($codigo)
+    {
+        $sql = "SELECT * FROM tbl_productos WHERE codigo=?";
+        $stmt = Conexion::conectar()->prepare($sql);
+        $stmt->bindValue(1, $codigo);
+        $stmt->execute();
+        return $stmt->fetch();
+        $stmt = null;
+    }
+
+    public static function mdlCrearProductoImport($pd)
+    {
+        try {
+            //code...
+            $sql = "INSERT INTO tbl_productos(codigo, producto, marca, categoria, descripcion, caracteristicas_producto, 
+            existencia, existencia_min, precio_compra, precio_publico, precio_mayoreo, precio_especial, fecha, usuario_registro, imagen) 
+            VALUES (?,?,?,?,?,?,?,?,?,?,?,?,?,?,?)";
+            $con = Conexion::conectar();
+            $pps = $con->prepare($sql);
+            $pps->bindValue(1, $pd['codigo']);
+            $pps->bindValue(2, $pd['producto']);
+            $pps->bindValue(3, $pd['marca']);
+            $pps->bindValue(4, $pd['categoria']);
+            $pps->bindValue(5, $pd['descripcion']);
+            $pps->bindValue(6, $pd['caracteristicas_producto']);
+            $pps->bindValue(7, $pd['existencia']);
+            $pps->bindValue(8, $pd['existencia_min']);
+            $pps->bindValue(9, $pd['precio_compra']);
+            $pps->bindValue(10, $pd['precio_publico']);
+            $pps->bindValue(11, $pd['precio_mayoreo']);
+            $pps->bindValue(12, $pd['precio_especial']);
+            $pps->bindValue(13, $pd['fecha']);
+            $pps->bindValue(14, $pd['usuario_registro']);
+            $pps->bindValue(15, $pd['imagen']);
+
+            $pps->execute();
+            return $pps->rowCount() > 0;
+        } catch (PDOException $th) {
+            throw $th;
+            return false;
+        } finally {
+            $pps = null;
+            $con = null;
+        }
+    }
+
+    public static function mdlActualizarProductoImport($pd)
+    {
+        try {
+            $sql = "UPDATE tbl_productos SET producto=?,categoria=?,existencia=existencia + ?,
+            precio_compra=?,precio_publico=?,fecha=?,usuario_registro=? WHERE codigo=?";
+            $con = Conexion::conectar();
+            $pps = $con->prepare($sql);
+            $pps->bindValue(1, $pd['producto']);
+            $pps->bindValue(2, $pd['categoria']);
+            $pps->bindValue(3, $pd['existencia']);
+            $pps->bindValue(4, $pd['precio_compra']);
+            $pps->bindValue(5, $pd['precio_publico']);
+            $pps->bindValue(6, $pd['fecha']);
+            $pps->bindValue(7, $pd['usuario_registro']);
+            $pps->bindValue(8, $pd['codigo']);
+            $pps->execute();
+            return $pps->rowCount() > 0;
+        } catch (PDOException $th) {
+            throw $th;
+            return false;
+        } finally {
+            $pps = null;
+            $pps = null;
+        }
+    }
 }
