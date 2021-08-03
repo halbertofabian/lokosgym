@@ -2,6 +2,8 @@
 if ($_SESSION['usr_caja'] <= 0) {
     PlantillaControlador::msj('warning', 'CAJA CERRADA', 'Usted aún no ha abierto caja', $url . 'abrir-caja');
     return;
+
+  
 }
 
 ?>
@@ -25,12 +27,13 @@ if ($_SESSION['usr_caja'] <= 0) {
                 </div>
             </div>
             <div class="col-md-4">
+                <?php   $t = CajasControlador::ctrTotales($_SESSION['usr_caja']); ?>
                 <div class="card">
                     <div class="card-body">
                         <h4 class="card-title">EFECTIVO</h4>
                         <div class="form-group">
-                            <label for="copn_ingreso_efectivo">Introduce la cantidad en efectivo</label>
-                            <input type="text" name="copn_ingreso_efectivo" id="copn_ingreso_efectivo" class="form-control inputN" placeholder="">
+                            <label for="copn_ingreso_efectivo">Cantidad en efectivo</label>
+                            <input type="text" name="copn_ingreso_efectivo" id="copn_ingreso_efectivo" class="form-control inputN" readonly value="<?= number_format($t['total_efectivo'], 2) ?>" >
                         </div>
                     </div>
                 </div>
@@ -40,8 +43,8 @@ if ($_SESSION['usr_caja'] <= 0) {
                     <div class="card-body">
                         <h4 class="card-title">BANCO</h4>
                         <div class="form-group">
-                            <label for="copn_ingreso_banco">Introduce la cantidad en banco</label>
-                            <input type="text" name="copn_ingreso_banco" id="copn_ingreso_banco" class="form-control inputN" placeholder="Transaferencias / Depositos / Pagos con Tarjeta">
+                            <label for="copn_ingreso_banco">Cantidad en banco</label>
+                            <input type="text" name="copn_ingreso_banco" id="copn_ingreso_banco" class="form-control inputN" readonly value="<?=  number_format($t['total_banco'], 2) ?>">
                         </div>
                     </div>
                 </div>
@@ -53,8 +56,8 @@ if ($_SESSION['usr_caja'] <= 0) {
     </form>
 </div>
 
-<div class="container">
-    <?php $t = CajasControlador::ctrTotales($_SESSION['usr_caja']) ?>
+<!-- <div class="container">
+   
     <div class="row">
         <div class="col-md-6 mt-1">
             <div class="card">
@@ -75,4 +78,4 @@ if ($_SESSION['usr_caja'] <= 0) {
             </div>
         </div>
     </div>
-</div>
+</div> -->

@@ -115,6 +115,17 @@ if ($_SESSION['perfil'] != 'Cajero') :
                 </div>
             </div>
 
+            <div class="row mt-3 mb-3">
+                <div class="col-md-6">
+                    <div class="card">
+                        <div class="card-body">
+                            <h4 class="card-title">Ventas</h4>
+                            <p class="card-text">Efectivo</p>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
         </div>
 
     <?php else :

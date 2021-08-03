@@ -255,7 +255,7 @@ class ProductosModelo
     public static function mdlActualizarProductoImport($pd)
     {
         try {
-            $sql = "UPDATE tbl_productos SET producto=?,categoria=?,existencia=existencia + ?,
+            $sql = "UPDATE tbl_productos SET producto=?,categoria=?,existencia=?,
             precio_compra=?,precio_publico=?,fecha=?,usuario_registro=? WHERE codigo=?";
             $con = Conexion::conectar();
             $pps = $con->prepare($sql);
