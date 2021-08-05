@@ -46,7 +46,8 @@ if ($_SESSION['perfil'] != 'Cajero') :
                                                 <th>Vendedor</th>
                                                 <th>Metodo de pago</th>
                                                 <th>Fecha</th>
-                                                <th>Total</th>
+                                                <th>Efectivo</th>
+                                                <th>Banco</th>
                                             </tr>
                                         </thead>
                                         <tbody>
@@ -60,7 +61,8 @@ if ($_SESSION['perfil'] != 'Cajero') :
                                                     <td><?php echo $vts['nombre'] ?></td>
                                                     <td><?php echo $vts['venta_mp'] ?></td>
                                                     <td><?php echo $vts['fecha'] ?></td>
-                                                    <td><?php echo $vts['total'] ?></td>
+                                                    <td><?php echo $vts['vts_efectivo'] ?></td>
+                                                    <td><?php echo $vts['vts_tarjeta'] ?></td>
                                                 </tr>
 
                                             <?php endforeach; ?>
@@ -88,7 +90,8 @@ if ($_SESSION['perfil'] != 'Cajero') :
                                                 <th>Vendedor</th>
                                                 <th>Metodo de pago</th>
                                                 <th>Fecha</th>
-                                                <th>Total</th>
+                                                <th>Efectivo</th>
+                                                <th>Banco</th>
                                             </tr>
                                         </thead>
                                         <tbody>
@@ -102,7 +105,8 @@ if ($_SESSION['perfil'] != 'Cajero') :
                                                     <td><?php echo $pgos['nombre'] ?></td>
                                                     <td><?php echo $pgos['pmbs_mp'] ?></td>
                                                     <td><?php echo $pgos['pmbs_fecha_pago'] ?></td>
-                                                    <td><?php echo $pgos['pmbs_monto'] ?></td>
+                                                    <td><?php echo $pgos['pmbs_efectivo'] ?></td>
+                                                    <td><?php echo $pgos['pmbs_tarjeta'] ?></td>
                                                 </tr>
 
                                             <?php endforeach; ?>
@@ -116,11 +120,25 @@ if ($_SESSION['perfil'] != 'Cajero') :
             </div>
 
             <div class="row mt-3 mb-3">
+                <?php
+
+                $totales = CajasControlador::ctrTotales($_GET['ver']);
+                // var_dump($totales);
+
+                ?>
                 <div class="col-md-6">
                     <div class="card">
                         <div class="card-body">
-                            <h4 class="card-title">Ventas</h4>
-                            <p class="card-text">Efectivo</p>
+                            <h4 class="card-title">$ <strong><?= number_format($totales['total_efectivo'], 2) ?></strong> </h4>
+                            <p class="card-text">EFECTIVO</p>
+                        </div>
+                    </div>
+                </div>
+                <div class="col-md-6">
+                    <div class="card">
+                        <div class="card-body">
+                            <h4 class="card-title">$ <strong><?= number_format($totales['total_banco'], 2) ?></strong> </h4>
+                            <p class="card-text">BANCO</p>
                         </div>
                     </div>
                 </div>
