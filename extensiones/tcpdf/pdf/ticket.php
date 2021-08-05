@@ -206,7 +206,7 @@ EOF;
 			$descuento = $value['precio'] / 100 *   $value['descuento'];
 			$descuento = $value['precio'] - $descuento;
 			$totalDescuento = $descuento * $value['cantidad'];
-			$totalDescuento = number_format($totalDescuento,2);
+			$totalDescuento = number_format($totalDescuento, 2);
 			$bloque2 = <<<EOF
 
 <table style="font-size:9px;">
@@ -307,7 +307,81 @@ EOF;
 
 EOF;
 
-		$pdf->writeHTML($bloque3, false, false, false, false, '');
+		$total_efectivo_lkg = $ventaTicket[0]['vts_efectivo'];
+		$total_tarjeta_lkg = $ventaTicket[0]['vts_tarjeta'];
+
+		$bloque3_dividido = <<<EOF
+
+<table style="font-size:9px; text-align:right">
+
+	<tr>
+	
+		<td style="width:$impresions2 px;">
+			 = <br>
+			 $leyend3 
+		</td>
+
+		<td style="width:$impresions2 px;">
+			$ $neto 
+			<br>
+			 $descuentoTotal
+			<hr>
+		</td>
+
+	</tr>
+
+	<tr>
+	
+		<td style="width:$impresions2 px;">
+			 <strong>Total:</strong><br>
+			 <strong>EFECTIVO:</strong> <br>
+			 <strong>TARJETA:</strong>
+
+		</td>
+
+		<td style="width:$impresions2 px;">
+			$ $total <br>
+			$ $total_efectivo_lkg <br>
+			$ $total_tarjeta_lkg
+
+		</td>
+
+	</tr>
+
+	<tr>
+	
+		<td style="width:$impresion px;">
+			 <hr>
+		</td>
+
+	</tr>
+
+	<tr>
+	
+		<td style="width:$impresion px; text-align:center; font-size:7px">
+			$politicas_ventas
+			GRACIAS POR SU COMPRA
+		</td>
+
+	</tr>
+	<tr>
+	
+		<td style="width:$impresion px; text-align:center; font-size:7px;">
+		
+		
+		</td>
+
+	</tr>
+
+</table>
+
+
+
+EOF;
+
+		$pdf->writeHTML($bloque3_dividido, false, false, false, false, '');
+
+		//$pdf->writeHTML($bloque3, false, false, false, false, '');
 
 		// ---------------------------------------------------------
 		//SALIDA DEL ARCHIVO 

@@ -1,9 +1,9 @@
 
 
-var usr_rol =  $("#usr_rol").attr("usr_rol")
+var usr_rol = $("#usr_rol").attr("usr_rol")
 
 
-
+$(".inputN").number(true, 2);
 $(".nuevaImagen").change(function () {
 
 	var imagen = this.files[0];
@@ -69,14 +69,14 @@ $(".todayTimeEnd").val(toDay + "T23:59");
 
 
 function startLoadButton() {
-    $(".btn-load").attr("disabled", true);
-    $(".btn-load").html(` <span class="spinner-border spinner-border-sm" role="status" aria-hidden="true"></span>
+	$(".btn-load").attr("disabled", true);
+	$(".btn-load").html(` <span class="spinner-border spinner-border-sm" role="status" aria-hidden="true"></span>
             Por favor espere...`)
 }
 
 function stopLoadButton(label) {
-    $(".btn-load").attr("disabled", false);
-    $(".btn-load").html(`${label}`)
+	$(".btn-load").attr("disabled", false);
+	$(".btn-load").html(`${label}`)
 }
 
 

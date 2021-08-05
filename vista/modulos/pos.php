@@ -82,7 +82,7 @@
                 <div class="card-body" id="caja_venta">
                     <div class="box box-success">
                         <div class="box-header with-border">
-                            <form action="#" method="post" class="formularioVenta">
+                            <form id="formularioVentaPOS" method="post" class="formularioVenta">
                                 <div class="box-body">
 
 
@@ -167,7 +167,7 @@
                                                     <thead>
 
                                                         <tr>
-                                                            
+
                                                             <th>Total</th>
                                                         </tr>
 
@@ -228,7 +228,7 @@
                                         </div>
                                         <div class="form-group row">
 
-                                            <div class="col-md-6" style="padding-right:0px">
+                                            <!-- <div class="col-md-6" style="padding-right:0px">
 
                                                 <div class="input-group">
 
@@ -236,20 +236,20 @@
                                                         <option value="">Seleccione método de pago</option>
                                                         <option value="Efectivo" selected>EFECTIVO</option>
                                                         <option value="Tarjeta">TARJETA CREDITO / DEBITO</option>
-                                                        
-                                                        
+
+
                                                     </select>
 
                                                 </div>
 
-                                            </div>
+                                            </div> -->
 
 
 
 
                                         </div>
                                         <div class="row cajasMetodoPago">
-                                            <div class="col-md-6">
+                                            <!-- <div class="col-md-6">
 
                                                 <div class="input-group">
 
@@ -259,9 +259,9 @@
 
                                                 </div>
 
-                                            </div>
+                                            </div> -->
 
-                                            <div class="col-md-6" id="capturarCambioEfectivo" style="padding-left:0px">
+                                            <!-- <div class="col-md-6" id="capturarCambioEfectivo" style="padding-left:0px">
 
                                                 <div class="input-group">
 
@@ -271,30 +271,232 @@
 
                                                 </div>
 
-                                            </div>
+                                            </div> -->
                                         </div>
                                         <input type="hidden" id="listaMetodoPago" name="listaMetodoPago">
 
 
 
 
+                                        <div class="modal fade" id="exampleModal" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
+                                            <div class="modal-dialog modal-lg" role="document">
+                                                <div class="modal-content">
+                                                    <div class="modal-header">
+                                                        <h5 class="modal-title" id="exampleModalLabel">METODO DE PAGO</h5>
+                                                        <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                                                            <span aria-hidden="true">&times;</span>
+                                                        </button>
+                                                    </div>
+                                                    <div class="modal-body">
+                                                        <div class="row">
+                                                            <div class="col-md-12">
+                                                                <p><strong>EFECTIVO</strong></p>
+                                                            </div>
+                                                            <div class="col-md-4">
+                                                                <div class="form-group">
+                                                                    <label for="lkg_cantidad_efectivo">Introduce la cantidad a cobrar</label>
+                                                                    <input type="text" name="lkg_cantidad_efectivo" id="lkg_cantidad_efectivo" class="form-control inputN" value="0.00" placeholder="">
+                                                                </div>
+                                                            </div>
+
+                                                            <div class="col-md-4">
+                                                                <div class="form-group">
+                                                                    <label for="lkg_monto_efectivo">Cantidad recibda</label>
+                                                                    <input type="text" name="lkg_monto_efectivo" id="lkg_monto_efectivo" class="form-control inputN" value="0.00" placeholder="">
+                                                                </div>
+                                                            </div>
+
+                                                            <div class="col-md-4">
+                                                                <div class="form-group">
+                                                                    <label for="lkg_cambio_efectivo">Cambio</label>
+                                                                    <input type="text" name="lkg_cambio_efectivo" id="lkg_cambio_efectivo" class="form-control inputN" value="0.00" readonly>
+                                                                </div>
+                                                            </div>
+                                                        </div>
+
+                                                        <div class="row">
+                                                            <div class="col-md-12">
+                                                                <p><strong>TARJETA</strong></p>
+                                                            </div>
+                                                            <div class="col-md-4">
+                                                                <div class="form-group">
+                                                                    <label for="lkg_cantidad_tarjeta">Introduce la cantidad a cobrar</label>
+                                                                    <input type="text" name="lkg_cantidad_tarjeta" id="lkg_cantidad_tarjeta" class="form-control inputN" value="0.00">
+                                                                </div>
+                                                            </div>
+
+                                                            <!-- <div class="col-md-4">
+                                                                <div class="form-group">
+                                                                    <label for="">Referancia</label>
+                                                                    <input type="text" name="" id="" class="form-control" placeholder="">
+                                                                </div>
+                                                            </div> -->
+                                                        </div>
+
+                                                        <div class="row">
+                                                            <div class="col-md-4">
+                                                                <div class="form-group">
+                                                                    <label for="lkg_total_venta_usr">TOTAL USUARIO</label>
+                                                                    <input type="text" name="lkg_total_venta_usr" id="lkg_total_venta_usr" class="form-control inputN" readonly>
+                                                                </div>
+                                                            </div>
+                                                            <div class="col-md-4">
+                                                                <div class="form-group">
+                                                                    <label for="lkg_total_venta_faltante">FALTANTE</label>
+                                                                    <input type="text" name="lkg_total_venta_faltante" id="lkg_total_venta_faltante" class="form-control inputN" readonly>
+                                                                </div>
+                                                            </div>
+                                                            <div class="col-md-4">
+                                                                <div class="form-group">
+                                                                    <label for="lkg_total_venta">TOTAL</label>
+                                                                    <input type="text" name="lkg_total_venta" id="lkg_total_venta" class="form-control inputN" readonly>
+                                                                </div>
+                                                            </div>
+                                                        </div>
+
+                                                    </div>
+                                                    <div class="modal-footer">
+                                                        <button type="button" class="btn btn-secondary" data-dismiss="modal">CANCELAR</button>
+                                                        <button type="submit" class="btn btn-primary">REGISTRAR VENTA</button>
+                                                    </div>
+                                                </div>
+                                            </div>
+                                        </div>
 
 
 
                                     </div>
-                                    <div class="box-footer mt-3">
+                                    <!-- <div class="box-footer mt-3">
 
                                         <button type="submit" class="btn btn-primary float-right" name="btnVender">VENDER</button>
 
-                                    </div>
+                                    </div> -->
+
+                                    <button type="button" class="btn btn-primary btn-block btnDivCobro" data-toggle="modal" data-target="#exampleModal">
+                                        COBRAR
+                                    </button>
+
+                                    <script>
+                                        $(".btnDivCobro").on("click", function() {
+
+                                            var nuevoTotalVenta = $("#nuevoTotalVenta").val();
+
+                                            $("#lkg_total_venta").val(nuevoTotalVenta)
+
+                                        })
+
+                                        $("#lkg_cantidad_efectivo").on("keyup", function(e) {
+
+                                            var nuevoTotalVenta = $("#nuevoTotalVenta").val();
+
+                                            var lkg_cantidad_efectivo = $("#lkg_cantidad_efectivo").val()
+                                            var lkg_cantidad_tarjeta = $("#lkg_cantidad_tarjeta").val();
+
+                                            $("#lkg_monto_efectivo").val(lkg_cantidad_efectivo);
+
+                                            var lkg_monto_efectivo = $("#lkg_monto_efectivo").val()
+
+                                            var lkg_cambio_efectivo = Number(lkg_monto_efectivo) - Number(lkg_cantidad_efectivo)
+
+                                            $("#lkg_cambio_efectivo").val(lkg_cambio_efectivo)
+
+
+                                            var lkg_total_venta_usr = Number(lkg_cantidad_efectivo) + Number(lkg_cantidad_tarjeta);
+                                            $("#lkg_total_venta_usr").val(lkg_total_venta_usr)
+
+
+                                            var lkg_total_venta_faltante = Number(lkg_cantidad_efectivo) + Number(lkg_cantidad_tarjeta) - Number(nuevoTotalVenta)
+
+                                            $("#lkg_total_venta_faltante").val(lkg_total_venta_faltante)
+
+                                        })
+
+                                        $("#lkg_monto_efectivo").on("keyup", function(e) {
+
+                                            var lkg_cantidad_efectivo = $("#lkg_cantidad_efectivo").val()
+
+                                            // $("#lkg_monto_efectivo").val(lkg_cantidad_efectivo);
+
+                                            var lkg_monto_efectivo = $("#lkg_monto_efectivo").val()
+
+                                            var lkg_cambio_efectivo = Number(lkg_monto_efectivo) - Number(lkg_cantidad_efectivo)
+
+                                            $("#lkg_cambio_efectivo").val(lkg_cambio_efectivo)
+
+                                        })
+
+                                        $("#lkg_cantidad_tarjeta").on("keyup", function() {
+
+                                            var nuevoTotalVenta = $("#nuevoTotalVenta").val();
+                                            var lkg_cantidad_tarjeta = $("#lkg_cantidad_tarjeta").val();
+                                            var lkg_cantidad_efectivo = $("#lkg_cantidad_efectivo").val();
+                                            var lkg_total_venta_usr = Number(lkg_cantidad_efectivo) + Number(lkg_cantidad_tarjeta);
+                                            $("#lkg_total_venta_usr").val(lkg_total_venta_usr);
+
+                                            var lkg_total_venta_faltante = Number(lkg_cantidad_efectivo) + Number(lkg_cantidad_tarjeta) - Number(nuevoTotalVenta)
+                                            $("#lkg_total_venta_faltante").val(lkg_total_venta_faltante)
+
+                                        })
+                                    </script>
+
+
+
 
 
                                 </div>
                                 <?php
-                                $crearVenta = new VentasControlador();
-                                $crearVenta->ctrCrearVenta();
+                                // $crearVenta = new VentasControlador();
+                                // $crearVenta->ctrCrearVenta();
                                 ?>
                             </form>
+
+                            <script>
+                                $("#formularioVentaPOS").on("submit", function(e) {
+
+                                    e.preventDefault();
+
+                                    swal({
+                                            title: "¿Estás seguro de contunuar?",
+                                            text: "EFECTIVO: " + $("#lkg_cantidad_efectivo").val() + " \n TARJETA: " + $("#lkg_cantidad_tarjeta").val(),
+                                            icon: "warning",
+                                            buttons: ["Cancelar", "Si, continuar"],
+                                            dangerMode: true,
+                                        })
+                                        .then((willDelete) => {
+                                            if (willDelete) {
+                                                var lkg_total_venta_faltante = $("#lkg_total_venta_faltante").val()
+
+                                                if (lkg_total_venta_faltante != 0) {
+                                                    swal("Error", "Completa el monto correcto de la venta", "warning");
+                                                    return;
+                                                }
+                                                var datos = new FormData(this);
+                                                datos.append("btnRegistrarVentasPos", true)
+                                                $.ajax({
+                                                    url: "ajax/ventas.ajax.php",
+                                                    method: "POST",
+                                                    data: datos,
+                                                    cache: false,
+                                                    contentType: false,
+                                                    processData: false,
+                                                    dataType: "json",
+                                                    success: function(res) {
+                                                        if (res.status) {
+                                                            var ruta = "extensiones/tcpdf/pdf/ticket.php?codigo=" + res.codigo;
+                                                            window.location = res.pagina;
+                                                            window.open(ruta, "_blank");
+
+                                                        } else {
+                                                            swal("Error", res.mensaje, "error");
+                                                        }
+                                                    }
+                                                })
+                                            }
+                                        });
+
+
+                                })
+                            </script>
 
                         </div>
 

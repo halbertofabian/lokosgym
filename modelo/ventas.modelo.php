@@ -16,8 +16,8 @@ class VentasModelo
     public static function mdlCrearVenta($datos)
     {
         $sqlInsert = "INSERT INTO tbl_ventas (id_venta,id_cliente,
-        id_vendedor,forma_pago,neto,total,descuento,fecha,estado_corte,venta_mp) VALUES(:id_venta,:id_cliente,
-        :id_vendedor,:forma_pago,:neto,:total,:descuento,:fecha,:estado_corte,:venta_mp)";
+        id_vendedor,forma_pago,neto,total,descuento,fecha,estado_corte,venta_mp,vts_efectivo,vts_tarjeta) VALUES(:id_venta,:id_cliente,
+        :id_vendedor,:forma_pago,:neto,:total,:descuento,:fecha,:estado_corte,:venta_mp,:vts_efectivo,:vts_tarjeta)";
 
         $stmt = Conexion::conectar()->prepare($sqlInsert);
 
@@ -31,8 +31,12 @@ class VentasModelo
         $stmt->bindParam(':fecha', $datos['fecha']);
         $stmt->bindParam(':estado_corte', $datos['estado_corte']);
         $stmt->bindParam(':venta_mp', $datos['venta_mp']);
+        $stmt->bindParam(':vts_efectivo', $datos['vts_efectivo']);
+        $stmt->bindParam(':vts_tarjeta', $datos['vts_tarjeta']);
 
-        return $stmt->execute();
+        $stmt->execute();
+
+        return $stmt->errorInfo();
 
 
 
@@ -83,7 +87,7 @@ class VentasModelo
         $sql = "SELECT dv.id_venta,dv.cantidad, dv.precio, dv.neto,
          dv.total, tp.codigo,tp.producto, tp.caracteristicas_producto, 
          tp.precio_publico, tv.id_venta,tv.id_cliente,tv.id_vendedor,
-         tv.forma_pago,tv.neto,tv.total,tv.descuento,tv.fecha,tu.nombre,tu.apellido,tc.nombre_cliente 
+         tv.forma_pago,tv.neto,tv.total,tv.descuento,tv.fecha,tv.vts_efectivo,tv.vts_tarjeta,tu.nombre,tu.apellido,tc.nombre_cliente 
          FROM tbl_detalle_ventas dv JOIN tbl_productos tp
           ON dv.id_producto = tp.id JOIN tbl_ventas tv 
           ON dv.id_venta = tv.id_venta JOIN tbl_usuarios tu
@@ -200,7 +204,7 @@ class VentasModelo
             $stmt->bindValue(1, $usuario);
             $stmt->bindValue(2, $mp);
             $stmt->execute();
-        }elseif($usuario == null && $mp!=null){
+        } elseif ($usuario == null && $mp != null) {
             $sql = "SELECT p.producto,p.precio_compra,dv.cantidad,dv.precio,dv.id_venta,v.total,v.descuento,v.fecha,v.venta_mp,us.nombre 
             FROM tbl_detalle_ventas dv 
             JOIN tbl_productos p ON dv.id_producto = p.id 
@@ -208,11 +212,10 @@ class VentasModelo
             JOIN tbl_usuarios us ON v.id_vendedor= us.id
             WHERE (v.fecha BETWEEN '$dateStart' AND '$dateEnd') AND (v.venta_mp=?) ORDER BY dv.id_venta DESC";
             $stmt = Conexion::conectar()->prepare($sql);
-           
+
             $stmt->bindValue(1, $mp);
             $stmt->execute();
-        }
-        elseif($mp == null && $usuario!=null){
+        } elseif ($mp == null && $usuario != null) {
             $sql = "SELECT p.producto,p.precio_compra,dv.cantidad,dv.precio,dv.id_venta,v.total,v.descuento,v.fecha,v.venta_mp,us.nombre 
             FROM tbl_detalle_ventas dv 
             JOIN tbl_productos p ON dv.id_producto = p.id 
@@ -222,8 +225,7 @@ class VentasModelo
             $stmt = Conexion::conectar()->prepare($sql);
             $stmt->bindValue(1, $usuario);
             $stmt->execute();
-        }
-        elseif($mp == null && $usuario ==null){
+        } elseif ($mp == null && $usuario == null) {
             $sql = "SELECT p.producto,p.precio_compra,dv.cantidad,dv.precio,dv.id_venta,v.total,v.descuento,v.fecha,v.venta_mp,us.nombre 
             FROM tbl_detalle_ventas dv 
             JOIN tbl_productos p ON dv.id_producto = p.id 
@@ -231,7 +233,7 @@ class VentasModelo
             JOIN tbl_usuarios us ON v.id_vendedor= us.id
             WHERE (v.fecha BETWEEN '$dateStart' AND '$dateEnd') ORDER BY dv.id_venta DESC";
             $stmt = Conexion::conectar()->prepare($sql);
-          
+
             $stmt->execute();
         }
 
@@ -298,5 +300,5 @@ class VentasModelo
         }
     }
     //`
-    
+
 }

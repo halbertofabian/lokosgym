@@ -280,7 +280,7 @@ class CajasModelo
     {
 
         if ($datos['vts_mp'] == "") {
-            $sql = "SELECT vts.*,usr.nombre FROM tbl_ventas vts JOIN tbl_usuarios usr ON usr.id = vts.id_vendedor WHERE vts.fecha BETWEEN ? AND ? AND vts.id_vendedor LIKE '%" . $datos['vts_vendedor'] . "%'";
+            $sql = "SELECT vts.*,usr.nombre FROM tbl_ventas vts JOIN tbl_usuarios usr ON usr.id = vts.id_vendedor WHERE vts.fecha BETWEEN ? AND ? AND vts.id_vendedor LIKE '%" . $datos['vts_vendedor'] . "%' ORDER BY fecha DESC ";
             $con = conexion::conectar();
             $pps = $con->prepare($sql);
             $pps->bindValue(1, $datos['vts_fecha_inicio']);
@@ -288,7 +288,7 @@ class CajasModelo
             $pps->execute();
             return $pps->fetchAll();
         } elseif ($datos['vts_mp'] == "EFECTIVO") {
-            $sql = "SELECT vts.*,usr.nombre FROM tbl_ventas vts JOIN tbl_usuarios usr ON usr.id = vts.id_vendedor WHERE vts.fecha BETWEEN ? AND ? AND venta_mp = 'EFECTIVO' AND vts.id_vendedor LIKE '%" . $datos['vts_vendedor'] . "%' ";
+            $sql = "SELECT vts.*,usr.nombre FROM tbl_ventas vts JOIN tbl_usuarios usr ON usr.id = vts.id_vendedor WHERE vts.fecha BETWEEN ? AND ? AND vts_efectivo > 0  AND vts.id_vendedor LIKE '%" . $datos['vts_vendedor'] . "%' ORDER BY fecha DESC ";
             $con = conexion::conectar();
             $pps = $con->prepare($sql);
             $pps->bindValue(1, $datos['vts_fecha_inicio']);
@@ -296,7 +296,7 @@ class CajasModelo
             $pps->execute();
             return $pps->fetchAll();
         } elseif ($datos['vts_mp'] != "EFECTIVO") {
-            $sql = "SELECT vts.*,usr.nombre FROM tbl_ventas vts JOIN tbl_usuarios usr ON usr.id = vts.id_vendedor WHERE vts.fecha BETWEEN ? AND ? AND venta_mp != 'EFECTIVO' AND vts.id_vendedor LIKE '%" . $datos['vts_vendedor'] . "%' ";
+            $sql = "SELECT vts.*,usr.nombre FROM tbl_ventas vts JOIN tbl_usuarios usr ON usr.id = vts.id_vendedor WHERE vts.fecha BETWEEN ? AND ? AND vts_tarjeta > 0 AND vts.id_vendedor LIKE '%" . $datos['vts_vendedor'] . "%' ORDER BY fecha DESC ";
             $con = conexion::conectar();
             $pps = $con->prepare($sql);
             $pps->bindValue(1, $datos['vts_fecha_inicio']);

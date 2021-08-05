@@ -1107,7 +1107,6 @@ function buscarVentasFiltro(arrayDatos) {
     datos.append("vts_mp", arrayDatos[2])
     datos.append("vts_vendedor", arrayDatos[3])
     datos.append("btnBuscarVentasFiltro", true)
-
     $.ajax({
         url: "ajax/ventas.ajax.php",
         method: "POST",
@@ -1125,8 +1124,21 @@ function buscarVentasFiltro(arrayDatos) {
 
             var contenido = "";
             var ventastotal = 0;
+            var total = 0;
 
             res.forEach(vts => {
+
+                if (arrayDatos[2] == "") {
+                    total = vts.total;
+                }
+
+                if (arrayDatos[2] == "EFECTIVO") {
+                    total = vts.vts_efectivo;
+                }
+                if (arrayDatos[2] == "BANCO" ) {
+                    total = vts.vts_tarjeta;
+                }
+
 
                 ventastotal += Number(vts.total);
 
@@ -1145,7 +1157,7 @@ function buscarVentasFiltro(arrayDatos) {
                     <td>${vts.id_venta}</td>
                     <td>${vts.nombre}</td>
                     <td>${vts.venta_mp}</td>
-                    <td>${vts.total}</td>
+                    <td>${total}</td>
                     <td>${vts.fecha}</td>
                     <td><a target="_blank" href="./extensiones/tcpdf/pdf/ticket.php?codigo=${vts.id_venta}" class="btn btn-secondary"><i class="fas fa-print"></i></td>
                     <td>${acciones}</td>

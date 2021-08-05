@@ -1,10 +1,12 @@
-<?php
+<?php session_start();
 require_once '../modelo/categorias.modelo.php';
 require_once '../modelo/productos.modelo.php';
 require_once '../modelo/cajas.modelo.php';
 require_once '../controlador/categorias.controlador.php';
 require_once '../controlador/productos.controlador.php';
 require_once '../modelo/rutas.php';
+require_once '../controlador/plantilla.controlador.php';
+require_once '../controlador/ventas.controlador.php';
 require_once '../modelo/ventas.modelo.php';
 
 
@@ -86,6 +88,12 @@ class AjaxVentas
         $res = VentasModelo::eliminarVentaById($_POST);
         echo json_encode($res, true);
     }
+
+    public function ajaxVentasPos()
+    {
+        $res = VentasControlador::ctrCrearVenta();
+        echo json_encode($res, true);
+    }
 }
 
 
@@ -109,4 +117,10 @@ if (isset($_POST['btn-elimina-venta'])) {
 
     $elimina = new AjaxVentas();
     $elimina->ajaxEliminarVenta();
+}
+
+
+if (isset($_POST['btnRegistrarVentasPos'])) {
+    $registrarVentaPos = new AjaxVentas();
+    $registrarVentaPos->ajaxVentasPos();
 }
