@@ -226,15 +226,14 @@ class CajasModelo
     }
 
 
-    public static function mdlReporteVentasByMPCorte($venta_mp, $estado_corte)
+    public static function mdlReporteVentasByMPCorteEfectivo($estado_corte)
     {
         try {
-            $sql = "SELECT SUM(total) AS venta_total FROM tbl_ventas WHERE venta_mp = ? AND estado_corte = ?
+            $sql = "SELECT SUM(vts_efectivo) AS venta_total FROM tbl_ventas WHERE  estado_corte = ?
             ";
             $con = conexion::conectar();
             $pps = $con->prepare($sql);
-            $pps->bindValue(1, $venta_mp);
-            $pps->bindValue(2, $estado_corte);
+            $pps->bindValue(1, $estado_corte);
             $pps->execute();
             return $pps->fetch();
         } catch (PDOException $th) {
@@ -246,27 +245,85 @@ class CajasModelo
         }
     }
 
-    public static function mdlReportePagosByMPCorte($pmbs_mp, $pmbs_corte)
+    public static function mdlReporteVentasByMPCorteTarjeta($estado_corte)
     {
         try {
-            if ($pmbs_mp == "") {
-                $sql = "SELECT SUM(pmbs_monto) AS pagos_total FROM tbl_pagos_pmbs WHERE pmbs_mp != 'EFECTIVO' AND pmbs_corte = ?
+            $sql = "SELECT SUM(vts_tarjeta) AS venta_total FROM tbl_ventas WHERE  estado_corte = ?
+            ";
+            $con = conexion::conectar();
+            $pps = $con->prepare($sql);
+            $pps->bindValue(1, $estado_corte);
+            $pps->execute();
+            return $pps->fetch();
+        } catch (PDOException $th) {
+            //throw $th;
+            return false;
+        } finally {
+            $pps = null;
+            $con = null;
+        }
+    }
+
+    // public static function mdlReportePagosByMPCorte($pmbs_mp, $pmbs_corte)
+    // {
+    //     try {
+    //         if ($pmbs_mp == "") {
+    //             $sql = "SELECT SUM(pmbs_monto) AS pagos_total FROM tbl_pagos_pmbs WHERE pmbs_mp != 'EFECTIVO' AND pmbs_corte = ?
+    //             ";
+    //             $con = conexion::conectar();
+    //             $pps = $con->prepare($sql);
+    //             $pps->bindValue(1, $pmbs_corte);
+    //             $pps->execute();
+    //             return $pps->fetch();
+    //         } else {
+    //             $sql = "SELECT SUM(pmbs_monto) AS pagos_total FROM tbl_pagos_pmbs WHERE pmbs_mp = ? AND pmbs_corte = ?
+    //             ";
+    //             $con = conexion::conectar();
+    //             $pps = $con->prepare($sql);
+    //             $pps->bindValue(1, $pmbs_mp);
+    //             $pps->bindValue(2, $pmbs_corte);
+    //             $pps->execute();
+    //             return $pps->fetch();
+    //         }
+    //     } catch (PDOException $th) {
+    //         //throw $th;
+    //         return false;
+    //     } finally {
+    //         $pps = null;
+    //         $con = null;
+    //     }
+    // }
+
+    public static function mdlReportePagosByMPCorteEfectivo($pmbs_corte)
+    {
+        try {
+
+            $sql = "SELECT SUM(pmbs_efectivo) AS pagos_total FROM tbl_pagos_pmbs WHERE  pmbs_corte = ?
                 ";
-                $con = conexion::conectar();
-                $pps = $con->prepare($sql);
-                $pps->bindValue(1, $pmbs_corte);
-                $pps->execute();
-                return $pps->fetch();
-            } else {
-                $sql = "SELECT SUM(pmbs_monto) AS pagos_total FROM tbl_pagos_pmbs WHERE pmbs_mp = ? AND pmbs_corte = ?
-                ";
-                $con = conexion::conectar();
-                $pps = $con->prepare($sql);
-                $pps->bindValue(1, $pmbs_mp);
-                $pps->bindValue(2, $pmbs_corte);
-                $pps->execute();
-                return $pps->fetch();
-            }
+            $con = conexion::conectar();
+            $pps = $con->prepare($sql);
+            $pps->bindValue(1, $pmbs_corte);
+            $pps->execute();
+            return $pps->fetch();
+        } catch (PDOException $th) {
+            //throw $th;
+            return false;
+        } finally {
+            $pps = null;
+            $con = null;
+        }
+    }
+
+    public static function mdlReportePagosByMPCorteTarjeta($pmbs_corte)
+    {
+        try {
+
+            $sql = "SELECT SUM(pmbs_tarjeta) AS pagos_total FROM tbl_pagos_pmbs WHERE  pmbs_corte = ? ";
+            $con = conexion::conectar();
+            $pps = $con->prepare($sql);
+            $pps->bindValue(1, $pmbs_corte);
+            $pps->execute();
+            return $pps->fetch();
         } catch (PDOException $th) {
             //throw $th;
             return false;
@@ -318,7 +375,7 @@ class CajasModelo
             $pps->execute();
             return $pps->fetchAll();
         } elseif ($datos['pmbs_mp'] == "EFECTIVO") {
-            $sql = "SELECT pgs.*,usr.nombre FROM tbl_pagos_pmbs pgs JOIN tbl_usuarios usr ON usr.id = pgs.id_vendedor WHERE pgs.pmbs_fecha_pago BETWEEN ? AND ? AND pmbs_mp = 'EFECTIVO' AND pgs.id_vendedor LIKE '%" . $datos['pmbs_vendedor'] . "%' ORDER BY pgs.pmbs_id DESC ";
+            $sql = "SELECT pgs.*,usr.nombre FROM tbl_pagos_pmbs pgs JOIN tbl_usuarios usr ON usr.id = pgs.id_vendedor WHERE pgs.pmbs_fecha_pago BETWEEN ? AND ? AND pmbs_efectivo > 0 AND pgs.id_vendedor LIKE '%" . $datos['pmbs_vendedor'] . "%' ORDER BY pgs.pmbs_id DESC ";
             $con = conexion::conectar();
             $pps = $con->prepare($sql);
             $pps->bindValue(1, $datos['pmbs_fecha_inicio']);
@@ -326,7 +383,7 @@ class CajasModelo
             $pps->execute();
             return $pps->fetchAll();
         } elseif ($datos['pmbs_mp'] != "EFECTIVO") {
-            $sql = "SELECT pgs.*,usr.nombre FROM tbl_pagos_pmbs pgs JOIN tbl_usuarios usr ON usr.id = pgs.id_vendedor WHERE pgs.pmbs_fecha_pago BETWEEN ? AND ? AND pmbs_mp != 'EFECTIVO' AND pgs.id_vendedor LIKE '%" . $datos['pmbs_vendedor'] . "%' ORDER BY pgs.pmbs_id DESC ";
+            $sql = "SELECT pgs.*,usr.nombre FROM tbl_pagos_pmbs pgs JOIN tbl_usuarios usr ON usr.id = pgs.id_vendedor WHERE pgs.pmbs_fecha_pago BETWEEN ? AND ? AND pmbs_tarjeta > 0 AND pgs.id_vendedor LIKE '%" . $datos['pmbs_vendedor'] . "%' ORDER BY pgs.pmbs_id DESC ";
             $con = conexion::conectar();
             $pps = $con->prepare($sql);
             $pps->bindValue(1, $datos['pmbs_fecha_inicio']);

@@ -180,10 +180,22 @@ function buscarPagosFiltro(arrayDatos) {
 
             var contenido = "";
             var ventastotal = 0;
+            var total = 0;
 
             res.forEach(pgs => {
 
-                ventastotal += Number(pgs.pmbs_monto);
+                if (arrayDatos[2] == "") {
+                    total = pgs.pmbs_monto;
+                }
+
+                if (arrayDatos[2] == "EFECTIVO") {
+                    total = pgs.pmbs_efectivo;
+                }
+                if (arrayDatos[2] == "BANCO") {
+                    total = pgs.pmbs_tarjeta;
+                }
+
+                ventastotal += Number(total);
                 if (usr_rol == "Administrador") {
                     acciones = `<button class="btn btn-danger btn-elimina-pago" id="${pgs.pmbs_id}"><i class="fas fa-trash"></i></button>`;
                 } else {
@@ -197,7 +209,7 @@ function buscarPagosFiltro(arrayDatos) {
                     <td>${pgs.pmbs_id}</td>
                     <td>${pgs.nombre}</td>
                     <td>${pgs.pmbs_mp}</td>
-                    <td>${pgs.pmbs_monto}</td>
+                    <td>${total}</td>
                     <td>${pgs.pmbs_fecha_pago}</td>
                     <td>
                         <a target="_blank" href="./extensiones/tcpdf/pdf/pagos.php?pmbs_id=${pgs.pmbs_id}" class="btn btn-dafault"><i class="fa fa-print" aria-hidden="true"></i></a>

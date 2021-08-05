@@ -94,11 +94,55 @@ class MembresiasControlador
 
         if (isset($_POST['btnRegistrarMembresiaPago'])) {
 
+
+
             $url = Rutas::ctrRtas();
             if ($_SESSION['usr_caja'] <= 0) {
                 PlantillaControlador::msj('warning', 'Error', 'Necesita abrir caja para realizar está operación', $url . 'abrir-caja');
                 return;
             }
+            $_POST['pmbs_monto'] = str_replace(",", "", $_POST['pmbs_monto']);
+
+            if ($_POST['pmbs_monto'] <= 0 || $_POST['pmbs_monto'] == "") {
+                PlantillaControlador::msj('warning', 'Error', 'El costo de renovación no es valido');
+                return;
+            }
+
+            if ($_POST['lkg_total_venta_faltante'] != 0) {
+                PlantillaControlador::msj('warning', 'Error', 'Completa el monto correcto de la renovación');
+                return;
+            }
+            // Identificar tipos de pagos
+
+            $pmbs_mp = "";
+            $_POST['lkg_cantidad_efectivo']  = str_replace(",", "", $_POST['lkg_cantidad_efectivo']);
+            $_POST['lkg_cantidad_tarjeta']  = str_replace(",", "", $_POST['lkg_cantidad_tarjeta']);
+            $_POST['lkg_monto_efectivo'] = str_replace(",", "", $_POST['lkg_monto_efectivo']);
+
+            if ($_POST['lkg_cantidad_efectivo'] > 0 && $_POST['lkg_cantidad_tarjeta'] > 0) {
+
+                $pmbs_mp = "DIVIDIDO";
+                $_POST['listaMetodoPago'] = "Efectivo-" . $_POST['lkg_monto_efectivo'];
+                $_POST['pmbs_efectivo'] = $_POST['lkg_cantidad_efectivo'];
+                $_POST['pmbs_tarjeta'] = $_POST['lkg_cantidad_tarjeta'];
+            } elseif ($_POST['lkg_cantidad_efectivo'] > 0 && $_POST['lkg_cantidad_tarjeta'] == 0) {
+
+                $pmbs_mp = "EFECTIVO";
+                $_POST['listaMetodoPago'] = "Efectivo-" . $_POST['lkg_monto_efectivo'];
+                $_POST['pmbs_efectivo'] = $_POST['lkg_cantidad_efectivo'];
+                $_POST['pmbs_tarjeta'] = 0;
+            } elseif ($_POST['lkg_cantidad_tarjeta'] > 0 && $_POST['lkg_cantidad_efectivo'] == 0) {
+
+                $pmbs_mp = "TARJETA CREDITO / DEBITO";
+                $_POST['listaMetodoPago'] = "Tarjeta-" . $_POST['lkg_cantidad_tarjeta'];
+                $_POST['pmbs_efectivo'] = 0;
+                $_POST['pmbs_tarjeta'] = $_POST['lkg_cantidad_tarjeta'];
+            } else {
+                PlantillaControlador::msj('warning', 'Error', 'Algo salio mal, intenta de nuevo');
+                return;
+            }
+
+            $_POST['pmbs_mp'] = $pmbs_mp;
 
             // $fechaRen = MembresiasModelo::mdlActualizarMembresiaCliente($_POST['rmbs_fecha_termino'], $_POST['pmbs_rmbs']);
 
@@ -123,9 +167,8 @@ class MembresiasControlador
             $_POST['pmbs_corte'] = $_SESSION["usr_caja"];
             $_POST['id_vendedor'] = $_SESSION["id"];
 
-            $_POST['pmbs_monto'] = str_replace(",", "", $_POST['pmbs_monto']);
 
-
+            $_POST['pmbs_ref'] = "";
 
 
             $crearPago = MembresiasModelo::mdlRegistrarMembresiaPago($_POST);

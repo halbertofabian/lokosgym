@@ -79,6 +79,8 @@ $total = number_format($respuestaVenta["total"],2);*/
         $vendedor = $ventaTicket['nombre'];
         $fecha_venta = $ventaTicket['pmbs_fecha_pago'];
 
+        $pmbs_efectivo = $ventaTicket['pmbs_efectivo'];
+        $pmbs_tarjeta = $ventaTicket['pmbs_tarjeta'];
 
 
 
@@ -196,7 +198,9 @@ EOF;
 		<td style="width:$impresion px; text-align:right">
 		<strong>Total: $ $ventaTicket[pmbs_monto] </strong>
 		<br>
-       
+                <strong>EFECTIVO: $ $pmbs_efectivo </strong>
+		<br>
+                <strong>TARJETA: $ $pmbs_tarjeta </strong>
 		</td>
 
        
@@ -208,7 +212,7 @@ EOF;
     <td style="width:$impresion px; text-align:center">
     ***** Forma de pago ***** <br>
     $ventaTicket[pmbs_mp] <br>
-    $ventaTicket[pmbs_ref] <br>
+    $ventaTicket[pmbs_ref] 
 
    
     </td>

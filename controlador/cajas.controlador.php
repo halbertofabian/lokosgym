@@ -51,10 +51,10 @@ class CajasControlador
 
 
             $montos = array(
-                'monto_venta_e' => CajasModelo::mdlReporteVentasByMPCorte('EFECTIVO', $crt_id),
-                'monto_venta_b' => CajasModelo::mdlReporteVentasByMPCorte('TARJETA CREDITO / DEBITO', $crt_id),
-                'monto_pagos_e' => CajasModelo::mdlReportePagosByMPCorte('EFECTIVO', $crt_id),
-                'monto_pagos_b' => CajasModelo::mdlReportePagosByMPCorte('', $crt_id),
+                'monto_venta_e' => CajasModelo::mdlReporteVentasByMPCorteEfectivo($crt_id),
+                'monto_venta_b' => CajasModelo::mdlReporteVentasByMPCorteTarjeta($crt_id),
+                'monto_pagos_e' => CajasModelo::mdlReportePagosByMPCorteEfectivo( $crt_id),
+                'monto_pagos_b' => CajasModelo::mdlReportePagosByMPCorteTarjeta($crt_id),
             );
 
 
@@ -161,10 +161,10 @@ class CajasControlador
 
 
         $montos = array(
-            'monto_venta_e' => CajasModelo::mdlReporteVentasByMPCorte('EFECTIVO', $crt_id),
-            'monto_venta_b' => CajasModelo::mdlReporteVentasByMPCorte('TARJETA CREDITO / DEBITO', $crt_id),
-            'monto_pagos_e' => CajasModelo::mdlReportePagosByMPCorte('EFECTIVO', $crt_id),
-            'monto_pagos_b' => CajasModelo::mdlReportePagosByMPCorte('', $crt_id),
+            'monto_venta_e' => CajasModelo::mdlReporteVentasByMPCorteEfectivo($crt_id),
+            'monto_venta_b' => CajasModelo::mdlReporteVentasByMPCorteTarjeta($crt_id),
+            'monto_pagos_e' => CajasModelo::mdlReportePagosByMPCorteEfectivo($crt_id),
+            'monto_pagos_b' => CajasModelo::mdlReportePagosByMPCorteTarjeta($crt_id),
         );
 
 

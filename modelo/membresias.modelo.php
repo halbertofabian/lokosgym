@@ -150,7 +150,7 @@ class MembresiasModelo
     {
         try {
             //code...
-            $sql = "INSERT INTO tbl_pagos_pmbs  (pmbs_fecha_pago,pmbs_mp,pmbs_monto,pmbs_ref,pmbs_corte,id_vendedor,id_cliente) VALUES (?,?,?,?,?,?,?)";
+            $sql = "INSERT INTO tbl_pagos_pmbs  (pmbs_fecha_pago,pmbs_mp,pmbs_monto,pmbs_ref,pmbs_corte,id_vendedor,id_cliente,pmbs_efectivo,pmbs_tarjeta) VALUES (?,?,?,?,?,?,?,?,?)";
             $con = Conexion::conectar();
             $pps = $con->prepare($sql);
             $pps->bindValue(1, $pmbs['pmbs_fecha_pago']);
@@ -160,6 +160,8 @@ class MembresiasModelo
             $pps->bindValue(5, $pmbs['pmbs_corte']);
             $pps->bindValue(6, $pmbs['id_vendedor']);
             $pps->bindValue(7, $pmbs['id_cliente']);
+            $pps->bindValue(8, $pmbs['pmbs_efectivo']);
+            $pps->bindValue(9, $pmbs['pmbs_tarjeta']);
 
             $pps->execute();
             return $pps->rowCount() > 0;
@@ -172,7 +174,7 @@ class MembresiasModelo
         }
     }
 
-    public static function mdlCambiarVigencia($vigencia, $tipo, $cliente,$fecha_registro)
+    public static function mdlCambiarVigencia($vigencia, $tipo, $cliente, $fecha_registro)
     {
         try {
             $sql = "UPDATE tbl_clientes  SET vigencia = ?, tipo = ?, fecha_registro = ? WHERE id_cliente = ? ";
@@ -183,7 +185,7 @@ class MembresiasModelo
             $pps->bindValue(3, $fecha_registro);
             $pps->bindValue(4, $cliente);
             $pps->execute();
-            return $pps->rowCount()>0;
+            return $pps->rowCount() > 0;
         } catch (PDOException $th) {
             throw $th;
             return false;
