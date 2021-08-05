@@ -1135,12 +1135,12 @@ function buscarVentasFiltro(arrayDatos) {
                 if (arrayDatos[2] == "EFECTIVO") {
                     total = vts.vts_efectivo;
                 }
-                if (arrayDatos[2] == "BANCO" ) {
+                if (arrayDatos[2] == "BANCO") {
                     total = vts.vts_tarjeta;
                 }
 
 
-                ventastotal += Number(vts.total);
+                ventastotal += Number(total);
 
                 var acciones = "";
                 if (usr_rol == "Administrador") {
