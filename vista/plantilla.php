@@ -31,6 +31,9 @@ session_start();
 
   <!-- <script src="https://unpkg.com/sweetalert/dist/sweetalert.min.js"></script> -->
 
+  <link href="<?php echo $url ?>vista/vendor/autocomplete/jquery-ui.css" rel="stylesheet" />
+    <link href="<?php echo $url ?>vista/vendor/autocomplete/jquery-ui.theme.css" rel="stylesheet" />
+
 
   <script src="<?php echo $url ?>vista/js/sweetalert.min.js"></script>
 
@@ -46,7 +49,7 @@ session_start();
 
   <!-- date range picker -->
   <link rel="stylesheet" type="text/css" href="<?php echo $url ?>vista/vendor/date-range-picker/css/daterangepicker.css" />
-
+  <script src="<?= $url  ?>vista/vendor/autocomplete/jquery-ui.js"></script>
 
 
 </head>
@@ -104,7 +107,10 @@ session_start();
               $rutas[0] == 'asistencia' ||
               $rutas[0] == 'corte' ||
               $rutas[0] == 'listar-membresia' ||
-              $rutas[0] == 'editar-cliente'
+              $rutas[0] == 'editar-cliente' ||
+              $rutas[0] == "nueva-compra" ||
+              $rutas[0] == 'listar-compras' 
+
 
             ) {
               include_once 'vista/modulos/' . $rutas[0] . '.php';
@@ -189,6 +195,7 @@ session_start();
   <script src="<?php echo $url ?>vista/js/membresias.js"></script>
   <script src="<?php echo $url ?>vista/js/cajas.js"></script>
   <script src="<?php echo $url ?>vista/js/clientes.js"></script>
+  <script src="<?php echo $url ?>vista/js/compras.js"></script>
   <script src="<?php echo $url ?>vista/js/camara.js"></script>
 
 </body>

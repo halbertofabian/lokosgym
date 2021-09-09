@@ -33,7 +33,7 @@
         <li class="nav-item">
             <a class="nav-link" href="<?php echo $url ?>abrir-caja">
                 <i class="fas fa-cash-register"></i>
-                    <span>Abrir caja</span></a>
+                <span>Abrir caja</span></a>
         </li>
     <?php elseif ($_SESSION['usr_caja'] > 0) : ?>
 
@@ -87,6 +87,12 @@
                 <a class="collapse-item" href="<?php echo $url ?>categorias">
                     <i class="fas fa-project-diagram"></i>
                     <span>Categorias</span></a>
+                    <a class="collapse-item" href="<?php echo $url ?>nueva-compra">
+                    <i class="fas fa-box"></i>
+                    <span>Registrar compra</span></a>
+                    <a class="collapse-item" href="<?php echo $url ?>listar-compras">
+                    <i class="fas fa-box"></i>
+                    <span>Listar compras</span></a>
 
             </div>
         </div>

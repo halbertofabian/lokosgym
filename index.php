@@ -8,6 +8,7 @@ require_once 'controlador/ventas.controlador.php';
 require_once 'controlador/clientes.controlador.php';
 require_once 'controlador/membresias.controlador.php';
 require_once 'controlador/cajas.controlador.php';
+require_once 'controlador/compras.controlador.php';
 
 
 //Modelos
@@ -26,6 +27,7 @@ require_once 'modelo/clientes.modelo.php';
 
 require_once 'modelo/membresias.modelo.php';
 require_once 'modelo/cajas.modelo.php';
+require_once 'modelo/compras.modelo.php';
 
 
 
