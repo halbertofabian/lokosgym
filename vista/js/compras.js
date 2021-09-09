@@ -609,8 +609,8 @@ $(document).ready(function () {
 
     $("#tbodylistarcompras").on("click", "button.btnImprimirReporte", function () {
         var cps_id = $(this).attr("cps_id");
-        window.open("app/report/reporte-compra.php?cps_id=" + cps_id, "_blank", "toolbar=no,scrollbars=yes,resizable=yes,top=100,right=100,width=700,height=700");
-
+        window.open("extensiones/tcpdf/pdf/reporte-compra.php?cps_id=" + cps_id, "_blank", "toolbar=no,scrollbars=yes,resizable=yes,top=100,right=100,width=700,height=700");
+        
     });
 
 

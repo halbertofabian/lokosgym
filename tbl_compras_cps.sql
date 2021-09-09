@@ -3,7 +3,7 @@
 -- https://www.phpmyadmin.net/
 --
 -- Servidor: localhost
--- Tiempo de generación: 09-09-2021 a las 20:22:14
+-- Tiempo de generación: 09-09-2021 a las 21:50:34
 -- Versión del servidor: 10.4.13-MariaDB
 -- Versión de PHP: 7.2.32
 
@@ -18,7 +18,7 @@ SET time_zone = "+00:00";
 /*!40101 SET NAMES utf8mb4 */;
 
 --
--- Base de datos: `db_ifixit_clientes`
+-- Base de datos: `db_lokosgym_2`
 --
 
 -- --------------------------------------------------------
@@ -51,8 +51,7 @@ CREATE TABLE `tbl_compras_cps` (
 -- Indices de la tabla `tbl_compras_cps`
 --
 ALTER TABLE `tbl_compras_cps`
-  ADD PRIMARY KEY (`cps_id`),
-  ADD KEY `pvs_compras_fk` (`cps_id_proveedor`);
+  ADD PRIMARY KEY (`cps_id`);
 
 --
 -- AUTO_INCREMENT de las tablas volcadas
@@ -63,16 +62,6 @@ ALTER TABLE `tbl_compras_cps`
 --
 ALTER TABLE `tbl_compras_cps`
   MODIFY `cps_id` int(11) NOT NULL AUTO_INCREMENT;
-
---
--- Restricciones para tablas volcadas
---
-
---
--- Filtros para la tabla `tbl_compras_cps`
---
-ALTER TABLE `tbl_compras_cps`
-  ADD CONSTRAINT `pvs_compras_fk` FOREIGN KEY (`cps_id_proveedor`) REFERENCES `tbl_proveedores_pvs` (`pvs_id`);
 COMMIT;
 
 /*!40101 SET CHARACTER_SET_CLIENT=@OLD_CHARACTER_SET_CLIENT */;

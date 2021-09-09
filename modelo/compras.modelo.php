@@ -369,7 +369,7 @@ class ComprasModelo
     {
         try {
 
-            $sql = "SELECT cps.*,pvs.pvs_nombre FROM tbl_compras_cps cps JOIN  tbl_proveedores_pvs pvs ON  cps.cps_id_proveedor = pvs.pvs_id WHERE cps.cps_id  = ? ";
+            $sql = "SELECT cps.* FROM tbl_compras_cps cps  WHERE cps.cps_id  = ? ";
             $con = Conexion::conectar();
             $pps = $con->prepare($sql);
             $pps->bindValue(1, $cps_id);

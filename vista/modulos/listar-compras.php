@@ -11,9 +11,9 @@
                         
                         <th>Fecha compra</th>
                         <!-- <th>Costo envio</th>
-                        <th>Gran total</th>
+                        <th>Gran total</th>-->
                         
-                        <th>Monto</th> -->
+                        <th>Costo</th> 
                         <th>Acciones</th>
                     </tr>
                 </thead>
@@ -30,9 +30,9 @@
                             
                             <td><?php echo $pcps['cps_fecha_compra'] ?></td>
                             <!-- <td><?php echo number_format($pcps['cps_costo_envio'], 2) ?></td>
-                            <td><?php echo number_format($pcps['cps_gran_total'], 2) ?></td>
+                            <td><?php echo number_format($pcps['cps_gran_total'], 2) ?></td> -->
                             
-                            <td><?php echo number_format($pcps['cps_monto'], 2) ?></td> -->
+                            <td><?php echo number_format($pcps['cps_monto'], 2) ?></td>
                             <td>
                                 <!-- Button trigger modal -->
                                 <div class="btn btn-group">
@@ -43,9 +43,9 @@
                                         <i class="fa fa-file-pdf"></i> Reporte
                                     </button>
                                     <?php if ($_SESSION['perfil'] == 'Administrador') : ?>
-                                        <button type="button" class="btn btn-danger btn-sm btnEliminarCompra" cps_folio="<?= $pcps['cps_folio'] ?>">
+                                        <!-- <button type="button" class="btn btn-danger btn-sm btnEliminarCompra" cps_folio="<?= $pcps['cps_folio'] ?>">
                                             <i class="fa fa-trash"></i> Eliminar
-                                        </button>
+                                        </button> -->
                                     <?php endif; ?>
                                     
                                 </div>
@@ -129,9 +129,9 @@
                                                                 <tr>
                                                                     <th>Nombre</th>
                                                                     <th>SKU</th>
-                                                                    <th>Precio unitario</th>
+                                                                    <!-- <th>Precio unitario</th> -->
                                                                     <th>Cantidad</th>
-                                                                    <th>Total</th>
+                                                                    <!-- <th>Total</th> -->
                                                                 </tr>
                                                             </thead>
                                                             <tbody>
@@ -144,9 +144,9 @@
                                                                     <tr>
                                                                         <td><?php echo $p['pds_nombre'] ?></td>
                                                                         <td><?php echo $p['codigo']; ?></td>
-                                                                        <td><?php echo number_format($p['pds_pu'], 2) ?></td>
+                                                                        <!-- <td><?php echo number_format($p['pds_pu'], 2) ?></td> -->
                                                                         <td><?php echo $p['stock'] ?></td>
-                                                                        <td><?php echo number_format($p['total'], 2) ?></td>
+                                                                        <!-- <td><?php echo number_format($p['total'], 2) ?></td> -->
                                                                     </tr>
                                                                 <?php endforeach; ?>
                                                             </tbody>

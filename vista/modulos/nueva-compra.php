@@ -24,6 +24,8 @@
                 <label for="cps_fecha">Fecha de compra</label>
                 <input type="date" class="form-control today" name="cps_fecha" id="cps_fecha">
             </div>
+            
+            
         </div>
         <div class="row">
             <div class="col-xl-6 col-md-6 col-sm-12">
@@ -56,7 +58,8 @@
             </div>
             <input type="hidden" name="cps_num_articulos" id="cps_num_articulos">
             <input type="hidden" name="cps_total" id="cps_total">
-            <input type="hidden" name="cps_gran_total" id="cps_gran_total">
+            
+
             <input type="hidden" name="cps_productos" id="cps_productos">
 
             <div class="alert alert-dark col-12 p-1" role="alert">
@@ -70,6 +73,10 @@
         </div>
 
         <div class="row">
+        <div class="form-group col-md-4 col-12">
+                <label for="cps_fecha">Total de la compra</label>
+                <input type="text" name="cps_gran_total" id="cps_gran_total" class="form-control inputN">
+            </div>
 
             <!-- <div class="alert alert-dark col-12 p-1" role="alert">
                 <strong>Tipo de pago </strong>
