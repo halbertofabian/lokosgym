@@ -150,16 +150,17 @@ EOF;
         //********* */
 
     }
-
+    $infoTps['cps_monto'] = number_format($infoTps['cps_monto'],2);
     //--------------------------
     $seccionTOTAL = <<<EOF
 
     <table  style="background-color: #e9ecef; padding-top: 20px;">
         <thead>
             <tr>
-            <td></td>
-            <td><strong>TOTAL DE PRODUCTOS:</strong></td>
+            
+            <td><strong>TOTAL DE PRODUCTOS: </strong></td>
             <td style="text-align: center;"><strong>$infoTps[cps_num_articulos]</strong></td>
+            <td>Costo: $infoTps[cps_monto] </td>
             </tr>
         </thead>
     </table>
