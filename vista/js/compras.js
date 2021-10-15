@@ -459,7 +459,7 @@ $(document).ready(function () {
                     <button class="btn btn-default mas" btn_mas="${ui.item.id}" type="button">+</button>
                 </span>
                     </td>
-                    <td> <input type="text" class=" form-control precio_compra" value="${ui.item.precio_compra}" readonly ></td>
+                    <td> <input type="text" class=" form-control precio_compra" precio_compra_id="${ui.item.id}" value="${ui.item.precio_compra}"  ></td>
                     <td> <input type="text" class=" form-control total_compra" id="totalCompra_${ui.item.id}" value="${ui.item.precio_compra}" readonly ></td>
                     <td>
                         <button type="button" class="btn btn-danger btnQuitarProducto" sku="${ui.item.id}"><i class="fa fa-trash-alt"></i></button>
@@ -526,6 +526,29 @@ $(document).ready(function () {
 
     })
 
+
+    $("#tbodyNuevaCompra").on("keyup", ".precio_compra", function (e) {
+        var id = $(this).attr("precio_compra_id");
+        var precio_compra_actual = $(this).val();
+        // $("#contador" + id).val(Number($("#contador" + id).val()) + 1);
+        // sumarProductos2();
+        
+        var products = $("#cps_productos").val();
+        var productos = JSON.parse(products);
+        for (var i = productos.length; i--;) {
+            if (productos[i].pds_id == id) {
+
+                productos[i].stock = Number($("#contador" + id).val());
+                productos[i].pds_pu = Number(precio_compra_actual);
+                productos[i].total = Number($("#contador" + id).val()) * Number(precio_compra_actual);
+
+                $("#totalCompra_"+ id).val(productos[i].total)
+            }
+        }
+        $("#cps_productos").val(JSON.stringify(productos));
+        sumarTotales()
+
+    });
 
     $("#tbodyNuevaCompra").on("click", ".mas", function (e) {
         var id = $(this).attr("btn_mas");
