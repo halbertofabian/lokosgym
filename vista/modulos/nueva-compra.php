@@ -49,6 +49,8 @@
                             <th>Categoria</th>
                             <th>Codigo</th>
                             <th>Cantidad</th>
+                            <th>Precio compra</th>
+                            <th>Total</th>
                             <th></th>
                         </tr>
                     </thead>
@@ -75,7 +77,7 @@
         <div class="row">
         <div class="form-group col-md-4 col-12">
                 <label for="cps_fecha">Total de la compra</label>
-                <input type="text" name="cps_gran_total" id="cps_gran_total" class="form-control inputN">
+                <input type="text" name="cps_gran_total" id="cps_gran_total" class="form-control inputN" readonly >
             </div>
 
             <!-- <div class="alert alert-dark col-12 p-1" role="alert">

@@ -351,7 +351,7 @@ class ComprasModelo
     {
         try {
             //code...
-            $sql = "SELECT tbl_productos.id,tbl_productos.producto,CONCAT(tbl_productos.codigo,' - ',tbl_productos.producto) as label, tbl_productos.codigo, tbl_productos.descripcion, tbl_categorias.categoria FROM tbl_productos JOIN tbl_categorias ON tbl_productos.categoria = tbl_categorias.id WHERE tbl_productos.producto LIKE '%$producto%' OR tbl_productos.codigo LIKE '%$producto%' OR tbl_productos.descripcion LIKE '%$producto%' OR tbl_categorias.categoria LIKE '%$producto%' ";
+            $sql = "SELECT tbl_productos.id,tbl_productos.producto, tbl_productos.precio_compra, CONCAT(tbl_productos.codigo,' - ',tbl_productos.producto) as label, tbl_productos.codigo, tbl_productos.descripcion, tbl_categorias.categoria FROM tbl_productos JOIN tbl_categorias ON tbl_productos.categoria = tbl_categorias.id WHERE tbl_productos.producto LIKE '%$producto%' OR tbl_productos.codigo LIKE '%$producto%' OR tbl_productos.descripcion LIKE '%$producto%' OR tbl_categorias.categoria LIKE '%$producto%' ";
             $con = Conexion::conectar();
             $pps = $con->prepare($sql);
             $pps->execute();

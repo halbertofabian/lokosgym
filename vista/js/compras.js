@@ -459,6 +459,8 @@ $(document).ready(function () {
                     <button class="btn btn-default mas" btn_mas="${ui.item.id}" type="button">+</button>
                 </span>
                     </td>
+                    <td> <input type="text" class=" form-control precio_compra" value="${ui.item.precio_compra}" readonly ></td>
+                    <td> <input type="text" class=" form-control total_compra" id="totalCompra_${ui.item.id}" value="${ui.item.precio_compra}" readonly ></td>
                     <td>
                         <button type="button" class="btn btn-danger btnQuitarProducto" sku="${ui.item.id}"><i class="fa fa-trash-alt"></i></button>
                     </td>
@@ -469,8 +471,8 @@ $(document).ready(function () {
                     "pds_nombre": ui.item.label,
                     "codigo": ui.item.codigo,
                     "stock": 1,
-                    "pds_pu": 0,
-                    "total": 0
+                    "pds_pu": ui.item.precio_compra,
+                    "total": ui.item.precio_compra * 1
 
                 };
                 if (data == "") {
@@ -483,7 +485,7 @@ $(document).ready(function () {
                     $("#cps_productos").val(JSON.stringify(data));
                 }
 
-
+               // sumarTotales()
 
                 sumarProductos();
                 // sumaArticulos += Number(cantidad_pts);
@@ -496,6 +498,7 @@ $(document).ready(function () {
                 $("#cps_gran_total").val(sumaCompra);
 
                 $(this).val("");
+                sumarTotales()
                 return false;
             }
         },
@@ -514,8 +517,8 @@ $(document).ready(function () {
         $("#" + sku).remove();
         eliminarCantProductos(productos);
 
-        $("#cps_total").val(sumaCompra);
-        $("#cps_gran_total").val(sumaCompra);
+        // $("#cps_total").val(sumaCompra);
+        // $("#cps_gran_total").val(sumaCompra);
 
         if (productos == "") {
             data = [];
@@ -528,15 +531,19 @@ $(document).ready(function () {
         var id = $(this).attr("btn_mas");
         $("#contador" + id).val(Number($("#contador" + id).val()) + 1);
         sumarProductos2();
-
+        
         var products = $("#cps_productos").val();
         var productos = JSON.parse(products);
         for (var i = productos.length; i--;) {
             if (productos[i].pds_id == id) {
                 productos[i].stock = Number($("#contador" + id).val());
+                productos[i].total = Number($("#contador" + id).val()) * productos[i].pds_pu ;
+
+                $("#totalCompra_"+ id).val(productos[i].total)
             }
         }
         $("#cps_productos").val(JSON.stringify(productos));
+        sumarTotales()
 
     });
 
@@ -553,9 +560,12 @@ $(document).ready(function () {
         for (var i = productos.length; i--;) {
             if (productos[i].pds_id == id) {
                 productos[i].stock = Number($("#contador" + id).val());
+                productos[i].total = Number($("#contador" + id).val()) * productos[i].pds_pu ;
+                $("#totalCompra_"+ id).val(productos[i].total)
             }
         }
         $("#cps_productos").val(JSON.stringify(productos));
+        sumarTotales()
     });
 
     $("#tbodyNuevaCompra").on("keyup", ".contador", function (e) {
@@ -570,9 +580,12 @@ $(document).ready(function () {
             for (var i = productos.length; i--;) {
                 if (productos[i].pds_id == id) {
                     productos[i].stock = contador;
+                    productos[i].total = contador * productos[i].pds_pu ;
+                    $("#totalCompra_"+ id).val(productos[i].total)
                 }
             }
             $("#cps_productos").val(JSON.stringify(productos));
+            sumarTotales()
         }
     });
 
@@ -597,6 +610,17 @@ $(document).ready(function () {
         $('#sumArticulos').text(add);
         $("#cps_num_articulos").val(add);
     }
+
+    function sumarTotales() {
+        var add = 0;
+        $('.total_compra').each(function () {
+            if (!isNaN($(this).val())) {
+                add += Number($(this).val());
+            }
+        });
+        // $('#sumArticulos').text(add);
+        $("#cps_gran_total").val(add);
+    }
     function eliminarCantProductos(productos) {
         var add = 0;
         $('.contador').each(function () {
@@ -604,9 +628,22 @@ $(document).ready(function () {
                 add += Number($(this).val());
             }
         });
+        var total = 0;
+        $('.total_compra').each(function () {
+            if (!isNaN($(this).val())) {
+                total += Number($(this).val());
+            }
+        });
+        // $('#sumArticulos').text(total);
+        $("#cps_gran_total").val(total);
+
         $('#sumArticulos').text(add);
         $("#cps_num_articulos").val(add);
         $("#cps_productos").val(JSON.stringify(productos));
+
+        
+
+        // sumarTotales()
     }
 
     $("#tbodylistarcompras").on("click", "button.btnImprimirReporte", function () {

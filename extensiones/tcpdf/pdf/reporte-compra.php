@@ -118,6 +118,8 @@ if (isset($_GET['cps_id'])) {
             <th>CODIGO</th>
             <th>PRODUCTO</th>
             <th>CANTIDAD</th>    
+            <th>PRECIO UNIT</th>    
+            <th>TOTAL</th>    
         </tr> 
     </thead>
     
@@ -137,6 +139,8 @@ EOF;
             <td >$infP[codigo]</td>
             <td >$infP[pds_nombre]</td>
             <td >$infP[stock]</td>
+            <td >$infP[pds_pu]</td>
+            <td >$infP[total]</td>
         </tr>
         
     </thead>

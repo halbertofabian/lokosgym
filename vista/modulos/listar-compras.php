@@ -129,9 +129,9 @@
                                                                 <tr>
                                                                     <th>Nombre</th>
                                                                     <th>SKU</th>
-                                                                    <!-- <th>Precio unitario</th> -->
+                                                                    <th>Precio unitario</th>
                                                                     <th>Cantidad</th>
-                                                                    <!-- <th>Total</th> -->
+                                                                    <th>Total</th>
                                                                 </tr>
                                                             </thead>
                                                             <tbody>
@@ -144,9 +144,9 @@
                                                                     <tr>
                                                                         <td><?php echo $p['pds_nombre'] ?></td>
                                                                         <td><?php echo $p['codigo']; ?></td>
-                                                                        <!-- <td><?php echo number_format($p['pds_pu'], 2) ?></td> -->
+                                                                        <td><?php echo number_format($p['pds_pu'], 2) ?></td>
                                                                         <td><?php echo $p['stock'] ?></td>
-                                                                        <!-- <td><?php echo number_format($p['total'], 2) ?></td> -->
+                                                                        <td><?php echo number_format($p['total'], 2) ?></td>
                                                                     </tr>
                                                                 <?php endforeach; ?>
                                                             </tbody>
