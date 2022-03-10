@@ -54,4 +54,24 @@ class PlantillaControlador
         ';
         }
     }
+
+
+    public static function restringir($array)
+    {
+        $ruta = Rutas::ctrRtas();
+        $badera = false;
+        foreach ($array as $key => $item) {
+            
+            if ($_SESSION['perfil'] == $item)
+                $badera = true;
+        }
+       
+        if ($badera) {
+            echo '<script>
+
+	                window.location = "'.$ruta.'";
+
+                </script>';
+        }
+    }
 }

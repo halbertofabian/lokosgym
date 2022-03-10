@@ -1,3 +1,6 @@
+ 
+ 
+ 
  <!-- Begin Page Content -->
  <div class="container-fluid">
 
@@ -180,6 +183,8 @@
                              <div class="form-group">
                                  <label for="usr_perfil">Perfil</label>
                                  <select class="form-control" name="usr_perfil" id="usr_perfil">
+                                     <option>Gerenica</option>
+                                     <option>Auxiliar</option>
                                      <option>Administrador</option>
                                      <option>Cajero</option>
                                  </select>

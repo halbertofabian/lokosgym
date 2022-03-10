@@ -262,11 +262,13 @@ class ComprasModelo
     {
         try {
 
-            $sql = "UPDATE tbl_productos SET existencia = existencia + ? WHERE codigo = ?";
+            $sql = "UPDATE tbl_productos SET existencia = existencia + ?, precio_compra = ? WHERE codigo = ?";
             $con = Conexion::conectar();
             $pps = $con->prepare($sql);
             $pps->bindValue(1, $pds['stock']);
-            $pps->bindValue(2, $pds['codigo']);
+            $pps->bindValue(2, $pds['pds_pu']);
+            $pps->bindValue(3, $pds['codigo']);
+
             $pps->execute();
             return $pps->rowCount() > 0;
         } catch (PDOException $th) {

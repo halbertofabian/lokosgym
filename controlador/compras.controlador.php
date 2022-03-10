@@ -250,6 +250,8 @@ class ComprasControlador
         $compra = json_decode($_POST['cps_productos'], true);
         $countUpdate = 0;
         foreach ($compra as $key => $cps) {
+            // var_dump($compra);
+            // return;
             $actualizar = ComprasModelo::mdlActualizarProductosExcel($cps);
             if ($actualizar) {
                 $countUpdate += 1;

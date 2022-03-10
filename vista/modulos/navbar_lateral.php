@@ -52,7 +52,7 @@
         </a>
         <div id="Usuarios" class="collapse" aria-labelledby="headingTwo" data-parent="#accordionSidebar">
             <div class="bg-white py-2 collapse-inner rounded">
-                <?php if ($_SESSION['perfil'] != 'Cajero') : ?>
+                <?php if ($_SESSION['perfil'] != 'Cajero' && $_SESSION['perfil'] != 'Auxiliar' ) : ?>
                     <a class="collapse-item" href="<?php echo $url ?>usuarios"> <i class="fas fa-user"></i> Personal</a>
                 <?php endif; ?>
                 <a class="collapse-item" href="<?php echo $url ?>clientes"><i class="fas fa-address-card"></i> Socios</a>

@@ -75,9 +75,11 @@
                 ?>
                  <tr>
                      <td>
-
-                         <a class="btn btn-default " href="editar-productos/<?php echo $value[0] ?>" idCategoria="<?php echo $value['id'] ?>"><i class="fas fa-eye"></i> <?php echo $value['codigo'] ?> </a>
-
+                         <?php if ($_SESSION['perfil'] == 'Cajero' || $_SESSION['perfil'] == 'Auxiliar') : ?>
+                             <p><i class="fas fa-eye"></i> <?php echo $value['codigo'] ?></p>
+                         <?php else : ?>
+                             <a class="btn btn-default " href="editar-productos/<?php echo $value[0] ?>" idCategoria="<?php echo $value['id'] ?>"><i class="fas fa-eye"></i> <?php echo $value['codigo'] ?> </a>
+                         <?php endif; ?>
                      </td>
                      <td><?php echo $value['producto'] ?></td>
                      <td><?php echo $value['categoria'] ?></td>

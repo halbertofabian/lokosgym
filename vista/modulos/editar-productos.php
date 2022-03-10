@@ -1,3 +1,4 @@
+ <?php PlantillaControlador::restringir(['Cajero', 'Auxiliar']) ?>
  <!-- Begin Page Content -->
  <div class="container-fluid">
 
