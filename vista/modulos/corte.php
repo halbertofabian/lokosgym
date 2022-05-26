@@ -147,15 +147,55 @@ if ($_SESSION['perfil'] != 'Cajero') :
         </div>
 
     <?php else :
-        $cajas = CajasModelo::mdlMostrarCajasById();
+
+
 
 
     ?>
         <div class="container">
+            <form method="post">
+                <div class="row">
+                    <div class="col-md-3">
+                        <label for="copn_fecha_cierre_inicio">Fecha inicio</label>
+                        <input type="date" class="form-control" placeholder="" name="copn_fecha_cierre_inicio" id="copn_fecha_cierre_inicio" value="<?= $_GET['copn_fecha_cierre_inicio'] ?>">
+                    </div>
+                    <div class="col-md-3">
+                        <label for="copn_fecha_cierre_fin">Fecha fin</label>
+                        <input type="date" class="form-control" placeholder="" name="copn_fecha_cierre_fin" id="copn_fecha_cierre_fin" value="<?= $_GET['copn_fecha_cierre_fin'] ?>">
+                        <button class="btn btn-primary float-right mt-1" id="">Buscar</button>
+
+                    </div>
+
+                </div>
+                <?php
+
+                $corte_fecha = new CajasControlador();
+                $corte_fecha->ctrObtenerCorteFechas();
+
+                ?>
+            </form>
+            <?php
+
+            $copn_fecha_cierre_inicio = "";
+            $copn_fecha_cierre_fin = "";
+            $dataTable = "dataTable";
+            $efectivo = 0;
+            $banco = 0;
+            if (isset($_GET['copn_fecha_cierre_inicio'])) {
+                $dataTable = "";
+                $cajas = CajasModelo::mdlMostrarCajasById('', $_GET['copn_fecha_cierre_inicio'], $_GET['copn_fecha_cierre_fin']);
+            } else {
+                $dataTable = "dataTable";
+
+                $cajas = CajasModelo::mdlMostrarCajasById();
+            }
+
+            ?>
 
             <div class="row">
+
                 <div class="col-12">
-                    <table class="table " id="dataTable">
+                    <table class="table " id="<?= $dataTable ?>">
                         <thead>
                             <tr>
                                 <th>#</th>
@@ -171,6 +211,8 @@ if ($_SESSION['perfil'] != 'Cajero') :
                         <tbody>
                             <?php
                             foreach ($cajas as $key => $cja) :
+                                $efectivo += $cja['copn_efectivo_real'];
+                                $banco += $cja['copn_banco_real'];
                             ?>
                                 <tr>
 
@@ -187,6 +229,22 @@ if ($_SESSION['perfil'] != 'Cajero') :
                             <?php endforeach; ?>
                         </tbody>
                     </table>
+                </div>
+                <div class="col-6 mb-4">
+                    <div class="card">
+                        <div class="card-body">
+                            <h4 class="card-title">Efectivo</h4>
+                            <p class="card-text">$ <strong> <?= number_format($efectivo, 2) ?></strong></p>
+                        </div>
+                    </div>
+                </div>
+                <div class="col-6">
+                    <div class="card">
+                        <div class="card-body">
+                            <h4 class="card-title">Banco</h4>
+                            <p class="card-text">$ <strong><?= number_format($banco, 2) ?></strong></p>
+                        </div>
+                    </div>
                 </div>
             </div>
 

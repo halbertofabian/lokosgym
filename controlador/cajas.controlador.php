@@ -53,7 +53,7 @@ class CajasControlador
             $montos = array(
                 'monto_venta_e' => CajasModelo::mdlReporteVentasByMPCorteEfectivo($crt_id),
                 'monto_venta_b' => CajasModelo::mdlReporteVentasByMPCorteTarjeta($crt_id),
-                'monto_pagos_e' => CajasModelo::mdlReportePagosByMPCorteEfectivo( $crt_id),
+                'monto_pagos_e' => CajasModelo::mdlReportePagosByMPCorteEfectivo($crt_id),
                 'monto_pagos_b' => CajasModelo::mdlReportePagosByMPCorteTarjeta($crt_id),
             );
 
@@ -180,5 +180,14 @@ class CajasControlador
             "total_efectivo" => $totalEfectivo,
             "total_banco" => $totalBanco
         );
+    }
+
+    public  function ctrObtenerCorteFechas()
+    {
+        if (isset($_POST['copn_fecha_cierre_inicio'])) {
+            echo '<script>
+            window.location = "index.php?ruta=corte&copn_fecha_cierre_inicio=' . $_POST['copn_fecha_cierre_inicio'] . '&copn_fecha_cierre_fin=' . $_POST['copn_fecha_cierre_fin'] . '";
+        </script>';
+        }
     }
 }

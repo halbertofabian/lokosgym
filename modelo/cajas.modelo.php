@@ -93,11 +93,22 @@ class CajasModelo
     }
 
 
-    public static function mdlMostrarCajasById($copn_id = "")
+    public static function mdlMostrarCajasById($copn_id = "", $copn_fecha_cierre_inicio = "", $copn_fecha_cierre_fin = "")
     {
         try {
+            
             //code...
-            if ($copn_id != "") {
+            if ($copn_fecha_cierre_inicio != "") {
+                $copn_fecha_cierre_inicio = $copn_fecha_cierre_inicio.'T00:00';
+                $copn_fecha_cierre_fin = $copn_fecha_cierre_fin.'T23:59';
+                $sql = "SELECT copn.*,usr.*,cja.* FROM tbl_caja_open_copn copn  JOIN  tbl_usuarios usr ON usr.id = copn.copn_usuario_abrio JOIN tbl_caja_cja cja ON cja.cja_id_caja = copn.copn_id_caja WHERE copn_fecha_cierre BETWEEN ? AND ?  ORDER BY copn_id DESC ";
+                $con = Conexion::conectar();
+                $pps = $con->prepare($sql);
+                $pps->bindValue(1, $copn_fecha_cierre_inicio);
+                $pps->bindValue(2, $copn_fecha_cierre_fin);
+                $pps->execute();
+                return $pps->fetchAll();
+            } elseif ($copn_id != "") {
 
                 $sql = "SELECT copn.*,usr.*,cja.* FROM tbl_caja_open_copn copn  JOIN  tbl_usuarios usr ON usr.id = copn.copn_usuario_abrio JOIN tbl_caja_cja cja ON cja.cja_id_caja = copn.copn_id_caja    WHERE copn.copn_id = ? ";
                 $con = Conexion::conectar();
