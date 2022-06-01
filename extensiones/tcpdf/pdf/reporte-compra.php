@@ -53,7 +53,7 @@ if (isset($_GET['cps_id'])) {
     // dejavusans is a UTF-8 Unicode font, if you only need to
     // print standard ASCII chars, you can use core fonts like
     // helvetica or times to reduce file size.
-    $pdf->SetFont('helvetica', '', 9, '', true);
+    $pdf->SetFont('helvetica', '', 7, '', true);
 
     $pdf->setPrintHeader(false);
     $pdf->setPrintFooter(false);
@@ -75,7 +75,7 @@ if (isset($_GET['cps_id'])) {
     // } else {
     //     $logo = HTTP_HOST . 'app/app-assets/images/softmor/logo-gris-softmor2.jpg';
     // }
-    $logo = '<img src="../../../vista/img/logo_lokos.jpeg" width="110"> ';
+    $logo = '<img src="../../../vista/img/logo_lokos.jpeg" width="50"> ';
     //
     $infoTps = ComprasModelo::mdlConsultarCompraPorID($_GET['cps_id']);
 
