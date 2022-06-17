@@ -221,8 +221,8 @@ if ($_SESSION['perfil'] != 'Cajero') :
                                     <td><?php echo $cja['nombre'] ?></td>
                                     <td><?php echo $cja['copn_fecha_abrio'] ?></td>
                                     <td><?php echo $cja['copn_fecha_cierre'] ?></td>
-                                    <td><?php echo $cja['copn_efectivo_real'] ?></td>
-                                    <td><?php echo $cja['copn_banco_real'] ?></td>
+                                    <td><?php echo $cja['copn_ingreso_efectivo'] ?></td>
+                                    <td><?php echo $cja['copn_ingreso_banco'] ?></td>
                                     <td><a class="btn btn-secondary" href="index.php?ruta=corte&ver=<?php echo $cja['copn_id'] ?>"><i class="fas fa-eye    "></i></a></td>
 
                                 </tr>
