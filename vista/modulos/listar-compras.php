@@ -1,19 +1,19 @@
 <div class="container">
-    
+
     <div class="row">
         <div class="col-12 table-responsives">
             <table class="table tablas tablaCompras" id="dataTable">
                 <thead>
                     <tr>
-                        <th>#</th>
                         <th>Folio</th>
+                        <th>Referencia</th>
                         <th>Almacen</th>
-                        
+
                         <th>Fecha compra</th>
                         <!-- <th>Costo envio</th>
                         <th>Gran total</th>-->
-                        
-                        <th>Costo</th> 
+
+                        <th>Costo</th>
                         <th>Acciones</th>
                     </tr>
                 </thead>
@@ -27,11 +27,11 @@
 
                             <td><?php echo $pcps['cps_folio'] ?></td>
                             <td><?php echo $pcps['cps_suc_nombre'] ?></td>
-                            
+
                             <td><?php echo $pcps['cps_fecha_compra'] ?></td>
                             <!-- <td><?php echo number_format($pcps['cps_costo_envio'], 2) ?></td>
                             <td><?php echo number_format($pcps['cps_gran_total'], 2) ?></td> -->
-                            
+
                             <td><?php echo number_format($pcps['cps_monto'], 2) ?></td>
                             <td>
                                 <!-- Button trigger modal -->
@@ -47,7 +47,7 @@
                                             <i class="fa fa-trash"></i> Eliminar
                                         </button> -->
                                     <?php endif; ?>
-                                    
+
                                 </div>
                                 <!-- Modal -->
                                 <div class="modal " id="exampleModal<?php echo $pcps['cps_id'] ?>" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
@@ -66,7 +66,7 @@
                                                             <label for="">Sucursal</label>
                                                             <input type="text" value="<?php echo $pcps['cps_suc_nombre'] ?>" class="form-control " disabled>
                                                         </div>
-                                                        
+
                                                         <div class="form-group col-md-3 col-12">
                                                             <!-- Content -->
                                                             <label for="">Folio</label>
@@ -85,7 +85,7 @@
                                                     </div>
 
                                                     <div class="row">
-                                                        
+
                                                         <!-- <div class="form-group col-md-3 col-12">
                                                             
                                                             <label for="">Total</label>
