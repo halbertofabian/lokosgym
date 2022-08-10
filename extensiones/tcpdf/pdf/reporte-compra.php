@@ -98,7 +98,7 @@ if (isset($_GET['cps_id'])) {
                         TOTAL DE PRODUCTOS:<strong></strong>
                 </td>
                 <td style="text-align: center;">
-                FOLIO: <strong>$infoTps[cps_folio]</strong><br>
+                FOLIO: <strong>$infoTps[cps_id]</strong><br>
                
                 FECHA: <strong>$infoTps[cps_fecha_compra]</strong><br>
                 </td>

@@ -4,8 +4,8 @@
             <table class="table tablas tablaCompras">
                 <thead>
                     <tr>
-                        <th>#</th>
                         <th>Folio</th>
+                        <th>Referencia</th>
                         <th>Almacen</th>
                         <th>Proveedor</th>
                         <th>Fecha compra</th>
